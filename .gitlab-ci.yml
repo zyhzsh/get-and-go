@@ -1,0 +1,14 @@
+##
+
+build:
+  stage: build
+  script: ./gradlew 
+
+
+test:
+  stage: test
+  script: ./gradlew 
+
+
+after_script:
+  - echo "End CI~!"
