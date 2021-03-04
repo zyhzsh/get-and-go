@@ -33,8 +33,15 @@ public class ProductResources {
 
     @GetMapping(value = "api/products",params = "location")
     public List<Product> getProductsByLocation(@RequestParam String location) {
-        return Data.getProducts(location);
+        return Data.getProductsByLocation(location);
     }
+
+    @GetMapping(value = "api/products",params = "category")
+    public List<Product> getProductsByCategory(@RequestParam String category) {
+        return Data.getProductsByCategory(category);
+    }
+
+
 
 
     @PostMapping("api/products")

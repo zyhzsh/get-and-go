@@ -12,6 +12,7 @@ public class FakeDataStore {
         productList.add(new Product("1000001",
                 "Takeout:Your LunchBox",
                 "FoodKing",
+                Product.Category.Food,
                 "a link of a picture ?",
                 50,
                 25,
@@ -24,6 +25,7 @@ public class FakeDataStore {
         productList.add(new Product("1000002",
                 "Foot massage",
                 "Tom's Healing Therapy",
+                Product.Category.Wellness,
                 "a link of a picture ?",
                 67,
                 41,
@@ -36,6 +38,7 @@ public class FakeDataStore {
         productList.add(new Product("1000003",
                 "Air conditioning service",
                 "Auto Center Karsmaker",
+                Product.Category.Speciality,
                 "a link of a picture ?",
                 80,
                 51,
@@ -48,6 +51,7 @@ public class FakeDataStore {
         productList.add(new Product("1000004",
                 "Hairdressing treatment",
                 "Exphairsr",
+                Product.Category.Wellness,
                 "a link of a picture ?",
                 30,
                 10,
@@ -62,7 +66,7 @@ public class FakeDataStore {
     public List<Product> getProducts(){ return productList; }
 
     //get filtered product by location
-    public List<Product> getProducts(String location){
+    public List<Product> getProductsByLocation(String location){
         List<Product> filetered = new ArrayList<>();
         for (Product p : productList) {
             if (p.getLocation().equals(location)) {
@@ -87,6 +91,7 @@ public class FakeDataStore {
         productList.add(new Product(product.getId(),
                 product.getName(),
                 product.getVendor(),
+                product.getCategory(),
                 product.getPicture(),
                 product.getPrice(),
                 product.getDiscount_rate_percentage(),
@@ -123,5 +128,15 @@ public class FakeDataStore {
             productList.remove(temp);
             return true;
         }
+    }
+
+    public List<Product> getProductsByCategory(String category) {
+        List<Product> filtered=new ArrayList<>();
+        for (Product p:productList) {
+            if(p.getCategory().toString().equals(category)){
+                filtered.add(p);
+            }
+        }
+        return filtered;
     }
 }

@@ -1,5 +1,6 @@
 package nl.getandgo.springboot.DTO;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ public class Product {
     @Getter @Setter private String name;
     @Getter @Setter private String vendor;
     @Getter @Setter private String picture;
+    @Getter @Setter private Category category;
     @Getter @Setter private double price;
     @Getter @Setter private int discount_rate_percentage;
     @Getter @Setter private String description;
@@ -20,9 +22,14 @@ public class Product {
     @Getter @Setter private String review_id;
 
 
+    public enum Category{
+        Wellness,Event,Food,WorkShop,Speciality
+    }
+
     public Product(String id,
                    String name,
                    String vendor,
+                   Category category,
                    String picture,
                    double price,
                    int discount_rate_percentage,
@@ -35,6 +42,7 @@ public class Product {
         this.id = id;
         this.name = name;
         this.vendor = vendor;
+        this.category=category;
         this.picture = picture;
         this.price = price;
         this.discount_rate_percentage = discount_rate_percentage;
