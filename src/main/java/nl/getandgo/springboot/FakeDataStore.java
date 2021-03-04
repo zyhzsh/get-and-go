@@ -84,7 +84,18 @@ public class FakeDataStore {
     //add product to list
     public boolean addProduct(Product product){
         if(getProduct(product.getId())!=null) { return  false; }
-        productList.add(product);
+        productList.add(new Product(product.getId(),
+                product.getName(),
+                product.getVendor(),
+                product.getPicture(),
+                product.getPrice(),
+                product.getDiscount_rate_percentage(),
+                product.getDescription(),
+                product.getEndOfDay(),
+                product.getLocation(),
+                product.getVendor_id(),
+                product.getVoucher_id(),
+                product.getReview_id()));
         return true;
     }
 
