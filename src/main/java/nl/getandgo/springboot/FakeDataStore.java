@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FakeDataStore {
-    private final List<Product> productList=new ArrayList<>();
+    private final static List<Product> productList=new ArrayList<>();
 
     public FakeDataStore(){
         productList.add(new Product("1000001",
@@ -18,7 +18,6 @@ public class FakeDataStore {
                 "bla bla bla",
                 "2021-3-25",
                 "Eindhoven",
-                45,
                 "",
                 "",
                 ""));
@@ -31,10 +30,9 @@ public class FakeDataStore {
                 "bla bla bla",
                 "2021-3-26",
                 "Eindhoven",
-                99,
                 "",
                 "",
-                ""));
+                "" ));
         productList.add(new Product("1000003",
                 "Air conditioning service",
                 "Auto Center Karsmaker",
@@ -44,7 +42,6 @@ public class FakeDataStore {
                 "bla bla bla",
                 "2021-3-26",
                 "Tilburg",
-                55,
                 "",
                 "",
                 ""));
@@ -57,7 +54,6 @@ public class FakeDataStore {
                 "bla bla bla",
                 "2021-4-2",
                 "Amersfoort",
-                55,
                 "",
                 "",
                 ""));

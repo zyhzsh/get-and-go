@@ -26,7 +26,6 @@ public class Product {
                    String description,
                    String endOfDay,
                    String location,
-                   int sold,
                    String vendor_id,
                    String voucher_id,
                    String review_id) {
@@ -39,7 +38,7 @@ public class Product {
         this.description = description;
         this.endOfDay = endOfDay;
         this.location = location;
-        this.sold = sold;
+        this.sold = 0;
         this.vendor_id = vendor_id;
         this.voucher_id = voucher_id;
         this.review_id = review_id;
