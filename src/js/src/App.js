@@ -1,36 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-import{getAllProducts} from "./client";
+import "./App.css";
+import { getAllProducts } from "./client";
 import { useState, useEffect } from "react";
+import { Table} from "antd";
+import Productstable from "./components/Productstable";
 function App() {
   //State...
-  const [products,SetProducts]=useState(null);
-  //
-  useEffect(()=>{
-    getAllProducts().then(data=>{
+  const [products, SetProducts] = useState(null);
+
+  useEffect(() => {
+    getAllProducts().then((data) => {
       SetProducts(data.data);
-    })
-  },[])
-
-if(products&&products.length){
-  return products.map((product,index)=>{
+    });
+  }, []);
+  if (products && products.length) {
     return (
-      <div key={index}>
-          <h2>{product.name}</h2>
-          <p>{product.vendor}</p>
-          <p>{product.price}</p>
-          <p>{product.sub_description}</p>
-          <p>{product.location}</p>
-      </div>
-    )
-  })
-}
-
-  return (
-    <div className="App">
-
-    </div>
-  );
+      <Productstable products={products}/>
+    );
+  }
+  return <div className="App"></div>;
 }
 
 export default App;

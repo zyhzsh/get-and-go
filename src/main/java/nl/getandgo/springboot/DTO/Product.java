@@ -1,17 +1,50 @@
 package nl.getandgo.springboot.DTO;
 
 public class Product {
-    private int id;
-    private String name;
-    private String vendor;
-    private String picture;
-    private double price;
-    private int discount_rate_percentage;
-    private String sub_description;
-    private String endOfDay;
-    private String location;
 
-    public int getId() {
+    private final String id;
+    private final String name;
+    private final String vendor;
+    private final String picture;
+    private final double price;
+    private final int discount_rate_percentage;
+    private final String description;
+    private final String endOfDay;
+    private final String location;
+    private final int sold;
+    private final String vendor_id;
+    private final String voucher_id;
+    private final String review_id;
+
+
+    public Product(String id,
+                   String name,
+                   String vendor,
+                   String picture,
+                   double price,
+                   int discount_rate_percentage,
+                   String description,
+                   String endOfDay,
+                   String location,
+                   int sold,
+                   String vendor_id,
+                   String voucher_id,
+                   String review_id) {
+        this.id = id;
+        this.name = name;
+        this.vendor = vendor;
+        this.picture = picture;
+        this.price = price;
+        this.discount_rate_percentage = discount_rate_percentage;
+        this.description = description;
+        this.endOfDay = endOfDay;
+        this.location = location;
+        this.sold = sold;
+        this.vendor_id = vendor_id;
+        this.voucher_id = voucher_id;
+        this.review_id = review_id;
+    }
+    public String getId() {
         return id;
     }
 
@@ -35,8 +68,8 @@ public class Product {
         return discount_rate_percentage;
     }
 
-    public String getSub_description() {
-        return sub_description;
+    public String getDescription() {
+        return description;
     }
 
     public String getEndOfDay() {
@@ -47,26 +80,24 @@ public class Product {
         return location;
     }
 
-
-    public Product(int id,
-                   String name,
-                   String vendor,
-                   String picture,
-                   double price,
-                   int discount_rate_percentage,
-                   String sub_description,
-                   String endOfDay,
-                   String location) {
-        this.id = id;
-        this.name = name;
-        this.vendor=vendor;
-        this.picture = picture;
-        this.price = price;
-        this.discount_rate_percentage = discount_rate_percentage;
-        this.sub_description = sub_description;
-        this.endOfDay = endOfDay;
-        this.location=location;
+    public int getSold() {
+        return sold;
     }
+
+    public String getVendor_id() {
+        return vendor_id;
+    }
+
+    public String getVoucher_id() {
+        return voucher_id;
+    }
+
+    public String getReview_id() {
+        return review_id;
+    }
+
+
+
     @Override
     public String toString() {
         return "product{" +
@@ -76,7 +107,7 @@ public class Product {
                 ", picture=" +picture  +
                 ", price="+ price+
                 ", discount_rate_percentage="+ discount_rate_percentage+
-                ", sub_description="+ sub_description+
+                ", sub_description="+ description+
                 ", endOfDay="+ endOfDay+
                 ", location="+location+
                 '}';

@@ -2,12 +2,12 @@
 
 build:
   stage: build
-  script: ./gradlew 
+  script: ./gradlew assemble
 
 
 test:
   stage: test
-  script: ./gradlew 
+  script: ./gradlew test
 
 
 after_script:

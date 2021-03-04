@@ -9,42 +9,58 @@ public class FakeDataStore {
     private final List<Product> productList=new ArrayList<>();
 
     public FakeDataStore(){
-        productList.add(new Product(1,
+        productList.add(new Product("1000001",
                 "Takeout:Your LunchBox",
                 "FoodKing",
                 "a link of a picture ?",
                 50,
-                50,
-                "bla bla",
+                25,
+                "bla bla bla",
                 "2021-3-25",
-                "Eindhoven"));
-        productList.add(new Product(2,
+                "Eindhoven",
+                45,
+                "",
+                "",
+                ""));
+        productList.add(new Product("1000002",
                 "Foot massage",
                 "Tom's Healing Therapy",
                 "a link of a picture ?",
-                80,
-                50,
-                "bla bla",
-                "2021-3-27",
-                "Eindhoven"));
-        productList.add(new Product(3,
+                67,
+                41,
+                "bla bla bla",
+                "2021-3-26",
+                "Eindhoven",
+                99,
+                "",
+                "",
+                ""));
+        productList.add(new Product("1000003",
                 "Air conditioning service",
                 "Auto Center Karsmaker",
                 "a link of a picture ?",
                 80,
-                25,
+                51,
+                "bla bla bla",
+                "2021-3-26",
+                "Tilburg",
+                55,
                 "",
-                "2021-3-25",
-                "Eindhoven"));
-        productList.add(new Product(4,
+                "",
+                ""));
+        productList.add(new Product("1000004",
                 "Hairdressing treatment",
-                "Exphairs",
+                "Exphairsr",
                 "a link of a picture ?",
-                35,
-                50,
+                30,
+                10,
+                "bla bla bla",
+                "2021-4-2",
+                "Amersfoort",
+                55,
                 "",
-                "2021-5-25",
-                "Amersfoort"));
+                "",
+                ""));
     }
 
     public List<Product> getProducts(){ return productList; }
@@ -61,9 +77,9 @@ public class FakeDataStore {
     }
 
     //get specific product by id
-    public Product getProduct(int id){
+    public Product getProduct(String id){
         for (Product p : productList) {
-            if (p.getId() == id)
+            if (p.getId().equals(id))
                 return p;
         }
         return null;
