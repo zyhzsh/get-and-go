@@ -1,8 +1,6 @@
 package nl.getandgo.springboot.resources;
-
 import nl.getandgo.springboot.DTO.Product;
 import nl.getandgo.springboot.FakeDataStore;
-import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +12,7 @@ public class ProductResources {
 
     private static final FakeDataStore Data=new FakeDataStore();
 
-//    //Get All Products
-//    @GetMapping("api/products")
-//    public List<Product> getAllProducts() {
-//        return Data.getProducts();
-//    }
-      //Get All Products
+
     @GetMapping("api/products")
     public Object getAllProducts() {
         List <Product> products = Data.getProducts();
@@ -38,17 +31,31 @@ public class ProductResources {
         return null;
     }
 
-    //Get List of Products by Location
     @GetMapping(value = "api/products",params = "location")
-    public List<Product> getProductByLocation(@RequestParam String location) {
+    public List<Product> getProductsByLocation(@RequestParam String location) {
         return Data.getProducts(location);
     }
 
+
     @PostMapping("api/products")
-    public void addingProducts(@RequestBody Product product) {
-        Data.addProduct(product);
+    public Object addNewProduct(@RequestBody Product product) {
+        boolean result=Data.addProduct(product);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    @PutMapping("")
+
+    @PutMapping(value = "api/products")
+    public Object updateProduct(@RequestBody Product product){
+        Data.upDateProduct(product);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping(value = "api/products",params = "id")
+    public Object deleteProduct(String id) {
+        Data.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+
 
 
 

@@ -1,20 +1,23 @@
 package nl.getandgo.springboot.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Product {
 
-    private final String id;
-    private final String name;
-    private final String vendor;
-    private final String picture;
-    private final double price;
-    private final int discount_rate_percentage;
-    private final String description;
-    private final String endOfDay;
-    private final String location;
-    private final int sold;
-    private final String vendor_id;
-    private final String voucher_id;
-    private final String review_id;
+    @Getter private final String id;
+    @Getter @Setter private String name;
+    @Getter @Setter private String vendor;
+    @Getter @Setter private String picture;
+    @Getter @Setter private double price;
+    @Getter @Setter private int discount_rate_percentage;
+    @Getter @Setter private String description;
+    @Getter @Setter private String endOfDay;
+    @Getter @Setter private String location;
+    @Getter @Setter private int sold;
+    @Getter @Setter private String vendor_id;
+    @Getter @Setter private String voucher_id;
+    @Getter @Setter private String review_id;
 
 
     public Product(String id,
@@ -43,57 +46,7 @@ public class Product {
         this.voucher_id = voucher_id;
         this.review_id = review_id;
     }
-    public String getId() {
-        return id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getVendor() {
-        return vendor;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getDiscount_rate_percentage() {
-        return discount_rate_percentage;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getEndOfDay() {
-        return endOfDay;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public int getSold() {
-        return sold;
-    }
-
-    public String getVendor_id() {
-        return vendor_id;
-    }
-
-    public String getVoucher_id() {
-        return voucher_id;
-    }
-
-    public String getReview_id() {
-        return review_id;
-    }
 
 
 

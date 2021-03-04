@@ -99,5 +99,29 @@ public class FakeDataStore {
         return true;
     }
 
+    public boolean upDateProduct(Product product){
+        Product pointer=getProduct(product.getId());
+        if(pointer!=null) {
+            pointer.setName(product.getName());
+            pointer.setDescription(product.getDescription());
+            pointer.setEndOfDay(product.getEndOfDay());
+            pointer.setPicture(product.getPicture());
+            pointer.setPrice(product.getPrice());
+            //....
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
+
+    public boolean deleteProduct(String id){
+        Product temp=getProduct(id);
+        if(temp==null){return false;}
+        else {
+            productList.remove(temp);
+            return true;
+        }
+    }
 }
