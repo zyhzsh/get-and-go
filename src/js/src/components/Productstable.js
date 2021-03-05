@@ -1,5 +1,6 @@
-import { Table } from "antd";
+import { Table,Spin } from "antd";
 import styled from "styled-components";
+
 const Productstable = ({ products }) => {
   const columns = [
     {

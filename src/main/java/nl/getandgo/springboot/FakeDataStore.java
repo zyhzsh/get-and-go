@@ -86,8 +86,8 @@ public class FakeDataStore {
     }
 
     //add product to list
-    public boolean addProduct(Product product){
-        if(getProduct(product.getId())!=null) { return  false; }
+    public Product addProduct(Product product){
+        if(getProduct(product.getId())!=null) { return null; }
         productList.add(new Product(product.getId(),
                 product.getName(),
                 product.getVendor(),
@@ -101,11 +101,14 @@ public class FakeDataStore {
                 product.getVendor_id(),
                 product.getVoucher_id(),
                 product.getReview_id()));
-        return true;
+        return product;
     }
 
-    public boolean upDateProduct(Product product){
-        Product pointer=getProduct(product.getId());
+    public Product upDateProduct(Product product,String id){
+        Product pointer=getProduct(id);
+
+
+
         if(pointer!=null) {
             pointer.setName(product.getName());
             pointer.setDescription(product.getDescription());
@@ -113,10 +116,10 @@ public class FakeDataStore {
             pointer.setPicture(product.getPicture());
             pointer.setPrice(product.getPrice());
             //....
-            return true;
+            return pointer;
         }
         else {
-            return false;
+            return null;
         }
     }
 
@@ -139,4 +142,7 @@ public class FakeDataStore {
         }
         return filtered;
     }
+
+
+
 }

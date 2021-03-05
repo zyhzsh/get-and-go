@@ -2,9 +2,14 @@ package nl.getandgo.springboot.resources;
 import nl.getandgo.springboot.DTO.Product;
 import nl.getandgo.springboot.FakeDataStore;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -12,50 +17,60 @@ public class ProductResources {
 
     private static final FakeDataStore Data=new FakeDataStore();
 
-
     @GetMapping("api/products")
-    public Object getAllProducts() {
-        List <Product> products = Data.getProducts();
-        if(products==null){
-            return new ResponseEntity<>("no data", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(products,HttpStatus.ACCEPTED);
+    public List<Product> getAllProducts() {
+      return Data.getProducts();
     }
 
     @GetMapping(value = "api/products",params = "id")
-    public Product getProductById(@RequestParam String id) {
+    public ResponseEntity<Product> getProductById(@RequestParam String id) {
         Product product=Data.getProduct(id);
         if(product!=null){
-            return product;
+            return ResponseEntity.ok(product);
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "api/products",params = "location")
-    public List<Product> getProductsByLocation(@RequestParam String location) {
-        return Data.getProductsByLocation(location);
+    public ResponseEntity<List<Product>> getProductsByLocation(@RequestParam String location) {
+        List<Product> temp=Data.getProductsByLocation(location);
+        if(temp.stream().count()==0){return ResponseEntity.notFound().build();}
+        return ResponseEntity.ok(Data.getProductsByLocation(location));
     }
 
     @GetMapping(value = "api/products",params = "category")
-    public List<Product> getProductsByCategory(@RequestParam String category) {
-        return Data.getProductsByCategory(category);
+    public ResponseEntity<List<Product>> getProductsByCategory(@RequestParam String category) {
+        List<Product> temp=Data.getProductsByCategory(category);
+        if(temp.stream().count()==0){return ResponseEntity.notFound().build();}
+        return ResponseEntity.ok(Data.getProductsByCategory(category));
     }
 
-
-
-
-    @PostMapping("api/products")
-    public Object addNewProduct(@RequestBody Product product) {
-        boolean result=Data.addProduct(product);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @PostMapping(value = "api/products")
+    public ResponseEntity<Product> addNewProduct(@RequestBody Product product)
+            throws URISyntaxException {
+        Product newproduct = Data.addProduct(product);
+        if(newproduct==null){
+            return ResponseEntity.notFound().build();
+        }else{
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .queryParam("id",newproduct.getId())
+                    .buildAndExpand(newproduct.getId())
+                    .toUri();
+            return ResponseEntity.created(uri)
+                    .body(newproduct);
+        }
     }
 
-    @PutMapping(value = "api/products")
-    public Object updateProduct(@RequestBody Product product){
-        Data.upDateProduct(product);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @PutMapping(value = "api/products",params = "id")
+    public Object updateProduct(@RequestBody Product product,String id){
+       Product temp= Data.upDateProduct(product,id);
+        if(temp==null){
+            return ResponseEntity.notFound().build();
+        }else{
+            return new ResponseEntity<>(product,HttpStatus.NO_CONTENT);
+        }
     }
-
+    
     @DeleteMapping(value = "api/products",params = "id")
     public Object deleteProduct(String id) {
         Data.deleteProduct(id);
