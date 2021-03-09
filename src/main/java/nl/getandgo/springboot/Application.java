@@ -18,9 +18,7 @@ import org.springframework.context.annotation.Bean;
 //                    the "com/example" package, letting it find the controllers.
 public class Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+    public static void main(String[] args) { SpringApplication.run(Application.class, args); }
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {

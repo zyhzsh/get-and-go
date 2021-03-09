@@ -3,6 +3,7 @@ package nl.getandgo.springboot.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.tomcat.util.json.JSONParserTokenManager;
 
 public class Product {
 
@@ -72,5 +73,4 @@ public class Product {
                 ", location="+location+
                 '}';
     }
-
 }

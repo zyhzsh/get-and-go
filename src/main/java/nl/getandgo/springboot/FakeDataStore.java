@@ -1,13 +1,14 @@
 package nl.getandgo.springboot;
 
 import nl.getandgo.springboot.DTO.Product;
+import nl.getandgo.springboot.DTO.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FakeDataStore {
     private final static List<Product> productList=new ArrayList<>();
-
+    private final static List<User> userList=new ArrayList<>();
     public FakeDataStore(){
         productList.add(new Product("1000001",
                 "Takeout:Your LunchBox",
@@ -61,6 +62,9 @@ public class FakeDataStore {
                 "",
                 "",
                 ""));
+        userList.add(new User("admin","Admin@outlook.com","admin",User.AccountType.admin));
+        userList.add(new User("vendor","Admin@outlook.com","vendor",User.AccountType.vendor));
+        userList.add(new User("normal","Admin@outlook.com","normal",User.AccountType.normal));
     }
 
     public List<Product> getProducts(){ return productList; }
@@ -106,9 +110,6 @@ public class FakeDataStore {
 
     public Product upDateProduct(Product product,String id){
         Product pointer=getProduct(id);
-
-
-
         if(pointer!=null) {
             pointer.setName(product.getName());
             pointer.setDescription(product.getDescription());
@@ -122,7 +123,6 @@ public class FakeDataStore {
             return null;
         }
     }
-
 
     public boolean deleteProduct(String id){
         Product temp=getProduct(id);
@@ -143,6 +143,13 @@ public class FakeDataStore {
         return filtered;
     }
 
-
-
+    public User Login(User user){
+        for (User u:userList) {
+          if(u.getUsername().equals(user.getUsername())&&u.getPassword().equals(user.getPassword()))
+          {
+              return u;
+          }
+        }
+        return null;
+    }
 }
