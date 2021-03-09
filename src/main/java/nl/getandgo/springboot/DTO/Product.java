@@ -1,72 +1,63 @@
 package nl.getandgo.springboot.DTO;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
 public class Product {
-    private int id;
-    private String name;
-    private String vendor;
-    private String picture;
-    private double price;
-    private int discount_rate_percentage;
-    private String sub_description;
-    private String endOfDay;
-    private String location;
 
-    public int getId() {
-        return id;
+    @Getter private final String id;
+    @Getter @Setter private String name;
+    @Getter @Setter private String vendor;
+    @Getter @Setter private String picture;
+    @Getter @Setter private Category category;
+    @Getter @Setter private double price;
+    @Getter @Setter private int discount_rate_percentage;
+    @Getter @Setter private String description;
+    @Getter @Setter private String endOfDay;
+    @Getter @Setter private String location;
+    @Getter @Setter private int sold;
+    @Getter @Setter private String vendor_id;
+    @Getter @Setter private String voucher_id;
+    @Getter @Setter private String review_id;
+
+
+    public enum Category{
+        Wellness,Event,Food,WorkShop,Speciality
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getVendor() {
-        return vendor;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getDiscount_rate_percentage() {
-        return discount_rate_percentage;
-    }
-
-    public String getSub_description() {
-        return sub_description;
-    }
-
-    public String getEndOfDay() {
-        return endOfDay;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-
-    public Product(int id,
+    public Product(String id,
                    String name,
                    String vendor,
+                   Category category,
                    String picture,
                    double price,
                    int discount_rate_percentage,
-                   String sub_description,
+                   String description,
                    String endOfDay,
-                   String location) {
+                   String location,
+                   String vendor_id,
+                   String voucher_id,
+                   String review_id) {
         this.id = id;
         this.name = name;
-        this.vendor=vendor;
+        this.vendor = vendor;
+        this.category=category;
         this.picture = picture;
         this.price = price;
         this.discount_rate_percentage = discount_rate_percentage;
-        this.sub_description = sub_description;
+        this.description = description;
         this.endOfDay = endOfDay;
-        this.location=location;
+        this.location = location;
+        this.sold = 0;
+        this.vendor_id = vendor_id;
+        this.voucher_id = voucher_id;
+        this.review_id = review_id;
     }
+
+
+
+
     @Override
     public String toString() {
         return "product{" +
@@ -76,7 +67,7 @@ public class Product {
                 ", picture=" +picture  +
                 ", price="+ price+
                 ", discount_rate_percentage="+ discount_rate_percentage+
-                ", sub_description="+ sub_description+
+                ", sub_description="+ description+
                 ", endOfDay="+ endOfDay+
                 ", location="+location+
                 '}';

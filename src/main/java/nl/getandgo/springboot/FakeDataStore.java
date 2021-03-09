@@ -6,51 +6,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FakeDataStore {
-    private final List<Product> productList=new ArrayList<>();
+    private final static List<Product> productList=new ArrayList<>();
 
     public FakeDataStore(){
-        productList.add(new Product(1,
+        productList.add(new Product("1000001",
                 "Takeout:Your LunchBox",
                 "FoodKing",
+                Product.Category.Food,
                 "a link of a picture ?",
                 50,
-                50,
-                "bla bla",
+                25,
+                "bla bla bla",
                 "2021-3-25",
-                "Eindhoven"));
-        productList.add(new Product(2,
+                "Eindhoven",
+                "",
+                "",
+                ""));
+        productList.add(new Product("1000002",
                 "Foot massage",
                 "Tom's Healing Therapy",
+                Product.Category.Wellness,
                 "a link of a picture ?",
-                80,
-                50,
-                "bla bla",
-                "2021-3-27",
-                "Eindhoven"));
-        productList.add(new Product(3,
+                67,
+                41,
+                "bla bla bla",
+                "2021-3-26",
+                "Eindhoven",
+                "",
+                "",
+                "" ));
+        productList.add(new Product("1000003",
                 "Air conditioning service",
                 "Auto Center Karsmaker",
+                Product.Category.Speciality,
                 "a link of a picture ?",
                 80,
-                25,
+                51,
+                "bla bla bla",
+                "2021-3-26",
+                "Tilburg",
                 "",
-                "2021-3-25",
-                "Eindhoven"));
-        productList.add(new Product(4,
+                "",
+                ""));
+        productList.add(new Product("1000004",
                 "Hairdressing treatment",
-                "Exphairs",
+                "Exphairsr",
+                Product.Category.Wellness,
                 "a link of a picture ?",
-                35,
-                50,
+                30,
+                10,
+                "bla bla bla",
+                "2021-4-2",
+                "Amersfoort",
                 "",
-                "2021-5-25",
-                "Amersfoort"));
+                "",
+                ""));
     }
 
     public List<Product> getProducts(){ return productList; }
 
     //get filtered product by location
-    public List<Product> getProducts(String location){
+    public List<Product> getProductsByLocation(String location){
         List<Product> filetered = new ArrayList<>();
         for (Product p : productList) {
             if (p.getLocation().equals(location)) {
@@ -61,20 +77,72 @@ public class FakeDataStore {
     }
 
     //get specific product by id
-    public Product getProduct(int id){
+    public Product getProduct(String id){
         for (Product p : productList) {
-            if (p.getId() == id)
+            if (p.getId().equals(id))
                 return p;
         }
         return null;
     }
 
     //add product to list
-    public boolean addProduct(Product product){
-        if(getProduct(product.getId())!=null) { return  false; }
-        productList.add(product);
-        return true;
+    public Product addProduct(Product product){
+        if(getProduct(product.getId())!=null) { return null; }
+        productList.add(new Product(product.getId(),
+                product.getName(),
+                product.getVendor(),
+                product.getCategory(),
+                product.getPicture(),
+                product.getPrice(),
+                product.getDiscount_rate_percentage(),
+                product.getDescription(),
+                product.getEndOfDay(),
+                product.getLocation(),
+                product.getVendor_id(),
+                product.getVoucher_id(),
+                product.getReview_id()));
+        return product;
     }
+
+    public Product upDateProduct(Product product,String id){
+        Product pointer=getProduct(id);
+
+
+
+        if(pointer!=null) {
+            pointer.setName(product.getName());
+            pointer.setDescription(product.getDescription());
+            pointer.setEndOfDay(product.getEndOfDay());
+            pointer.setPicture(product.getPicture());
+            pointer.setPrice(product.getPrice());
+            //....
+            return pointer;
+        }
+        else {
+            return null;
+        }
+    }
+
+
+    public boolean deleteProduct(String id){
+        Product temp=getProduct(id);
+        if(temp==null){return false;}
+        else {
+            productList.remove(temp);
+            return true;
+        }
+    }
+
+    public List<Product> getProductsByCategory(String category) {
+        List<Product> filtered=new ArrayList<>();
+        for (Product p:productList) {
+            if(p.getCategory().toString().equals(category)){
+                filtered.add(p);
+            }
+        }
+        return filtered;
+    }
+
 
 
 }
