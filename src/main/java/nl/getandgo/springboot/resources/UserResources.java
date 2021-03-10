@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserResources {
 
     private static final FakeDataStore Data=new FakeDataStore();
-
     @PostMapping(value = "api/user")
     public Object addNewProduct(@RequestBody User user){
         User temp =Data.Login(user);
-        System.out.printf(user.getUsername());
+        System.out.println(user.getUsername());
         if(temp!=null){
             return temp;
         }
