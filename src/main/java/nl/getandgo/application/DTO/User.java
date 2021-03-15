@@ -1,4 +1,4 @@
-package nl.getandgo.demo.DTO;
+package nl.getandgo.application.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

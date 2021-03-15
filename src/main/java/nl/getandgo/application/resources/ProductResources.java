@@ -1,6 +1,6 @@
-package nl.getandgo.demo.resources;
-import nl.getandgo.demo.DTO.Product;
-import nl.getandgo.demo.FakeDataStore;
+package nl.getandgo.application.resources;
+import nl.getandgo.application.DTO.Product;
+import nl.getandgo.application.FakeDataStore;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

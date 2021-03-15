@@ -1,7 +1,7 @@
-package nl.getandgo.demo.resources;
+package nl.getandgo.application.resources;
 
-import nl.getandgo.demo.DTO.User;
-import nl.getandgo.demo.FakeDataStore;
+import nl.getandgo.application.DTO.User;
+import nl.getandgo.application.FakeDataStore;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

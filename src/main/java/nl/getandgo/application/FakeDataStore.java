@@ -1,7 +1,7 @@
-package nl.getandgo.demo;
+package nl.getandgo.application;
 
-import nl.getandgo.demo.DTO.Product;
-import nl.getandgo.demo.DTO.User;
+import nl.getandgo.application.DTO.Product;
+import nl.getandgo.application.DTO.User;
 
 import java.util.ArrayList;
 import java.util.List;
