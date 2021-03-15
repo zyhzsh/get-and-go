@@ -1,4 +1,4 @@
-package nl.getandgo.springboot.DTO;
+package nl.getandgo.demo.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,8 +1,7 @@
-package nl.getandgo.springboot.resources;
+package nl.getandgo.demo.resources;
 
-import nl.getandgo.springboot.DTO.User;
-import nl.getandgo.springboot.FakeDataStore;
-import org.springframework.http.ResponseEntity;
+import nl.getandgo.demo.DTO.User;
+import nl.getandgo.demo.FakeDataStore;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

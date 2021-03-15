@@ -1,4 +1,4 @@
-package nl.getandgo.springboot;
+package nl.getandgo.demo;
 import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

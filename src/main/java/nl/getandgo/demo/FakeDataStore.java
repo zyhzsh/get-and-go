@@ -1,7 +1,7 @@
-package nl.getandgo.springboot;
+package nl.getandgo.demo;
 
-import nl.getandgo.springboot.DTO.Product;
-import nl.getandgo.springboot.DTO.User;
+import nl.getandgo.demo.DTO.Product;
+import nl.getandgo.demo.DTO.User;
 
 import java.util.ArrayList;
 import java.util.List;

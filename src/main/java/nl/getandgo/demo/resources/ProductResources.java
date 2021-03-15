@@ -1,11 +1,9 @@
-package nl.getandgo.springboot.resources;
-import nl.getandgo.springboot.DTO.Product;
-import nl.getandgo.springboot.FakeDataStore;
+package nl.getandgo.demo.resources;
+import nl.getandgo.demo.DTO.Product;
+import nl.getandgo.demo.FakeDataStore;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;

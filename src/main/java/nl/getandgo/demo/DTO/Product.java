@@ -1,9 +1,8 @@
-package nl.getandgo.springboot.DTO;
+package nl.getandgo.demo.DTO;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.tomcat.util.json.JSONParserTokenManager;
 
 public class Product {
 
