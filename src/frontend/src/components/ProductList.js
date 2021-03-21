@@ -14,7 +14,6 @@ const ProductList = ({ productlist }) => {
   } else {
     return (
       <Content>
-        <NotFound />
       </Content>
     );
   }
@@ -24,12 +23,10 @@ const Content = styled.div`
   height: 75vh;
   overflow: auto;
   background: #ffffff;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-end;
-  align-content: flex-start;
+  display:grid;
+  grid-template-columns: auto auto auto auto;
+
+
   &::-webkit-scrollbar {
     padding-top: 20px;
     width: 0.5rem;

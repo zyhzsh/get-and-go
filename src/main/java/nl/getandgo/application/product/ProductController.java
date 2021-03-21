@@ -24,37 +24,24 @@ public class ProductController {
         return productService.getProducts();
     }
     @GetMapping(value = "api/products", params = "id")
-    public ResponseEntity<Product> getProductById(@RequestParam String id) {
-        Product product = productService.getProduct(id);
-        if (product != null) {
-            return ResponseEntity.ok(product);
-        }
+    public Product getProductById(@RequestParam String id) {
+        return productService.getProduct(id);
     }
-
     @GetMapping(value = "api/products", params = "city")
-    public ResponseEntity<List<Product>> getProductsByCity(@RequestParam String city) {
-        List<Product> temp = productService.getProductsByCity(city);
-        if (temp.size() == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(temp);
+    public List<Product> getProductsByCity(@RequestParam String city) {
+        return  productService.getProductsByCity(city);
     }
     @GetMapping(value = "api/products", params = "category")
-    public ResponseEntity<List<Product>> getProductsByCategory(@RequestParam String category) {
-        List<Product> temp = productService.getProductsByCategory(category);
-        if (temp.size() == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(temp);
+    public List<Product> getProductsByCategory(@RequestParam String category) {
+        return  productService.getProductsByCategory(category);
     }
     @GetMapping(value="api/products",params ={"city","category"})
-    public ResponseEntity<List<Product>> getProductByCityAndCategory(@RequestParam String city,@RequestParam String category){
-        List<Product> temp = productService.getProductsByCategoryAndCity(category,city);
-        if (temp.size() == 0) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(temp);
+    public List<Product> getProductByCityAndCategory(@RequestParam String city,@RequestParam String category){
+        return productService.getProductsByCategoryAndCity(category,city);
     }
+
+   
+
     @PostMapping(value = "api/products")
     public ResponseEntity<Product> addNewProduct(@RequestBody Product product)
             throws URISyntaxException {
