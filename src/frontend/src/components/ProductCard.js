@@ -13,19 +13,19 @@ const ProductCard=({product}) =>{
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
-          height="140"
+          height="150"
           image={product.img}
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h2">
             {product.product_name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Price: €{product.price}
+            Price: €{product.price}<br/>
+            {product.description}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-           {product.description}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -33,11 +33,11 @@ const ProductCard=({product}) =>{
   );
 }
 const CardContainer=styled(Card)`
-    max-width:240px;
+    max-width:250px;
     margin-left:0.5rem;
     margin-top:1rem;
     display:block;
-    height:300px;
+    height:350px;
 `;
 
 export default ProductCard;

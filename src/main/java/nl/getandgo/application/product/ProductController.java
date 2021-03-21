@@ -40,8 +40,6 @@ public class ProductController {
         return productService.getProductsByCategoryAndCity(category,city);
     }
 
-   
-
     @PostMapping(value = "api/products")
     public ResponseEntity<Product> addNewProduct(@RequestBody Product product)
             throws URISyntaxException {

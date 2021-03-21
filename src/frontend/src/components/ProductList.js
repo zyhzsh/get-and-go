@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import NotFound from "./NotFound";
+import { Spin, Alert } from "antd";
 const ProductList = ({ productlist }) => {
   if (productlist.length > 0) {
     return (
@@ -14,6 +14,13 @@ const ProductList = ({ productlist }) => {
   } else {
     return (
       <Content>
+        <Spin tip="Loading...">
+          <Alert
+            message="Trying to loading latest data..."
+            description="If there is no news for a long time, it means we may not have such data yet."
+            type="info"
+          />
+        </Spin>
       </Content>
     );
   }
@@ -23,9 +30,12 @@ const Content = styled.div`
   height: 75vh;
   overflow: auto;
   background: #ffffff;
-  display:grid;
-  grid-template-columns: auto auto auto auto;
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: stretch;
 
   &::-webkit-scrollbar {
     padding-top: 20px;
@@ -42,5 +52,4 @@ const Content = styled.div`
     );
   }
 `;
-
 export default ProductList;
