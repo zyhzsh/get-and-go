@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS customer;
+create table customer
+(
+    id       INT,
+    name     VARCHAR(50),
+    password VARCHAR(50),
+    email    VARCHAR(50)
+);
 insert into customer (id, name, password, email) values (1, 'Waldemar Drain', 'KzPgkIhd', 'wdrain0@vistaprint.com');
 insert into customer (id, name, password, email) values (2, 'Shae Vickress', 'Xhf8mvvBuCmC', 'svickress1@who.int');
 insert into customer (id, name, password, email) values (3, 'Siward Peirson', 'UPBFvgImN', 'speirson2@w3.org');

@@ -3,15 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/compatible": "^1.0.8",
+    "@ant-design/icons": "^4.6.2",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.14.0",
     "axios": "^0.21.1",
     "framer-motion": "^3.10.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -33,8 +37,8 @@
       "react-app/jest"
     ]
   },
-  "homepage":"./",
-  "proxy":"http://localhost:8080/",
+  "homepage": "./",
+  "proxy": "http://localhost:8080/",
   "browserslist": {
     "production": [
       ">0.2%",
