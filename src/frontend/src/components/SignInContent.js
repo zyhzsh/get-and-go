@@ -52,9 +52,9 @@ const SignInContent = () => {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <a className="login-form-forgot" href="">
+          <Link to="/">
             Forgot password
-          </a>
+          </Link>
         </Form.Item>
         <Form.Item>
           <Button

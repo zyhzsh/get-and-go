@@ -23,7 +23,7 @@ const ProductCard=({product}) =>{
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Price: €{product.price}<br/>
-            {product.description}
+            {product.description }
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
           </Typography>

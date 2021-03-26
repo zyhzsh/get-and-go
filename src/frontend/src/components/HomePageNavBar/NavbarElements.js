@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 export const Nav = styled.nav`
-  background: #000;
+  background:black;
   height: 80px;
   display: flex;
   justify-content: space-between;

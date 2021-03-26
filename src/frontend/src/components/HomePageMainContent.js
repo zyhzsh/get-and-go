@@ -1,4 +1,4 @@
-import React, { useEffect,useState} from "react";
+import React, { useEffect,useState,useCallback} from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { loadAllProducts,
   loadAllProductsByCategory,
@@ -9,7 +9,6 @@ import { Tabs,Layout } from "antd";
 import styled from "styled-components";
 import HomePageSideBar from "./HomePageSideBar";
 import ProductList from"./ProductList";
-
 const { TabPane } = Tabs;
 const { Content } = Layout;
 const HomePageMainContent = () => {
@@ -17,18 +16,20 @@ const HomePageMainContent = () => {
   const [selectedcategory,setSelectedcategory]=useState("All");
   const dispatch = useDispatch();
   const productlist = useSelector(state => state.products.products);
-  useEffect(() => {
-    if(selectedcity=="All"&&selectedcategory=="All"){
+  const updateproductlist=useCallback(()=>{
+    if(selectedcity==="All"&&selectedcategory==="All"){
       dispatch(loadAllProducts()); 
-    }else if(selectedcity=="All"&&selectedcategory!="All"){
+    }else if(selectedcity==="All"&&selectedcategory!=="All"){
       dispatch(loadAllProductsByCategory(selectedcategory)); 
-    }else if(selectedcity!="All"&&selectedcategory=="All"){
+    }else if(selectedcity!=="All"&&selectedcategory==="All"){
       dispatch(loadAllProdductsByCity(selectedcity)); 
-    }else if(selectedcity!="All"&&selectedcategory!="All"){
+    }else if(selectedcity!=="All"&&selectedcategory!=="All"){
       dispatch(loadAllProdductsByCityAndCategory(selectedcity,selectedcategory)); 
     }
-    console.log(productlist);
-  },[selectedcity,selectedcategory]);
+  },[dispatch,selectedcategory,selectedcity]);
+  useEffect(()=>{
+    updateproductlist();
+  },[updateproductlist])
   return (
     <Content style={{ padding: "0 50px" }}>
       <Layout className="site-layout-background" style={{ padding: "24px 0" }}>

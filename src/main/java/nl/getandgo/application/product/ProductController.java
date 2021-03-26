@@ -5,10 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -39,21 +35,9 @@ public class ProductController {
     public List<Product> getProductByCityAndCategory(@RequestParam String city,@RequestParam String category){
         return productService.getProductsByCategoryAndCity(category,city);
     }
-
     @PostMapping(value = "api/products")
-    public ResponseEntity<Product> addNewProduct(@RequestBody Product product)
-            throws URISyntaxException {
-        Product new_product = productService.addProduct(product);
-        if (new_product == null) {
-            return ResponseEntity.notFound().build();
-        } else {
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .queryParam("id", new_product.getProduct_id())
-                    .buildAndExpand(new_product.getProduct_id())
-                    .toUri();
-            return ResponseEntity.created(uri)
-                    .body(new_product);
-        }
+    public boolean addNewProduct(@RequestBody Product product){
+          return productService.addProduct(product);
     }
     @PutMapping(value = "api/products", params = "id")
     public Object updateProduct(@RequestBody Product product, String id) {
