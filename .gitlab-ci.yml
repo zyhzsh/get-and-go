@@ -1,9 +1,19 @@
 ##
+stages:
+  - build
+  - sonar
+  - test
 
 build:
   stage: build
   script: ./gradlew assemble
 
+sonar:
+  stage: sonar
+  script: ./gradlew sonarqube \
+    Dsonar.projectKey=staticCodeAnysis \
+    Dsonar.host.url=http://localhost:9000 \
+    Dsonar.login=b130d4ee9025896e5c087ace7c41eb5e86e3ebd1
 
 test:
   stage: test
