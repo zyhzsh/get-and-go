@@ -13,28 +13,13 @@ import java.util.List;
 
 @ToString
 public class CustomerUser extends User{
+
     @Getter @Setter private String username;
     @Getter @Setter private City city;
     @Getter @Setter private List<Review> reviews;
     @Getter @Setter private List<Order> orders;
-
-    public CustomerUser(Long id,
-                        @Email String email,
-                        String password,
-                        UserType usertype,
-                        String first_name,
-                        String last_name,
-                        String avatar_link,
-                        String phone,
-                        List<Comment> comments,
-                        String username,
-                        City city,
-                        List<Review> reviews,
-                        List<Order> orders) {
-        super(id, email, password, usertype, first_name, last_name, avatar_link, phone, comments);
-        this.username = username;
-        this.city = city;
-        this.reviews = reviews;
-        this.orders = orders;
+    public CustomerUser(@Email String email, String password, UserType usertype, String first_name, String last_name) {
+        super(email, password, usertype, first_name, last_name);
     }
+
 }

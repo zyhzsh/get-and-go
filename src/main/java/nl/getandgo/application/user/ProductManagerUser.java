@@ -8,15 +8,8 @@ import java.util.List;
 
 @ToString
 public class ProductManagerUser extends User{
-    public ProductManagerUser(Long id,
-                              @Email String email,
-                              String password,
-                              UserType usertype,
-                              String first_name,
-                              String last_name,
-                              String avatar_link,
-                              String phone,
-                              List<Comment> comments) {
-        super(id, email, password, usertype, first_name, last_name, avatar_link, phone, comments);
+
+    public ProductManagerUser(@Email String email, String password, UserType usertype, String first_name, String last_name) {
+        super(email, password, usertype, first_name, last_name);
     }
 }

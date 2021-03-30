@@ -1,5 +1,6 @@
 package nl.getandgo.application.product;
 import com.github.javafaker.Faker;
+
 import nl.getandgo.application.location.City;
 import nl.getandgo.application.store.Store;
 
@@ -13,23 +14,22 @@ import java.util.List;
 @Service
 public class ProductService {
     public static List<Product> productList;
+
     @Autowired
     private final StoreService storeService;
-
-
+    //Constructor
     public ProductService(StoreService storeService){
         this.storeService = storeService;
         productList=new ArrayList<>();
         AddFakeProduct();
     }
-
+    //Fake Data
     public void AddFakeProduct(){
         Faker faker =new Faker();
-        Store store1=new Store(1L,1L,"Food King","ss", City.Eindohoven,"zzzz","xxxxxx","ssss");
-        Store store2=new Store(2L,2L,"Store 2","blablabla", City.Tilburg,"zzzz","xxxxxx","ssss");
-        Store store3=new Store(3L,3L,"Store 3","blablabla", City.Delft,"zzzz","xxxxxx","ssss");
-        Store store4=new Store(4L,4L,"Store 4","blablabla", City.Breda,"zzzz","xxxxxx","ssss");
-
+        Store store1=new Store("Food King","ss", City.Eindohoven,"zzzz","xxxxxx","ssss");
+        Store store2=new Store("Store 2","blablabla", City.Tilburg,"zzzz","xxxxxx","ssss");
+        Store store3=new Store("asd","Store 3", City.Delft,"zzzz","xxxxxx","blablabla");
+        Store store4=new Store("sd","Store 4", City.Breda,"zzzz","xxxxxx","blablabla");
         productList.add(new Product(1L,
                 store1,
                 null,
@@ -78,45 +78,7 @@ public class ProductService {
                 "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max",
                 Product.Category.Wellness,
                 null));
-        Store temp_store;
-        Product temp_product;
-        for (int i = 0; i < 3; i++) {
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Eindohoven,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Food,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Eindohoven,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Wellness,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Eindohoven,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Speciality,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Eindohoven,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Speciality,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Eindohoven,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Hotel,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Eindohoven,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.WorkShop,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Breda,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),faker.number().randomDigit(), Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Food,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Delft,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Food,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Tilburg,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Food,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Haarlem,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Food,null);
-            productList.add(temp_product);
-            temp_store=new Store(faker.number().randomNumber(), faker.number().randomNumber(),faker.company().name(), "bababa",City.Utrecht,faker.address().streetAddress(),"xxxxx","asdas");
-            temp_product=new Product(faker.number().randomNumber(),temp_store,null,faker.commerce().productName(),faker.number().randomDigit(),faker.number().randomDigit(),56, Product.Status.OnSale, "","http://placeimg.com/640/360/any", Product.Category.Food,null);
-            productList.add(temp_product);
-        }
     }
-
 
     public Product getProduct(String id) {
         for (Product p:productList) {
@@ -126,7 +88,10 @@ public class ProductService {
         }
         return null;
     }
-
+    //GET
+    public List<Product> getProducts() {
+        return productList;
+    }
     public List<Product> getProductsByCity(String city) {
         List<Product> temp=new ArrayList<>();
         for (Product p:productList) {
@@ -150,20 +115,18 @@ public class ProductService {
         temp.removeIf(p->(!(p.getCategory().toString().toLowerCase().equals(category))));
         return temp;
     }
-
-
+    //ADD
     public boolean addProduct(Product product) {
         //TODO Check
 
         return true;
 
     }
-    public List<Product> getProducts() {
-        return productList;
-    }
+    //UPDATE
     public Product upDateProduct(Product product, String id) {
         return null;
     }
+    //DELETE
     public void deleteProduct(String id) {
 
     }
