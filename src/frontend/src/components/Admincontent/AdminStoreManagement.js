@@ -5,10 +5,12 @@ import { getStoreList } from "../../actions/storeAction";
 import { Table, Space, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 //UI Component
-import AdminAddNewStoreForm from'./AdminAddNewStoreForm';
+import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
 
 const AdminStoreManagement = () => {
-  const [visible_add_new_store_form,set_visible_add_new_store_form]=useState(false);
+  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(
+    false
+  );
   const dispatch = useDispatch();
   const storeslist = useSelector((state) => state.store.store);
   const [mount, setMount] = useState(false);
@@ -21,7 +23,7 @@ const AdminStoreManagement = () => {
       }
     };
     loadstorelist();
-  }, [dispatch,storeslist,mount]);
+  }, [dispatch, storeslist, mount]);
 
   const columns = [
     {
@@ -68,13 +70,42 @@ const AdminStoreManagement = () => {
   return (
     <div>
       <h2>Store</h2>
-      <Table 
-      title={()=><Button type="primary" shape="round" icon={<PlusOutlined/>} size="middle" onClick={()=>{set_visible_add_new_store_form(true)}}>Add New</Button>}
-      columns={columns} 
-      dataSource={storeslist} 
-      rowKey="store_id"
+      <Table
+        title={() => (
+          <>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<PlusOutlined />}
+            size="middle"
+            onClick={() => {
+              set_visible_add_new_store_form(true);
+            }}
+         >
+            Add New Store
+          </Button>
+          <span> </span>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<PlusOutlined />}
+            size="middle"
+            onClick={() => {
+              set_visible_add_new_store_form(true);
+            }}
+          >
+            Register A New Vendor 
+          </Button>
+          </>
+        )}
+        columns={columns}
+        dataSource={storeslist}
+        rowKey="store_id"
       />
-      <AdminAddNewStoreForm visiable={visible_add_new_store_form} setvisiable={set_visible_add_new_store_form}/>
+      <AdminAddNewStoreForm
+        visiable={visible_add_new_store_form}
+        setvisiable={set_visible_add_new_store_form}
+      />
     </div>
   );
 };

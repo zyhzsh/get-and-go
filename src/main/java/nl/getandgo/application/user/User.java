@@ -1,5 +1,6 @@
 package nl.getandgo.application.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +17,7 @@ public abstract class User {
    // @Id
     @Getter private Long id;
     @Getter private @Email String email;
+    @JsonIgnore
     @Getter @Setter private String password;
     @Getter @Setter private UserType usertype;
     @Getter @Setter private String first_name;
