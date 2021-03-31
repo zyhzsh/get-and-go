@@ -1,12 +1,12 @@
 ##
 stages:
-  - remove_local_cache_file
+  - removelocalcachefile
   - build
   - sonar
   - test
 
-remove_local_cache_file:
-  stage: remove_local_cache_file
+removelocalcachefile:
+  stage: removelocalcachefile
   script:rm -rf builds 
   
 
