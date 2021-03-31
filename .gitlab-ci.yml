@@ -18,7 +18,7 @@ test:
 
 removelocalcachefile:
   stage: removelocalcachefile
-  script: cd ..&& cd ..&& cd ..&& cd ..&& cd ..&& cd ..&& rmdir builds 
+  script: cd ..; cd ..; cd ..; cd ..; cd ..; cd ..; rmdir builds 
 
 after_script:
   - echo "End CI~!"
