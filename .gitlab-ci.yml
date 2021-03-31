@@ -7,7 +7,7 @@ stages:
 
 removelocalcachefile:
   stage: removelocalcachefile
-  script: rm -rf builds 
+  script: rmdir builds 
 build:
   stage: build
   script: ./gradlew assemble
