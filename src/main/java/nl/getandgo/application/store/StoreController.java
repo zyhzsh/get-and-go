@@ -20,8 +20,8 @@ public class StoreController {
         System.out.println("Stores");
       return storeService.getStoreList();
     }
-    @PostMapping(value = "api/stores" @params = "Owner")
-    public boolean addNewStore(@RequestBody Store store){
-
-    }
+//    @PostMapping(value = "api/stores" @params = "Owner")
+//    public boolean addNewStore(@RequestBody Store store){
+//
+//    }
 }
