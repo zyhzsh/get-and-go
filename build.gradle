@@ -24,8 +24,8 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.security:spring-security-test'
+  //  implementation 'org.springframework.boot:spring-boot-starter-security'
+   // implementation 'org.springframework.security:spring-security-test'
 
 
     implementation("com.google.guava:guava:30.1.1-jre")

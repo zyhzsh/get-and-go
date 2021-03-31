@@ -5,7 +5,7 @@ const initState = {
   userprofile:null
 };
 
-export const userReducer = (state = initState, action) => {
+const userReducer = (state = initState, action) => {
   switch (action.type) {
     case "LOG_IN":
       return { ...state, user: action.payload.user ,login:action.payload.login};
@@ -15,3 +15,4 @@ export const userReducer = (state = initState, action) => {
       return { ...state };
   }
 };
+export default userReducer;

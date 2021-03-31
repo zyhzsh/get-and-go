@@ -10,11 +10,10 @@ public class StoreService {
     public List<Store> storeList;
     public StoreService(){
        storeList=new ArrayList<>();
-        storeList.add(new Store("asdasd","asdasdfsd", City.Eindohoven,"sdfhdhfgdhsdf","asdasd","asdasd"));
-        storeList.add(new Store("asdddasd","asdasdfsd", City.Utrecht,"sdfbsdf","asdarsfsd","asdasd"));
-        storeList.add(new Store("sdf","asdbvcxasd", City.Tilburg,"sdfbgfbksdf","asdasd","asdassdfsfd"));
-        storeList.add(new Store("fd","asdsdfjghfjasd", City.Delft,"sdfikiksdf","asdasdfsd","asdasd"));
-        storeList.add(new Store("sdf","asdaxvbjsd", City.Breda,"sdfstmkoiypdf","asdasd","asdasd"));
+        storeList.add(new Store(1L,10051L,"Food King","ss", City.Eindohoven,"zzzz","xxxxxx","ssss"));
+        storeList.add(new Store(2L,200054L,"sdDSf","asdaxvbjsd", City.Breda,"sdfstmkoiypdf","asdasd","asdasd"));
+        storeList.add(new Store(3L,51184L,"sdFSDf","asdaxvbjsd", City.Tilburg,"sdfstmkoiypdf","asdasd","asdasd"));
+        storeList.add(new Store(4L,5615L,"sFFSdf","asdaxvbjsd", City.Utrecht,"sdfstmkoiypdf","asdasd","asdasd"));
     }
     public List<Store> getStoreList(){return storeList;}
     public Store getStoreById(String id){

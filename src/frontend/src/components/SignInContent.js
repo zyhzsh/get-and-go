@@ -1,36 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogin
+ } from "../actions/userAction";
 const SignInContent = () => {
+  const dispatch = useDispatch();
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    if (values) {
+    //  console.log(values.email);
+     // console.log(values.password);
+      dispatch(userLogin(values.email,values.password))
+    }
   };
 
   return (
     <Content>
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-      >
-          <h1>Sign In </h1>
+      <Form name="normal_login" className="login-form" onFinish={onFinish}>
+        <h1>Sign In </h1>
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please input your Email!",
             },
           ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
+            placeholder="Email"
           />
         </Form.Item>
         <Form.Item
@@ -49,12 +51,7 @@ const SignInContent = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-          <Link to="/">
-            Forgot password
-          </Link>
+          <Link to="/">Forgot password</Link>
         </Form.Item>
         <Form.Item>
           <Button

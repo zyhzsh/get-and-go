@@ -26,12 +26,8 @@ public class ProductService {
     //Fake Data
     public void AddFakeProduct(){
         Faker faker =new Faker();
-        Store store1=new Store("Food King","ss", City.Eindohoven,"zzzz","xxxxxx","ssss");
-        Store store2=new Store("Store 2","blablabla", City.Tilburg,"zzzz","xxxxxx","ssss");
-        Store store3=new Store("asd","Store 3", City.Delft,"zzzz","xxxxxx","blablabla");
-        Store store4=new Store("sd","Store 4", City.Breda,"zzzz","xxxxxx","blablabla");
         productList.add(new Product(1L,
-                store1,
+                storeService.getStoreList().get(0),
                 null,
                 "Takeout:Your LunchBox",
                 51,
@@ -43,7 +39,7 @@ public class ProductService {
                 Product.Category.Food,
                 null));
         productList.add(new Product(2L,
-                store2,
+                storeService.getStoreList().get(1),
                 null,
                 "Foot massage",
                 9999,
@@ -55,7 +51,7 @@ public class ProductService {
                 Product.Category.Wellness,
                 null));
         productList.add(new Product(3L,
-                store3,
+                storeService.getStoreList().get(2),
                 null,
                 "Air conditioning service",
                 9999,
@@ -67,7 +63,7 @@ public class ProductService {
                 Product.Category.Speciality,
                 null));
         productList.add(new Product(4L,
-                store4,
+                storeService.getStoreList().get(3),
                 null,
                 "Hairdressing treatment",
                 9999,

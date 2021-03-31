@@ -4,7 +4,7 @@ package nl.getandgo.application.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("api/products")
-    @PreAuthorize("hasAnyRole('ROLE_Customer')")
+//
     public List<Product> getAllProducts() {
         return productService.getProducts();
     }

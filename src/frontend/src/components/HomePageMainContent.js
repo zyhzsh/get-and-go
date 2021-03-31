@@ -12,6 +12,7 @@ import ProductList from"./ProductList";
 const { TabPane } = Tabs;
 const { Content } = Layout;
 const HomePageMainContent = () => {
+  //Fildering Products
   const [selectedcity,setSelectedCity]=useState("All");
   const [selectedcategory,setSelectedcategory]=useState("All");
   const dispatch = useDispatch();
