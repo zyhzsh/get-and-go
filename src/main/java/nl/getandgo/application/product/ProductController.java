@@ -17,8 +17,8 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("api/products")
-//
     public List<Product> getAllProducts() {
+        System.out.println("All");
         return productService.getProducts();
     }
     @GetMapping(value = "api/products", params = "id")
@@ -27,14 +27,17 @@ public class ProductController {
     }
     @GetMapping(value = "api/products", params = "city")
     public List<Product> getProductsByCity(@RequestParam String city) {
+        System.out.println("city");
         return  productService.getProductsByCity(city);
     }
     @GetMapping(value = "api/products", params = "category")
     public List<Product> getProductsByCategory(@RequestParam String category) {
+        System.out.println("category");
         return  productService.getProductsByCategory(category);
     }
     @GetMapping(value="api/products",params ={"city","category"})
     public List<Product> getProductByCityAndCategory(@RequestParam String city,@RequestParam String category){
+        System.out.println("city+category");
         return productService.getProductsByCategoryAndCity(category,city);
     }
     @PostMapping(value = "api/products")
