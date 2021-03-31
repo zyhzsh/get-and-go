@@ -10,7 +10,7 @@ build:
 
 sonar:
   stage: sonar
-  script: ./gradlew -D sonar.projectKey=staticCodeAnysis -D sonar.host.url=http://localhost:9000 -D sonar.login=3a75aaa485111e6b80e037bf77e8e6be8df02382
+  script: ./gradlew sonarqube -D sonar.projectKey=getandgo -D sonar.host.url=%URL% -D sonar.login=%SONARKEY%
 test:
   stage: test
   script: ./gradlew test
