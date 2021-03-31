@@ -1,13 +1,10 @@
 ##
 stages:
-  - removelocalcachefile
   - build
   - sonar
   - test
+  - removelocalcachefile
 
-removelocalcachefile:
-  stage: removelocalcachefile
-  script: rmdir builds 
 build:
   stage: build
   script: ./gradlew assemble
@@ -19,6 +16,9 @@ test:
   stage: test
   script: ./gradlew test
 
+removelocalcachefile:
+  stage: removelocalcachefile
+  script: rmdir builds 
 
 after_script:
   - echo "End CI~!"
