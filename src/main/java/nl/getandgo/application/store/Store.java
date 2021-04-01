@@ -14,7 +14,7 @@ import nl.getandgo.application.location.City;
 public class Store {
  //   @Id
     @Getter @Setter private Long store_id;
-    @Getter @Setter private Long owner_id;
+    @Getter @Setter private Long vendor_id;
     @Getter @Setter private String store_name;
     @Getter @Setter private String description;
     @Getter @Setter private City city;

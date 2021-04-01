@@ -37,7 +37,7 @@ const AdminStoreManagement = () => {
       key: "store_name",
     },
     {
-      title: "Owner ID",
+      title: "Vendor ID",
       dataIndex: "owner_id",
       key: "owner_id",
     },

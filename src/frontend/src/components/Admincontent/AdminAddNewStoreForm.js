@@ -7,19 +7,17 @@ import {
   Row,
   Input,
   Select,
-  DatePicker,
-  Table,
+  Table
 } from "antd";
 import styled from "styled-components";
 
 const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
   const { Option } = Select;
-  const name = useRef(null);
-  const onFinish = () => {
-    setvisiable(false);
-    console.log(name.current.state.value);
-  };
-
+  const SubmitForm = (formdata) => {
+    alert("add succeed ~ !")
+    console.log(formdata);
+    form.current.resetFields();
+  };  
   const data = [
     {
       id: "1",
@@ -63,11 +61,19 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
       email: "vendor3@gmail.com",
       phone: "12321651",
     },
+    {
+      id: "821",
+      first_name: "Jim",
+      last_name: "jackiasd",
+      email: "vendor3@gmail.com",
+      phone: "12321651",
+    },
   ];
 
   // Vendor List Table Configure
   const [dataSource, setDataSource] = useState(data);
   const [value, setValue] = useState("");
+  const form=useRef(null);
   const FilterByInput = (placeholder) => (
     <Input
       placeholder={placeholder}
@@ -112,6 +118,13 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
       key: "phone",
     },
   ];
+
+  const SelectVendor=(selected_vendor_id)=>{
+    form.current.setFieldsValue({vendor_id:selected_vendor_id});
+  }
+
+
+
   return (
     <>
       <Drawer
@@ -136,100 +149,90 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
             >
               Cancel
             </Button>
-            <Button onClick={onFinish} type="primary">
-              Submit
-            </Button>
           </div>
         }
       >
+        <h3>Vendor List</h3>
         <VendorList>
-          <h3>Vendor List</h3>
           <Table
+            onRow={(record) => {
+              return {
+                onDoubleClick: () => {
+                  SelectVendor(record.id);
+                },
+              };
+            }}
             columns={columns}
             dataSource={dataSource}
-            scroll={{ y:300 }}
+            scroll={{ y: 300 }}
             pagination={false}
+            rowKey="id"
           />
         </VendorList>
-        <Form layout="vertical" hideRequiredMark>
+        <Form layout="vertical" 
+        onFinish={(value)=>{SubmitForm(value)}}
+        ref={form}
+        >
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="name"
-                label="Name"
-                rules={[{ required: true, message: "Please enter user name" }]}
-              >
-                <Input ref={name} placeholder="Please enter user name" />
+              <Form.Item name="vendor_id" label="Vendor ID"rules={[{ required: true, message: "Select vendor from the table above" }]}>
+                <Input disabled={true} placeholder="Select vendor from the table above"/>
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="url"
-                label="Url"
-                rules={[{ required: true, message: "Please enter url" }]}
+            <Form.Item
+                name="city"
+                label="City"
+                rules={[{ required: true, message: "Please select an City" }]}
               >
-                <Input
-                  style={{ width: "100%" }}
-                  addonBefore="http://"
-                  addonAfter=".com"
-                  placeholder="Please enter url"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="owner"
-                label="Owner"
-                rules={[{ required: true, message: "Please select an owner" }]}
-              >
-                <Select placeholder="Please select an owner">
-                  <Option value="xiao">Xiaoxiao Fu</Option>
-                  <Option value="mao">Maomao Zhou</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="type"
-                label="Type"
-                rules={[{ required: true, message: "Please choose the type" }]}
-              >
-                <Select placeholder="Please choose the type">
-                  <Option value="private">Private</Option>
-                  <Option value="public">Public</Option>
+                <Select placeholder="Please select an City">
+                  <Option value="Eindohoven">Eindohoven</Option>
+                  <Option value="Tilburg">Tilburg</Option>
+                  <Option value="Utrecht">Utrecht</Option>
+                  <Option value="Delft">Delft</Option>
+                  <Option value="Haarlem">Haarlem</Option>
+                  <Option value="Breda">Breda</Option>
                 </Select>
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="approver"
-                label="Approver"
-                rules={[
-                  { required: true, message: "Please choose the approver" },
-                ]}
-              >
-                <Select placeholder="Please choose the approver">
-                  <Option value="jack">Jack Ma</Option>
-                  <Option value="tom">Tom Liu</Option>
-                </Select>
+            <Form.Item name="website"label="Offcial Website">
+                <Input style={{ width: "100%" }} addonBefore="http://" placeholder="Please enter url"/>
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="dateTime"
-                label="DateTime"
+                name="store_name"
+                label="Store Name"
+                rules={[{ required: true, message: "Please Enter Store Name" }]}
+              >
+                <Input style={{ width: "100%" }}  placeholder="Please enter store name"/>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="address"
+                label="Address"
                 rules={[
-                  { required: true, message: "Please choose the dateTime" },
+                  { required: true, message: "Please Enter the Address " },
                 ]}
               >
-                <DatePicker.RangePicker
-                  style={{ width: "100%" }}
-                  getPopupContainer={(trigger) => trigger.parentElement}
-                />
+                 <Input style={{ width: "100%" }}  placeholder="Please enter the address"/>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+            <Form.Item
+                name="img"
+                label="Store Img Source"
+                rules={[
+                  { required: true, message: "Please Enter The Img Source " },
+                ]}
+              >
+                  <Input style={{ width: "100%" }} addonBefore="http://" placeholder="Please enter img source url"/>
               </Form.Item>
             </Col>
           </Row>
@@ -241,17 +244,20 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
                 rules={[
                   {
                     required: true,
-                    message: "please enter url description",
+                    message: "please enter the description about the store",
                   },
                 ]}
               >
                 <Input.TextArea
                   rows={4}
-                  placeholder="please enter url description"
+                  placeholder="please enter the description about the store"
                 />
               </Form.Item>
             </Col>
           </Row>
+          <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
         </Form>
       </Drawer>
     </>
@@ -263,12 +269,13 @@ const VendorList = styled.div`
   padding-top: 10px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
+  align-content: stretch;
   background-color: #f0f0f0;
   > div {
-    height: 100%;
-    margin: 20px;
+    margin: 10px;
     margin-top: 0px;
   }
 `;
