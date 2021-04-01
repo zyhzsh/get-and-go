@@ -26,7 +26,7 @@ public class ProductService {
     //Fake Data
     public void AddFakeProduct(){
         Faker faker =new Faker();
-        productList.add(new Product(1L,
+        productList.add(new Product(
                 storeService.getStoreList().get(0),
                 null,
                 "Takeout:Your LunchBox",
@@ -38,7 +38,7 @@ public class ProductService {
                 "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max",
                 Product.Category.Food,
                 null));
-        productList.add(new Product(2L,
+        productList.add(new Product(
                 storeService.getStoreList().get(1),
                 null,
                 "Foot massage",
@@ -50,7 +50,7 @@ public class ProductService {
                 "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max",
                 Product.Category.Wellness,
                 null));
-        productList.add(new Product(3L,
+        productList.add(new Product(
                 storeService.getStoreList().get(2),
                 null,
                 "Air conditioning service",
@@ -62,7 +62,7 @@ public class ProductService {
                 "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max",
                 Product.Category.Speciality,
                 null));
-        productList.add(new Product(4L,
+        productList.add(new Product(
                 storeService.getStoreList().get(3),
                 null,
                 "Hairdressing treatment",

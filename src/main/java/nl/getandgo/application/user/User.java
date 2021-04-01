@@ -15,22 +15,26 @@ import java.util.List;
 @ToString
 public abstract class User {
    // @Id
-    @Getter private Long id;
-    @Getter private @Email String email;
+    protected static Long seed=100000L;
+    @Getter protected Long id;
+    @Getter protected @Email String email;
     @JsonIgnore
-    @Getter @Setter private String password;
-    @Getter @Setter private UserType usertype;
-    @Getter @Setter private String first_name;
-    @Getter @Setter private String last_name;
-    @Getter @Setter private String avatar_link;
-    @Getter @Setter private String phone;
-    @Getter private List<Comment> comments;
-    public User(@Email String email, String password, UserType usertype, String first_name, String last_name) {
+    @Getter @Setter protected String password;
+    @Getter @Setter protected UserType usertype;
+    @Getter @Setter protected String first_name;
+    @Getter @Setter protected String last_name;
+    @Getter @Setter protected String avatar_link;
+    @Getter @Setter protected String phone;
+    @Getter protected List<Comment> comments;
+    public User(@Email String email, String password, UserType usertype, String first_name, String last_name,String phone) {
+        this.seed+=1;
+        this.id=seed;
         this.email = email;
         this.password = password;
         this.usertype = usertype;
         this.first_name = first_name;
         this.last_name = last_name;
+        this.phone=phone;
         comments=new ArrayList<>();
     }
 

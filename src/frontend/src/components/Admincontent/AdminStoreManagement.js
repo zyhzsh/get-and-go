@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStoreList } from "../../actions/storeAction";
+import { getVendorList } from "../../actions/adminAction";
 //Ant Ui
 import { Table, Space, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 //UI Component
 import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
 
+
 const AdminStoreManagement = () => {
   const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(
     false
   );
   const dispatch = useDispatch();
-  const storeslist = useSelector((state) => state.store.store);
+  const storeslist = useSelector((state) => state.stores.stores);
+  const vendorslist = useSelector((state) => state.vendors.vendors);
+  const [vendors,Setvendors]=useState(vendorslist);
   const [mount, setMount] = useState(false);
   useEffect(() => {
     const loadstorelist = () => {
       if (!mount) {
         setMount(true);
         dispatch(getStoreList());
-        console.log(storeslist);
+        dispatch(getVendorList());
+        Setvendors(vendorslist)
       }
     };
     loadstorelist();
-  }, [dispatch, storeslist, mount]);
+  }, [dispatch, storeslist,vendorslist ,mount]);
 
   const columns = [
     {
@@ -38,8 +43,8 @@ const AdminStoreManagement = () => {
     },
     {
       title: "Vendor ID",
-      dataIndex: "owner_id",
-      key: "owner_id",
+      dataIndex: "vendor_id",
+      key: "vendor_id",
     },
     {
       title: "City",
@@ -80,6 +85,7 @@ const AdminStoreManagement = () => {
             size="middle"
             onClick={() => {
               set_visible_add_new_store_form(true);
+
             }}
          >
             Add New Store
@@ -105,6 +111,7 @@ const AdminStoreManagement = () => {
       <AdminAddNewStoreForm
         visiable={visible_add_new_store_form}
         setvisiable={set_visible_add_new_store_form}
+        vendors={vendors}
       />
     </div>
   );

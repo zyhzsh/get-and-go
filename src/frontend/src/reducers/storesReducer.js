@@ -1,10 +1,10 @@
 const initState={
-    store:[],
+    stores:[],
 }
 const storesReducer=(state=initState,action)=>{
     switch(action.type){
         case "FETCH_STORES":
-            return {...state,store:action.payload.store.data};
+            return {...state,stores:action.payload.store.data};
         default:
             return {...state};
     }

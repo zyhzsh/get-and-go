@@ -10,68 +10,16 @@ import {
   Table
 } from "antd";
 import styled from "styled-components";
-
-const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
+const AdminAddNewStoreForm = ({ visiable, setvisiable ,vendors}) => {
   const { Option } = Select;
   const SubmitForm = (formdata) => {
     alert("add succeed ~ !")
     console.log(formdata);
     form.current.resetFields();
   };  
-  const data = [
-    {
-      id: "1",
-      first_name: "Jojn",
-      last_name: "Clous",
-      email: "vendor1@gmail.com",
-      phone: "12321651",
-    },
-    {
-      id: "2",
-      first_name: "Tom",
-      last_name: "fjdi",
-      email: "vendor2@gmail.com",
-      phone: "12321651",
-    },
-    {
-      id: "3",
-      first_name: "Jim",
-      last_name: "Brown",
-      email: "vendor3@gmail.com",
-      phone: "12321651",
-    },
-    {
-      id: "7",
-      first_name: "Jim",
-      last_name: "jackiasd",
-      email: "vendor3@gmail.com",
-      phone: "12321651",
-    },
-    {
-      id: "81",
-      first_name: "Jim",
-      last_name: "jackiasd",
-      email: "vendor3@gmail.com",
-      phone: "12321651",
-    },
-    {
-      id: "484",
-      first_name: "Jim",
-      last_name: "jackiasd",
-      email: "vendor3@gmail.com",
-      phone: "12321651",
-    },
-    {
-      id: "821",
-      first_name: "Jim",
-      last_name: "jackiasd",
-      email: "vendor3@gmail.com",
-      phone: "12321651",
-    },
-  ];
-
   // Vendor List Table Configure
-  const [dataSource, setDataSource] = useState(data);
+  
+//  const vendorslist = useSelector((state) => state.vendors.vendors);
   const [value, setValue] = useState("");
   const form=useRef(null);
   const FilterByInput = (placeholder) => (
@@ -81,13 +29,14 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
       onChange={(e) => {
         const currValue = e.target.value;
         setValue(currValue);
-        const filteredData = data.filter((entry) =>
-          entry.id.includes(currValue)
+        const filteredData = vendors.filter((entry) =>
+           entry.id.toString().includes(currValue)
         );
         setDataSource(filteredData);
       }}
     />
   );
+const [dataSource, setDataSource] = useState(vendors);
   const columns = [
     {
       title: FilterByInput("Vendor ID"),
@@ -118,13 +67,9 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable }) => {
       key: "phone",
     },
   ];
-
   const SelectVendor=(selected_vendor_id)=>{
     form.current.setFieldsValue({vendor_id:selected_vendor_id});
   }
-
-
-
   return (
     <>
       <Drawer

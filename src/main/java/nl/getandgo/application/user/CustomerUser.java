@@ -18,8 +18,10 @@ public class CustomerUser extends User{
     @Getter @Setter private City city;
     @Getter @Setter private List<Review> reviews;
     @Getter @Setter private List<Order> orders;
-    public CustomerUser(@Email String email, String password, UserType usertype, String first_name, String last_name) {
-        super(email, password, usertype, first_name, last_name);
+    public CustomerUser(@Email String email, String password, UserType usertype, String first_name, String last_name,String phone) {
+        super(email, password, usertype, first_name, last_name,phone);
+        super.seed+=1;
+        super.id=seed;
     }
 
 }

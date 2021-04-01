@@ -10,9 +10,9 @@ import nl.getandgo.application.location.City;
 
 
 @ToString
-@AllArgsConstructor
 public class Store {
  //   @Id
+    private static Long seed=10000L;
     @Getter @Setter private Long store_id;
     @Getter @Setter private Long vendor_id;
     @Getter @Setter private String store_name;
@@ -22,12 +22,15 @@ public class Store {
     @Getter @Setter private String img;
     @Getter @Setter private String official_website;
 
-//    public Store(String store_name, String description, City city, String address, String img, String official_website) {
-//        this.store_name = store_name;
-//        this.description = description;
-//        this.city = city;
-//        this.address = address;
-//        this.img = img;
-//        this.official_website = official_website;
-//    }
+   public Store(Long vendor_id, String store_name, String description, City city, String address, String img, String official_website) {
+      this.seed+=1;
+      this.store_id=seed;
+      this.vendor_id = vendor_id;
+      this.store_name = store_name;
+      this.description = description;
+      this.city = city;
+      this.address = address;
+      this.img = img;
+      this.official_website = official_website;
+   }
 }

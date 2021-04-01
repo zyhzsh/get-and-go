@@ -11,9 +11,10 @@ public class UserService {
     public List<User> userList;
     public UserService(){
         userList=new ArrayList<>();
-        userList.add(new CustomerUser("customer@gmail.com","customer", User.UserType.CustomerUser,"C","U"));
-        userList.add(new ProductManagerUser("manager@gmail.com","manager", User.UserType.ManagerUser,"m","a"));
-        userList.add(new VendorUser("vendor@gmail.com","vendor", User.UserType.VendorUser,"V","e",null));
+        userList.add(new CustomerUser("customer@gmail.com","customer", User.UserType.CustomerUser,"C","U","064345876"));
+        userList.add(new ProductManagerUser("manager@gmail.com","manager", User.UserType.ManagerUser,"m","a","06879564125"));
+        userList.add(new VendorUser("vendorA@gmail.com","vendor", User.UserType.VendorUser,"Vendor A","aa",null,"0665987125"));
+        userList.add(new VendorUser("vendorB@gmail.com","vendor", User.UserType.VendorUser,"Vendor B","bb",null,"0685459475"));
     }
 
     public User Login(String email,String password){
@@ -47,4 +48,13 @@ public class UserService {
         return true;
     }
 
+    public List<User> getAllVendor() {
+        List<User> temp=new ArrayList<>();
+        for (User u: userList){
+            if(u instanceof VendorUser){
+                temp.add(u);
+            }
+        }
+        return temp;
+    }
 }
