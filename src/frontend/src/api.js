@@ -11,6 +11,6 @@ export const loginURL='api/login';
 
 //Store
 export const all_storesURL='api/stores';
-
+export const add_new_store_Api='api/stores';
 //Vendor
 export const all_vendorsURL="api/vendors"

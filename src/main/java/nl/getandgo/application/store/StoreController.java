@@ -18,4 +18,8 @@ public class StoreController {
         System.out.println("Stores");
       return storeService.getStoreList();
     }
+    @PostMapping("api/stores")
+    public void addNewStore(@RequestBody Store data){
+        storeService.addNewStore(data);
+    }
 }

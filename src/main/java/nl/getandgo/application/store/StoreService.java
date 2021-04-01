@@ -33,4 +33,9 @@ public class StoreService {
         }
         return temp;
     }
+
+    public void addNewStore(Store data) {
+        storeList.add(new Store(data.getVendor_id(),data.getStore_name(),data.getDescription(),data.getCity(),data.getAddress(),data.getImg(),data.getOfficial_website()));
+        System.out.println("Add Store: "+data);
+    }
 }

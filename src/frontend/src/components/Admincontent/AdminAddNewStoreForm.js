@@ -10,11 +10,15 @@ import {
   Table
 } from "antd";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addnewStore } from "../../actions/adminAction";
 const AdminAddNewStoreForm = ({ visiable, setvisiable ,vendors}) => {
   const { Option } = Select;
+  const dispatch = useDispatch();
   const SubmitForm = (formdata) => {
     alert("add succeed ~ !")
-    console.log(formdata);
+   // console.log(formdata);
+    dispatch(addnewStore(formdata))
     form.current.resetFields();
   };  
   // Vendor List Table Configure
