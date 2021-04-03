@@ -34,7 +34,7 @@ public class ProductService {
                 102,
                 25,
                 Product.Status.OnSale,
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ...",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi ",
                 "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max",
                 Product.Category.Food,
                 null));
