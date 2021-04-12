@@ -7,12 +7,11 @@ import lombok.ToString;
 import nl.getandgo.application.comment.Comment;
 
 
-//import javax.persistence.Id;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
 public abstract class User {
    // @Id
     protected static Long seed=100000L;
