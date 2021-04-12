@@ -1,10 +1,8 @@
 package nl.getandgo.application.user;
 
 import lombok.ToString;
-import nl.getandgo.application.comment.Comment;
 
 import javax.validation.constraints.Email;
-import java.util.List;
 
 @ToString
 public class ProductManagerUser extends User{
