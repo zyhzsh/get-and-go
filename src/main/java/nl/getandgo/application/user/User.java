@@ -2,48 +2,96 @@ package nl.getandgo.application.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.comment.Comment;
 
+import javax.persistence.*;
 
-import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import java.util.ArrayList;
-import java.util.List;
+import static javax.persistence.GenerationType.SEQUENCE;
 
+@NoArgsConstructor
+@ToString
+@Entity
+@Table(name = "users")
 public abstract class User {
-   // @Id
-    protected static Long seed=100000L;
-    @Getter protected Long id;
-    @Getter protected @Email String email;
+
+    /**
+     * User Id
+     * */
+    @Id
+    @SequenceGenerator(
+            name = "users_sequence",
+            sequenceName = "users_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "users_sequence"
+    )
+    @Column(name = "user_id")
+    @Getter @Setter private Long user_id;
+
+    /**
+     * User Email
+     * */
+    @Column(name = "user_email",nullable = false)
+    @Getter @Setter protected String email;
+
+    /**
+     * User Password
+     * */
     @JsonIgnore
+    @Column(name = "password",nullable = false)
     @Getter @Setter protected String password;
+
+    /**
+     * User Type
+     * */
+    @Column(name = "user_type",nullable = false)
     @Getter @Setter protected UserType usertype;
+
+
+    /**
+     * First Name
+    * */
+    @Column(name = "first_name",nullable = false)
     @Getter @Setter protected String first_name;
+
+    /**
+     * Last Name
+     * */
+    @Column(name = "last_name",nullable = false)
     @Getter @Setter protected String last_name;
+    /**
+     * Avatar Link
+     * */
+    @Column(name = "avatar_link",nullable = false)
     @Getter @Setter protected String avatar_link;
+
+    /**
+     * Phone Number
+     * */
+    @Column(name = "phone",nullable = false)
     @Getter @Setter protected String phone;
-    @Getter protected List<Comment> comments;
-    public User(@Email String email, String password, UserType usertype, String first_name, String last_name,String phone) {
-        this.seed+=1;
-        this.id=seed;
-        this.email = email;
-        this.password = password;
-        this.usertype = usertype;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.phone=phone;
-        comments=new ArrayList<>();
-    }
+
+    /**
+     * List Of Comment
+     * */
+//    @OneToMany(
+//
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+//    @Getter protected List<Comment> comments;
 
 
-    //Comment
-    public void addComment(Comment comment){
-        comments.add(comment);
-    }
-
-
+    /**
+     * User Type:
+     * - Customer User,
+     * - Manager User;
+     * - Vendor User;
+     * */
     enum UserType {
         CustomerUser, ManagerUser, VendorUser
     }

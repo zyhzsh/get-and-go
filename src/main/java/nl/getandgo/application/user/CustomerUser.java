@@ -1,27 +1,40 @@
 package nl.getandgo.application.user;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import nl.getandgo.application.comment.Comment;
+
+import lombok.*;
 import nl.getandgo.application.location.City;
 import nl.getandgo.application.order.Order;
 import nl.getandgo.application.review.Review;
 
-import javax.validation.constraints.Email;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
+@NoArgsConstructor
 @ToString
+@Entity(name = "CustomerUser")
+@Table(name = "customer")
 public class CustomerUser extends User{
 
+    /**
+     * Customer's User Name
+     * */
+    @Column(name = "user_name",unique = true,nullable = false)
     @Getter @Setter private String username;
+
+    /**
+     * Customer's City
+     * */
+    @Column(name = "city",nullable = false)
     @Getter @Setter private City city;
-    @Getter @Setter private List<Review> reviews;
-    @Getter @Setter private List<Order> orders;
-    public CustomerUser(@Email String email, String password, UserType usertype, String first_name, String last_name,String phone) {
-        super(email, password, usertype, first_name, last_name,phone);
-        super.seed+=1;
-        super.id=seed;
-    }
+
+    /**
+     *
+     * */
+//    @OneToMany
+//    @Getter @Setter private List<Review> reviews;
+//    @Getter @Setter private List<Order> orders;
+//
 
 }

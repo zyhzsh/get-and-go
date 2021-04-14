@@ -1,15 +1,15 @@
 package nl.getandgo.application.user;
 
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.validation.constraints.Email;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @ToString
+@NoArgsConstructor
+@Entity
+@Table(name = "managers")
 public class ProductManagerUser extends User{
 
-    public ProductManagerUser(@Email String email, String password, UserType usertype, String first_name, String last_name,String phone) {
-        super(email, password, usertype, first_name, last_name,phone);
-        super.seed+=1;
-        super.id=seed;
-    }
 }
