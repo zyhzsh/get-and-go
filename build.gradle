@@ -32,7 +32,6 @@ dependencies {
  //   implementation 'com.auth0:java-jwt:3.14.0'
     //DataBase
     runtimeOnly 'org.postgresql:postgresql'
-//    runtimeOnly("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 

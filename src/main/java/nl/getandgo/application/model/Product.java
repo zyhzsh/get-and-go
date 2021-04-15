@@ -1,9 +1,9 @@
 package nl.getandgo.application.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @ToString
 @NoArgsConstructor
 @Entity(name = "Product")
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     /**
@@ -35,13 +35,15 @@ public class Product {
     /**
      * Store (The Product Owned by this store)
      * */
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn(
             name = "store_id",
             nullable = false,
             referencedColumnName = "store_id",
             foreignKey = @ForeignKey(name = "store_id_fk")
     )
+    @JsonManagedReference
     @Getter @Setter private Store store;
 
     /**
@@ -112,6 +114,21 @@ public class Product {
             fetch = FetchType.EAGER
     )
     @Getter @Setter private List<Voucher> vouchers;
+
+    //constructor
+    public Product(Store store, List<Review> review, String product_name, int current_stock, int sold, double price, Status status, String description, String img, Category category, List<Voucher> vouchers) {
+        this.store = store;
+        this.review = review;
+        this.product_name = product_name;
+        this.current_stock = current_stock;
+        this.sold = sold;
+        this.price = price;
+        this.status = status;
+        this.description = description;
+        this.img = img;
+        this.category = category;
+        this.vouchers = vouchers;
+    }
 
     /***
      * Product Status

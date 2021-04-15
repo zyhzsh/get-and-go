@@ -1,26 +1,26 @@
-//package nl.getandgo.application.product;
-//
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-////import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.web.bind.annotation.*;
-//import java.util.List;
-//
-//@RestController
-//public class ProductController {
-//
-//    private final ProductService productService;
-//    @Autowired
-//    public ProductController(ProductService productService) {
-//        this.productService = productService;
-//    }
-//    @GetMapping("api/products")
-//    public List<Product> getAllProducts() {
-//        System.out.println("All");
-//        return productService.getProducts();
-//    }
+package nl.getandgo.application.controller;
+import nl.getandgo.application.model.*;
+import nl.getandgo.application.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+
+@RestController
+public class ProductController {
+
+    private final ProductService productService;
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+    @GetMapping("api/products")
+    public List<Product> getAllProducts() {
+        System.out.println("All");
+        return productService.getProducts();
+    }
 //    @GetMapping(value = "api/products", params = "id")
 //    public Product getProductById(@RequestParam String id) {
 //        return productService.getProduct(id);
@@ -58,28 +58,28 @@
 //        productService.deleteProduct(id);
 //        return new ResponseEntity<>(HttpStatus.ACCEPTED);
 //    }
-//
-//}
-//     /*
-//    * Some Example for my self to check
-//    * 1.multiple param test...
-//    * 2.Return request with http Status code : 404
-//    *
-//    *****************************************************
-//    //1.multiple param test...
-//    @GetMapping(value = "api/products",params ={"location","price"} )
-//    public String example_getProductByLocationAndPrice(@RequestParam String location,
-//                                               @RequestParam String price) {
-//        return "location: "+location+" price : "+price;
-//    }
-//
-//    //2.Return request with http Status code : 404
-//    @GetMapping(value = "api/products",params = "id")
-//    public Object example_getProductById(@RequestParam String id) {
-//        Product product=Data.getProduct(id);
-//        if(product==null){
-//            return new ResponseEntity<>("404 ", HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(product,HttpStatus.ACCEPTED);
-//    }
-//    */
+
+}
+     /*
+    * Some Example for my self to check
+    * 1.multiple param test...
+    * 2.Return request with http Status code : 404
+    *
+    *****************************************************
+    //1.multiple param test...
+    @GetMapping(value = "api/products",params ={"location","price"} )
+    public String example_getProductByLocationAndPrice(@RequestParam String location,
+                                               @RequestParam String price) {
+        return "location: "+location+" price : "+price;
+    }
+
+    //2.Return request with http Status code : 404
+    @GetMapping(value = "api/products",params = "id")
+    public Object example_getProductById(@RequestParam String id) {
+        Product product=Data.getProduct(id);
+        if(product==null){
+            return new ResponseEntity<>("404 ", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(product,HttpStatus.ACCEPTED);
+    }
+    */

@@ -1,11 +1,13 @@
 package nl.getandgo.application.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -15,6 +17,17 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Entity(name = "Store")
 @Table(name = "stores")
 public class Store {
+
+    public Store(VendorUser vendor, String store_name, String description, City city, String address, String img, String official_website) {
+        this.vendor = vendor;
+        this.store_name = store_name;
+        this.description = description;
+        this.city = city;
+        this.address = address;
+        this.img = img;
+        this.official_website = official_website;
+        this.products=new ArrayList<>();
+    }
 
     /***
      * Store Id
@@ -79,11 +92,20 @@ public class Store {
     @Column(name = "offical_website")
     @Getter @Setter private String official_website;
 
+
     @OneToMany(
             mappedBy = "store",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.ALL
     )
+    @JsonBackReference
     @Getter private List<Product> products;
+
+    public void addprocut(Product product){
+        if(!this.products.contains(product)){
+            this.products.add(product);
+            product.setStore(this);
+        }
+    }
+
 
 }
