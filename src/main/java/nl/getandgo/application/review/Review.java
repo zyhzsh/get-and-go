@@ -1,11 +1,14 @@
 package nl.getandgo.application.review;
 import lombok.*;
 import nl.getandgo.application.comment.Comment;
+import nl.getandgo.application.product.Product;
+import nl.getandgo.application.user.CustomerUser;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -34,20 +37,41 @@ public class Review {
     /**
      * Product Id
      * */
-    @Column(name = "product_id",nullable = false)
-    @Getter @Setter private Long product_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "product_id",
+            nullable = false,
+            referencedColumnName = "product_id",
+            foreignKey = @ForeignKey(
+                    name = "product_id_fk"
+            )
+    )
+    @Getter private Product product;
 
     /**
      * Reviewer_id
      * */
-    @Column(name = "reviewer_id",nullable = false)
-    @Getter @Setter private Long reviewer_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "reviewer_id",
+            referencedColumnName = "user_id",
+            foreignKey = @ForeignKey(
+                    name = "user_id_fk"
+            )
+    )
+    @Getter @Setter private CustomerUser reviewer;
 
     /**
      * List of comment below the Review
      * */
-//    @OneToMany
-//    @Getter @Setter private List<Comment> comments;
+    @OneToMany(
+            mappedBy = "review",
+            orphanRemoval = true,
+        cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    @Getter @Setter private List<Comment> comments;
 
     /**
      * Created At

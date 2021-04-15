@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import nl.getandgo.application.user.CustomerUser;
 import nl.getandgo.application.voucher.Voucher;
 
 import javax.persistence.*;
@@ -36,8 +37,15 @@ public class Order {
     /**
      * Customer Id
      * */
-    @Column(name = "customer_id",nullable = false)
-    @Getter @Setter private Long customer_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "customer_id",
+            referencedColumnName = "user_id",
+            foreignKey = @ForeignKey(
+                    name = "user_id_fk"
+            )
+    )
+    @Getter @Setter private CustomerUser customer;
 
     /**
      * Store Id
@@ -54,12 +62,8 @@ public class Order {
     /**
      * Voucher
      * */
-//    @OneToOne(mappedBy = "")
-//    @JoinColumn(
-//            name = "voucher_id",
-//            referencedColumnName = "voucher_id"
-//    )
-//    @Getter @Setter private Voucher voucher;
+    @Column(name = "voucher_id")
+    @Getter @Setter private Long voucher_id;
 
 
     /**
@@ -78,13 +82,17 @@ public class Order {
     @Column(name = "buyer_email",nullable = false)
     @Getter @Setter private String buyer_email;
 
+    /**
+     * Detail
+     * */
+    @Column(name = "detail",nullable = false)
+    @Getter @Setter private String detail;
 
     /**
      * Order Status
      * */
     @Column(name = "order_status",nullable = false)
     @Getter @Setter private OrderStatus orderStatus;
-
 
     /**
      * Order Status:

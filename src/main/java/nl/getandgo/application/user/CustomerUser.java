@@ -1,14 +1,10 @@
 package nl.getandgo.application.user;
-
 import lombok.*;
 import nl.getandgo.application.location.City;
 import nl.getandgo.application.order.Order;
 import nl.getandgo.application.review.Review;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
@@ -30,11 +26,22 @@ public class CustomerUser extends User{
     @Getter @Setter private City city;
 
     /**
-     *
+     * List Of Reviews
      * */
-//    @OneToMany
-//    @Getter @Setter private List<Review> reviews;
-//    @Getter @Setter private List<Order> orders;
-//
+    @OneToMany(
+            mappedBy = "reviewer",
+            cascade = CascadeType.ALL
+    )
+    @Getter @Setter private List<Review> reviews;
+
+    /**
+     * List of Orders
+     * */
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL
+    )
+    @Getter @Setter private List<Order> orders;
+
 
 }

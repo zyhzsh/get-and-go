@@ -1,6 +1,8 @@
 package nl.getandgo.application.voucher;
 
 import lombok.*;
+import nl.getandgo.application.order.Order;
+import nl.getandgo.application.product.Product;
 
 import javax.persistence.*;
 
@@ -30,8 +32,16 @@ public class Voucher {
     /**
      * Product Id
      * */
-    @Column(name = "product_id",nullable = false)
-    @Getter @Setter private Long product_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "product_id",
+            nullable = false,
+            referencedColumnName = "product_id",
+            foreignKey = @ForeignKey(
+                    name = "product_id_fk"
+            )
+    )
+    @Getter @Setter private Product product;
 
     /**
     * Price
@@ -50,4 +60,5 @@ public class Voucher {
      * */
     @Column(name = "description",nullable = false)
     @Getter @Setter private String description;
+
 }

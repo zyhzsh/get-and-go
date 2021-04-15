@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import nl.getandgo.application.review.Review;
+import nl.getandgo.application.user.User;
 
 
 import javax.persistence.*;
@@ -28,14 +30,31 @@ public class Comment {
     /**
      * Review Id
      * */
-    @Column(name = "review_id",nullable = false)
-    @Getter @Setter private Long review_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "review_id",
+            nullable = false,
+            referencedColumnName = "review_id",
+            foreignKey = @ForeignKey(
+                    name = "review_id_fk"
+            )
+    )
+    private Review review;
 
     /**
      * Commenter Id
      * */
-//    @Column(name = "commter_id")
-//    @Getter @Setter private User commenter_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "commenter_id",
+            nullable = false,
+            referencedColumnName = "user_id",
+            foreignKey = @ForeignKey(
+                    name = "user_commenter_fk"
+            )
+    )
+    @Getter private User user;
+
 
     /**
      * Created At

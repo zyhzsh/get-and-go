@@ -5,15 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import nl.getandgo.application.comment.Comment;
 
 import javax.persistence.*;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @NoArgsConstructor
 @ToString
-@Entity
+@Entity(name = "User")
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class User {
 
     /**
@@ -78,12 +81,12 @@ public abstract class User {
     /**
      * List Of Comment
      * */
-//    @OneToMany(
-//
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY
-//    )
-//    @Getter protected List<Comment> comments;
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Getter @Setter protected List<Comment> comments;
 
 
     /**

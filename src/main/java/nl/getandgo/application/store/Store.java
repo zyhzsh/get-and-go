@@ -1,14 +1,11 @@
 package nl.getandgo.application.store;
-
 import lombok.*;
 import nl.getandgo.application.location.City;
-
+import nl.getandgo.application.product.Product;
+import nl.getandgo.application.user.VendorUser;
 import javax.persistence.*;
-
+import java.util.List;
 import static javax.persistence.GenerationType.SEQUENCE;
-
-//import javax.persistence.Id;
-
 
 @ToString
 @NoArgsConstructor
@@ -35,8 +32,13 @@ public class Store {
     /**
      * Vendor id
      * */
-    @Column(name = "vendor_id")
-    @Getter @Setter private Long vendor_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vendor_id",
+        referencedColumnName = "user_id",
+            foreignKey = @ForeignKey(
+                    name = "vendor_id_fk")
+    )
+    @Getter @Setter private VendorUser vendor;
 
     /**
      * Store name
@@ -74,13 +76,11 @@ public class Store {
     @Column(name = "offical_website")
     @Getter @Setter private String official_website;
 
-   public Store(Long vendor_id, String store_name, String description, City city, String address, String img, String official_website) {
-      this.vendor_id = vendor_id;
-      this.store_name = store_name;
-      this.description = description;
-      this.city = city;
-      this.address = address;
-      this.img = img;
-      this.official_website = official_website;
-   }
+    @OneToMany(
+            mappedBy = "store",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Getter private List<Product> products;
+
 }

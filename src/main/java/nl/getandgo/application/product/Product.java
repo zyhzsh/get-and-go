@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import nl.getandgo.application.review.Review;
+import nl.getandgo.application.store.Store;
 import nl.getandgo.application.voucher.Voucher;
 
 import javax.persistence.*;
@@ -36,14 +38,24 @@ public class Product {
     /**
      * Store (The Product Owned by this store)
      * */
-//    @ManyToOne
-//    @Getter @Setter private Store store;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(
+            name = "store_id",
+            nullable = false,
+            referencedColumnName = "store_id",
+            foreignKey = @ForeignKey(name = "store_id_fk")
+    )
+    @Getter @Setter private Store store;
 
     /**
      * List Of Review
      * */
-//    @OneToMany
-//    @Getter @Setter private List<Review> review;
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Getter @Setter private List<Review> review;
 
     /**
      * Product Name
@@ -97,8 +109,12 @@ public class Product {
      * List Of Voucher
      * (Represent selling type)
      * */
-//    @OneToMany
-//    @Getter @Setter private List<Voucher> vouchers;
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    @Getter @Setter private List<Voucher> vouchers;
 
     /***
      * Product Status

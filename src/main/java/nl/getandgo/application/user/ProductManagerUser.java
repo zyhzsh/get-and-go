@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @ToString
 @NoArgsConstructor
-@Entity
+@Entity(name = "ProductManagerUser")
 @Table(name = "managers")
 public class ProductManagerUser extends User{
 
