@@ -1,12 +1,9 @@
-package nl.getandgo.application.product;
+package nl.getandgo.application.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.review.Review;
-import nl.getandgo.application.store.Store;
-import nl.getandgo.application.voucher.Voucher;
 
 import javax.persistence.*;
 import java.util.List;

@@ -1,10 +1,9 @@
-package nl.getandgo.application.user;
+package nl.getandgo.application.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.store.Store;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity(name = "VendorUser")
 @Table(name = "vendors")
-public class VendorUser extends User{
+public class VendorUser extends User {
     @OneToMany(
             mappedBy = "vendor",
             cascade = CascadeType.ALL

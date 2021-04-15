@@ -1,10 +1,13 @@
-package nl.getandgo.application.store;
-import lombok.*;
-import nl.getandgo.application.location.City;
-import nl.getandgo.application.product.Product;
-import nl.getandgo.application.user.VendorUser;
+package nl.getandgo.application.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.List;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @ToString

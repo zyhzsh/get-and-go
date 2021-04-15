@@ -1,14 +1,13 @@
-package nl.getandgo.application.review;
-import lombok.*;
-import nl.getandgo.application.comment.Comment;
-import nl.getandgo.application.product.Product;
-import nl.getandgo.application.user.CustomerUser;
+package nl.getandgo.application.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 

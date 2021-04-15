@@ -1,8 +1,9 @@
-package nl.getandgo.application.user;
-import lombok.*;
-import nl.getandgo.application.location.City;
-import nl.getandgo.application.order.Order;
-import nl.getandgo.application.review.Review;
+package nl.getandgo.application.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @ToString
 @Entity(name = "CustomerUser")
 @Table(name = "customer")
-public class CustomerUser extends User{
+public class CustomerUser extends User {
 
     /**
      * Customer's User Name

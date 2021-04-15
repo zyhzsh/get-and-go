@@ -1,11 +1,11 @@
-package nl.getandgo.application.user;
+package nl.getandgo.application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.comment.Comment;
+import nl.getandgo.application.model.Comment;
 
 import javax.persistence.*;
 import java.util.List;

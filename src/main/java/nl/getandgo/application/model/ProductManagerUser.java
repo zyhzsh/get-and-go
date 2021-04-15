@@ -1,7 +1,8 @@
-package nl.getandgo.application.user;
+package nl.getandgo.application.model;
 
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import nl.getandgo.application.model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,6 +11,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity(name = "ProductManagerUser")
 @Table(name = "managers")
-public class ProductManagerUser extends User{
+public class ProductManagerUser extends User {
 
 }

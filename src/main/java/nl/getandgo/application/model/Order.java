@@ -1,11 +1,9 @@
-package nl.getandgo.application.order;
+package nl.getandgo.application.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.user.CustomerUser;
-import nl.getandgo.application.voucher.Voucher;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

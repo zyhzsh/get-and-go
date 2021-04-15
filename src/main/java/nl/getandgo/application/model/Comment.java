@@ -1,12 +1,9 @@
-package nl.getandgo.application.comment;
+package nl.getandgo.application.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.review.Review;
-import nl.getandgo.application.user.User;
-
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

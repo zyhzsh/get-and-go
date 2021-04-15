@@ -1,8 +1,9 @@
-package nl.getandgo.application.voucher;
+package nl.getandgo.application.model;
 
-import lombok.*;
-import nl.getandgo.application.order.Order;
-import nl.getandgo.application.product.Product;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 

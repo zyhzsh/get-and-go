@@ -1,4 +1,4 @@
-package nl.getandgo.application.user;
+package nl.getandgo.application.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
