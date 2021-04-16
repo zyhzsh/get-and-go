@@ -1,24 +1,21 @@
 package nl.getandgo.application.service;
 
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.model.Product;
 import nl.getandgo.application.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     //Constructor
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+
 
 
 //    public Product getProduct(String id) {
