@@ -34,7 +34,6 @@ public class Application {
 //    }
     @Bean
     CommandLineRunner commandLineRunner( StoreRepository storeRepository) {
-
         return args -> {
             Store s1=new Store(
                     null,
@@ -58,14 +57,8 @@ public class Application {
                     "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max",
                     Product.Category.Food,
                     null);
-
-            try{s1.addprocut(p1);}
-            catch (Exception e){
-                System.out.println(e);
-            }
+            s1.addprocut(p1);
             storeRepository.save(s1);
-
-
         };
     }
 }
