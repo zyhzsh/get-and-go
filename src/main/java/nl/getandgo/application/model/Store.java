@@ -71,6 +71,7 @@ public class Store {
     /**
      * City
      * */
+    @Enumerated(EnumType.STRING)
     @Column(name = "city",nullable = false)
     @Getter @Setter private City city;
 
@@ -100,12 +101,25 @@ public class Store {
     @JsonBackReference
     @Getter private List<Product> products;
 
-    public void addprocut(Product product){
+    /**
+     * Add New Product
+     * */
+    public void AddProduct(Product product){
         if(!this.products.contains(product)){
             this.products.add(product);
             product.setStore(this);
         }
     }
 
+    /**
+     * Off Sale Product
+     * */
+    public void OffShelfProduct(Long product_id){
+        for (Product p:products) {
+            if(p.getProduct_id().equals(product_id)){
+                p.setStatus(Product.Status.OFFSHELF);
+            }
+        }
+    }
 
 }

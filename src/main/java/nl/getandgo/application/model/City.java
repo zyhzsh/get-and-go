@@ -1,9 +1,9 @@
 package nl.getandgo.application.model;
 public enum City {
-    Eindohoven,
-    Tilburg,
-    Utrecht,
-    Delft,
-    Haarlem,
-    Breda
+    EINDOHOVEN,
+    TILBURG,
+    UTRECHT,
+    DELFT,
+    HAARLEM,
+    BREDA
 }

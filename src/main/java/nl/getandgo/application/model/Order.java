@@ -89,6 +89,7 @@ public class Order {
     /**
      * Order Status
      * */
+    @Enumerated(EnumType.STRING)
     @Column(name = "order_status",nullable = false)
     @Getter @Setter private OrderStatus orderStatus;
 
@@ -100,9 +101,9 @@ public class Order {
      * - Completed
      * */
     public enum OrderStatus {
-        Canceled,
-        WaitForPay,
-        Processing,
-        Completed
+        CANCELED,
+        WAITINGFORPAY,
+        PROCESSING,
+        COMPLETED
     }
 }

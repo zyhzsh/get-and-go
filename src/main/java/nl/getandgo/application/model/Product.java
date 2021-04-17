@@ -1,7 +1,4 @@
 package nl.getandgo.application.model;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -83,6 +80,7 @@ public class Product {
     /**
      * Product Current Status
      * */
+    @Enumerated(EnumType.STRING)
     @Column(name = "status",nullable = false)
     @Getter @Setter private Status status;
 
@@ -101,6 +99,7 @@ public class Product {
     /**
      * Product Category
      * */
+    @Enumerated(EnumType.STRING)
     @Column(name = "category",nullable = false)
     @Getter @Setter private Category category;
 
@@ -116,8 +115,7 @@ public class Product {
     @Getter @Setter private List<Voucher> vouchers;
 
     //constructor
-    public Product(Store store, List<Review> review, String product_name, int current_stock, int sold, double price, Status status, String description, String img, Category category, List<Voucher> vouchers) {
-        this.store = store;
+    public Product( List<Review> review, String product_name, int current_stock, int sold, double price, Status status, String description, String img, Category category, List<Voucher> vouchers) {
         this.review = review;
         this.product_name = product_name;
         this.current_stock = current_stock;
@@ -137,7 +135,9 @@ public class Product {
      * - Archive
      * */
     public enum Status{
-        OnSale,OffShelf,Archive
+        ONSALE,
+        OFFSHELF,
+        ARCHIVE
     }
 
     /**
@@ -150,7 +150,12 @@ public class Product {
      * - Speciality
      * */
     public enum Category{
-        Wellness,Hotel,Event,Food,WorkShop,Speciality
+        WELLNESS,
+        HOTEL,
+        EVENT,
+        FOOD,
+        WORKSHOP,
+        SPECIALITY
     }
 
 }

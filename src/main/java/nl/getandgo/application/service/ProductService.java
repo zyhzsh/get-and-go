@@ -1,67 +1,78 @@
 package nl.getandgo.application.service;
-
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Product;
+import nl.getandgo.application.model.Product.Status;
+import nl.getandgo.application.model.Product.Category;
 import nl.getandgo.application.repository.ProductRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
+import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
     private final ProductRepository productRepository;
-
-    //Constructor
-
-
-
-//    public Product getProduct(String id) {
-//       // productRepository.findAllByStatus(Product.Status.OnSale);
-//    }
-//    //GET
-    public List<Product> getProducts() {
-        return productRepository.findAllByStatus(Product.Status.OnSale);
+    /**
+     * Get List Of Products By Status:
+     * - OnSale
+     * - OffSale
+     * - Archive
+     * */
+    public List<Product> getAllProducts(){return productRepository.findAll();}
+    public List<Product> getProducts(Status status) {
+        return productRepository.findProductsByStatus(status);
+    }
+    public List<Product> getProducts(String status) {
+        Status s;
+        try {
+            s=Status.valueOf(status.toUpperCase());
+            return productRepository.findProductsByStatus(s);
+        }catch (Exception e){return null;}
     }
 
-//    public List<Product> getProductsByCity(String city) {
-//        List<Product> temp=new ArrayList<>();
-//        for (Product p:productList) {
-//            if(p.getStore().getCity().toString().toLowerCase().equals(city)){
-//                temp.add(p);
-//            }
-//        }
-//        return temp;
-//    }
-//    public List<Product> getProductsByCategory(String category) {
-//        List<Product> temp=new ArrayList<>();
-//        for (Product p:productList) {
-//            if(p.getCategory().toString().toLowerCase().equals(category)){
-//                temp.add(p);
-//            }
-//        }
-//        return temp;
-//    }
-//    public List<Product> getProductsByCategoryAndCity(String category,String city) {
-//        List<Product> temp=getProductsByCity(city);
-//        temp.removeIf(p->(!(p.getCategory().toString().toLowerCase().equals(category))));
-//        return temp;
-//    }
-//    //ADD
-//    public boolean addProduct(Product product) {
-//        //TODO Check
-//
-//        return true;
-//
-//    }
-//    //UPDATE
-//    public Product upDateProduct(Product product, String id) {
-//        return null;
-//    }
-//    //DELETE
-//    public void deleteProduct(String id) {
-//
-//    }
+    /**
+     * Get List Of Products By City and Product's Status
+     * */
+    public List<Product> getProductsByCityAndStatus(String city,Status status) {
+        City c;
+        try {
+             c = City.valueOf(city.toUpperCase());
+            return productRepository.findProductsByCityAndStatus(c,status);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    /**
+     * Get List Of Products By Category and Product's Status
+     * */
+    public List<Product> getProductsByCategoryAndStatus(String category,Status status) {
+        Category c;
+        try{
+            c = Category.valueOf(category.toUpperCase());
+            return productRepository.findProductsByCategoryAndStatus(c,status);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    /**
+     * Get List Of Products By Category、Category and Product's Status
+     * */
+    public List<Product> getProductsByCategoryAndCityAndStatus(String category,String city,Status status) {
+        Category ca;
+        City ci;
+        try{
+            ca = Category.valueOf(category.toUpperCase());
+            ci = City.valueOf(city.toUpperCase());
+            return productRepository.findProductsByCategoryAndStatusAndCity(ca,ci,status);
+        } catch (Exception e){return null;}
+    }
+
+    /**
+     * Get Product By Product Id
+     */
+    public Optional<Product> getProductById(String id) {
+       return productRepository.findById(Long.parseLong(id));
+    }
 }

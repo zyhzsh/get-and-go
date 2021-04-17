@@ -96,6 +96,8 @@ public abstract class User {
      * - Vendor User;
      * */
     enum UserType {
-        CustomerUser, ManagerUser, VendorUser
+        CUSTOMERUSER,
+        MANAGERUSER,
+        VENDORUSER
     }
 }

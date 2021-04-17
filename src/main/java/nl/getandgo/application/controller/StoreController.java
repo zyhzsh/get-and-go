@@ -1,25 +1,42 @@
-//package nl.getandgo.application.store;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//@RestController
-//@CrossOrigin
-//public class StoreController {
-//    private final StoreService storeService;
-//    @Autowired
-//    public StoreController(StoreService storeService) {
-//        this.storeService = storeService;
-//    }
-//    @GetMapping("api/stores")
-//    public List<Store> getStores(){
-//        System.out.println("Stores");
-//      return storeService.getStoreList();
-//    }
-//    @PostMapping("api/stores")
-//    public void addNewStore(@RequestBody Store data){
-//        storeService.addNewStore(data);
-//    }
-//}
+package nl.getandgo.application.controller;
+import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.model.Store;
+import nl.getandgo.application.service.StoreService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+
+@RestController
+@RequiredArgsConstructor
+public class StoreController {
+    private final StoreService storeService;
+
+    /**
+     * Get All Store
+     * */
+    @GetMapping("api/stores")
+    public List<Store> getAllStores(){
+      return storeService.getAllStores();
+    }
+
+    /**
+     * Get Store By Id
+     * */
+    @GetMapping(value = "api/store",params = {"id"})
+    public Optional<Store> getStoreByStoreId(@RequestParam String id){
+        return storeService.getStoreById(id);
+    }
+
+
+    /**
+     * Add New Store
+     * */
+    @PostMapping("api/stores")
+    public void addNewStore(@RequestBody Store data){
+        storeService.addNewStore(data);
+    }
+
+
+}
