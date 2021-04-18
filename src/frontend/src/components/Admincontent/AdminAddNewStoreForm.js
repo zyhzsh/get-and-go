@@ -1,31 +1,22 @@
 import React, { useRef, useState } from "react";
-import {
-  Drawer,
-  Form,
-  Button,
-  Col,
-  Row,
-  Input,
-  Select,
-  Table
-} from "antd";
+import { Drawer, Form, Button, Col, Row, Input, Select, Table } from "antd";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { addnewStore } from "../../actions/adminAction";
-const AdminAddNewStoreForm = ({ visiable, setvisiable ,vendors}) => {
+const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const SubmitForm = (formdata) => {
-    alert("add succeed ~ !")
-   // console.log(formdata);
-    dispatch(addnewStore(formdata))
+    alert("add succeed ~ !");
+    // console.log(formdata);
+    dispatch(addnewStore(formdata));
     form.current.resetFields();
-  };  
+  };
   // Vendor List Table Configure
-  
-//  const vendorslist = useSelector((state) => state.vendors.vendors);
+
+  //  const vendorslist = useSelector((state) => state.vendors.vendors);
   const [value, setValue] = useState("");
-  const form=useRef(null);
+  const form = useRef(null);
   const FilterByInput = (placeholder) => (
     <Input
       placeholder={placeholder}
@@ -34,18 +25,18 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable ,vendors}) => {
         const currValue = e.target.value;
         setValue(currValue);
         const filteredData = vendors.filter((entry) =>
-           entry.id.toString().includes(currValue)
+          entry.user_id.toString().includes(currValue)
         );
         setDataSource(filteredData);
       }}
     />
   );
-const [dataSource, setDataSource] = useState(vendors);
+  const [dataSource, setDataSource] = useState(vendors);
   const columns = [
     {
       title: FilterByInput("Vendor ID"),
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "user_id",
+      key: "user_id",
       width: "20%",
     },
     {
@@ -71,9 +62,9 @@ const [dataSource, setDataSource] = useState(vendors);
       key: "phone",
     },
   ];
-  const SelectVendor=(selected_vendor_id)=>{
-    form.current.setFieldsValue({vendor_id:selected_vendor_id});
-  }
+  const SelectVendor = (selected_vendor_id) => {
+    form.current.setFieldsValue({ vendor_id: selected_vendor_id });
+  };
   return (
     <>
       <Drawer
@@ -107,7 +98,7 @@ const [dataSource, setDataSource] = useState(vendors);
             onRow={(record) => {
               return {
                 onDoubleClick: () => {
-                  SelectVendor(record.id);
+                  SelectVendor(record.user_id);
                 },
               };
             }}
@@ -118,18 +109,33 @@ const [dataSource, setDataSource] = useState(vendors);
             rowKey="id"
           />
         </VendorList>
-        <Form layout="vertical" 
-        onFinish={(value)=>{SubmitForm(value)}}
-        ref={form}
+        <Form
+          layout="vertical"
+          onFinish={(value) => {
+            SubmitForm(value);
+          }}
+          ref={form}
         >
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="vendor_id" label="Vendor ID"rules={[{ required: true, message: "Select vendor from the table above" }]}>
-                <Input disabled={true} placeholder="Select vendor from the table above"/>
+              <Form.Item
+                name="vendor_id"
+                label="Vendor ID"
+                rules={[
+                  {
+                    required: true,
+                    message: "Select vendor from the table above by double click table row",
+                  },
+                ]}
+              >
+                <Input
+                  disabled={true}
+                  placeholder="Select vendor from the table above by double click table row"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
-            <Form.Item
+              <Form.Item
                 name="city"
                 label="City"
                 rules={[{ required: true, message: "Please select an City" }]}
@@ -147,8 +153,12 @@ const [dataSource, setDataSource] = useState(vendors);
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-            <Form.Item name="website"label="Offcial Website">
-                <Input style={{ width: "100%" }} addonBefore="http://" placeholder="Please enter url"/>
+              <Form.Item name="website" label="Offcial Website">
+                <Input
+                  style={{ width: "100%" }}
+                  addonBefore="http://"
+                  placeholder="Please enter url"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -157,7 +167,10 @@ const [dataSource, setDataSource] = useState(vendors);
                 label="Store Name"
                 rules={[{ required: true, message: "Please Enter Store Name" }]}
               >
-                <Input style={{ width: "100%" }}  placeholder="Please enter store name"/>
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Please enter store name"
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -170,18 +183,25 @@ const [dataSource, setDataSource] = useState(vendors);
                   { required: true, message: "Please Enter the Address " },
                 ]}
               >
-                 <Input style={{ width: "100%" }}  placeholder="Please enter the address"/>
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Please enter the address"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
-            <Form.Item
+              <Form.Item
                 name="img"
                 label="Store Img Source"
                 rules={[
                   { required: true, message: "Please Enter The Img Source " },
                 ]}
               >
-                  <Input style={{ width: "100%" }} addonBefore="http://" placeholder="Please enter img source url"/>
+                <Input
+                  style={{ width: "100%" }}
+                  addonBefore="http://"
+                  placeholder="Please enter img source url"
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -205,8 +225,8 @@ const [dataSource, setDataSource] = useState(vendors);
             </Col>
           </Row>
           <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+            Submit
+          </Button>
         </Form>
       </Drawer>
     </>

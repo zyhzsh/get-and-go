@@ -18,8 +18,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "stores")
 public class Store {
 
-    public Store(VendorUser vendor, String store_name, String description, City city, String address, String img, String official_website) {
-        this.vendor = vendor;
+    public Store(String store_name, String description, City city, String address, String img, String official_website) {
+        this.vendor=null;
         this.store_name = store_name;
         this.description = description;
         this.city = city;
@@ -54,6 +54,7 @@ public class Store {
             foreignKey = @ForeignKey(
                     name = "vendor_id_fk")
     )
+    @JsonManagedReference
     @Getter @Setter private VendorUser vendor;
 
     /**

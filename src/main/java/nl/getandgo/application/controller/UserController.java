@@ -1,7 +1,7 @@
 package nl.getandgo.application.controller;
 import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.model.User;
-import nl.getandgo.application.model.dto.LoginInFoDTO;
+import nl.getandgo.application.dto.LoginDetailDTO;
 import nl.getandgo.application.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(value = "api/login")
-    public boolean addNewProduct(@RequestBody LoginInFoDTO s){
+    public boolean addNewProduct(@RequestBody LoginDetailDTO s){
         return true;
     }
     @GetMapping(value="api/vendors")

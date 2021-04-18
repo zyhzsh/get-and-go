@@ -8,12 +8,14 @@ import lombok.ToString;
 import nl.getandgo.application.model.Comment;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@NoArgsConstructor
+
 @ToString
+@NoArgsConstructor
 @Entity(name = "User")
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -38,7 +40,7 @@ public abstract class User {
     /**
      * User Email
      * */
-    @Column(name = "user_email",nullable = false)
+    @Column(name = "user_email",nullable = false,unique = true)
     @Getter @Setter protected String email;
 
     /**
@@ -88,6 +90,20 @@ public abstract class User {
     )
     @Getter @Setter protected List<Comment> comments;
 
+
+    /**
+     * Constructor
+     * */
+    public User(String email, String password, String first_name, String last_name, String avatar_link, String phone) {
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.avatar_link = avatar_link;
+        this.phone = phone;
+        this.comments=new ArrayList<>();
+        this.usertype = UserType.CUSTOMERUSER;
+    }
 
     /**
      * User Type:

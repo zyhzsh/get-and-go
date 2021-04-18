@@ -8,15 +8,12 @@ import { PlusOutlined } from "@ant-design/icons";
 //UI Component
 import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
 
-
 const AdminStoreManagement = () => {
-  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(
-    false
-  );
+  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(false);
   const dispatch = useDispatch();
   const storeslist = useSelector((state) => state.stores.stores);
   const vendorslist = useSelector((state) => state.vendors.vendors);
-  const [vendors,Setvendors]=useState(vendorslist);
+  const [vendors, Setvendors] = useState(vendorslist);
   const [mount, setMount] = useState(false);
   useEffect(() => {
     const loadstorelist = () => {
@@ -24,12 +21,11 @@ const AdminStoreManagement = () => {
         setMount(true);
         dispatch(getStoreList());
         dispatch(getVendorList());
-        Setvendors(vendorslist)
+        Setvendors(vendorslist);
       }
     };
     loadstorelist();
-  }, [dispatch, storeslist,vendorslist ,mount]);
-
+  }, [dispatch, storeslist, vendorslist, mount]);
   const columns = [
     {
       title: "Store ID",
@@ -43,8 +39,8 @@ const AdminStoreManagement = () => {
     },
     {
       title: "Vendor ID",
-      dataIndex: "vendor_id",
-      key: "vendor_id",
+      dataIndex: ["vendor", "user_id"],
+      key: ["vendor", "user_id"],
     },
     {
       title: "City",
@@ -66,8 +62,8 @@ const AdminStoreManagement = () => {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          {/* <a>Invite {record.name}</a>
-              <a>Delete</a> */}
+          <button>Edit</button>
+          <button>Delete</button>
         </Space>
       ),
     },
@@ -78,30 +74,29 @@ const AdminStoreManagement = () => {
       <Table
         title={() => (
           <>
-          <Button
-            type="primary"
-            shape="round"
-            icon={<PlusOutlined />}
-            size="middle"
-            onClick={() => {
-              set_visible_add_new_store_form(true);
-
-            }}
-         >
-            Add New Store
-          </Button>
-          <span> </span>
-          <Button
-            type="primary"
-            shape="round"
-            icon={<PlusOutlined />}
-            size="middle"
-            onClick={() => {
-              set_visible_add_new_store_form(true);
-            }}
-          >
-            Register A New Vendor 
-          </Button>
+            <Button
+              type="primary"
+              shape="round"
+              icon={<PlusOutlined />}
+              size="middle"
+              onClick={() => {
+                set_visible_add_new_store_form(true);     
+              }}
+            >
+              Add New Store
+            </Button>
+            <span> </span>
+            <Button
+              type="primary"
+              shape="round"
+              icon={<PlusOutlined />}
+              size="middle"
+              onClick={() => {
+                set_visible_add_new_store_form(true);
+              }}
+            >
+              Register A New Vendor
+            </Button>
           </>
         )}
         columns={columns}

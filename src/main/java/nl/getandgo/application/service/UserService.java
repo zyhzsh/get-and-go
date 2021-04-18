@@ -31,6 +31,6 @@ public class UserService {
     }
 
     public List<User> getAllVendor() {
-        return null;
+        return userRepository.findAll();
     }
 }

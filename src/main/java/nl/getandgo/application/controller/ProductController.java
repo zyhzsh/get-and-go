@@ -2,6 +2,7 @@ package nl.getandgo.application.controller;
 import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.model.*;
 import nl.getandgo.application.service.ProductService;
+import nl.getandgo.application.service.StoreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
