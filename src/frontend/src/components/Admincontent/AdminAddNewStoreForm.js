@@ -1,20 +1,37 @@
 import React, { useRef, useState } from "react";
-import { Drawer, Form, Button, Col, Row, Input, Select, Table } from "antd";
+import {
+  Drawer,
+  Form,
+  Button,
+  Col,
+  Row,
+  Input,
+  Select,
+  Table,
+  notification,
+  Space,
+} from "antd";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { addnewStore } from "../../actions/adminAction";
 const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
   const { Option } = Select;
   const dispatch = useDispatch();
+  //Submit New Store From
+  const openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: "Success",
+      description: "Your Request is submitted",
+    });
+  };
   const SubmitForm = (formdata) => {
     alert("add succeed ~ !");
-    // console.log(formdata);
+    openNotificationWithIcon("success");
     dispatch(addnewStore(formdata));
     form.current.resetFields();
   };
-  // Vendor List Table Configure
 
-  //  const vendorslist = useSelector((state) => state.vendors.vendors);
+  // Vendor List Table Configure
   const [value, setValue] = useState("");
   const form = useRef(null);
   const FilterByInput = (placeholder) => (
@@ -31,7 +48,10 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
       }}
     />
   );
-  const [dataSource, setDataSource] = useState(vendors);
+  const [dataSource, setDataSource] = useState(null);
+  if(dataSource==null){
+    setDataSource(vendors);
+  }
   const columns = [
     {
       title: FilterByInput("Vendor ID"),
@@ -67,8 +87,9 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
   };
   return (
     <>
+      <Space />
       <Drawer
-        title="New Store"
+        title="New Store (Double click table row to select vendor)"
         width={1000}
         onClose={() => {
           setvisiable(false);
@@ -94,21 +115,21 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
       >
         <h3>Vendor List</h3>
         <VendorList>
-          <Table
-            onRow={(record) => {
-              return {
-                onDoubleClick: () => {
-                  SelectVendor(record.user_id);
-                },
-              };
-            }}
-            columns={columns}
-            dataSource={dataSource}
-            scroll={{ y: 300 }}
-            pagination={false}
-            rowKey="id"
-          />
-        </VendorList>
+              <Table
+                onRow={(record) => {
+                  return {
+                    onDoubleClick: () => {
+                      SelectVendor(record.user_id);
+                    },
+                  };
+                }}
+                columns={columns}
+                dataSource={dataSource}
+                scroll={{ y: 300 }}
+                pagination={false}
+                rowKey="user_id"
+              />
+            </VendorList>
         <Form
           layout="vertical"
           onFinish={(value) => {
@@ -124,7 +145,8 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Select vendor from the table above by double click table row",
+                    message:
+                      "Select vendor from the table above by double click table row",
                   },
                 ]}
               >

@@ -23,7 +23,6 @@ public class VendorUser extends User {
     @JsonBackReference
     @Getter @Setter private List<Store> storeList;
 
-
     /**
      * Constructor
      * @param email

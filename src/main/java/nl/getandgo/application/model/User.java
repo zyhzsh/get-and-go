@@ -28,7 +28,8 @@ public abstract class User {
     @SequenceGenerator(
             name = "users_sequence",
             sequenceName = "users_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 10000
     )
     @GeneratedValue(
             strategy = SEQUENCE,
@@ -53,6 +54,7 @@ public abstract class User {
     /**
      * User Type
      * */
+    @Enumerated(EnumType.STRING)
     @Column(name = "user_type",nullable = false)
     @Getter @Setter protected UserType usertype;
 
@@ -111,7 +113,7 @@ public abstract class User {
      * - Manager User;
      * - Vendor User;
      * */
-    enum UserType {
+    public enum UserType {
         CUSTOMERUSER,
         MANAGERUSER,
         VENDORUSER

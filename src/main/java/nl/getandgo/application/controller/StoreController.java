@@ -1,5 +1,6 @@
 package nl.getandgo.application.controller;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.dto.NewStoreDTO;
 import nl.getandgo.application.model.Store;
 import nl.getandgo.application.service.StoreService;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,12 @@ public class StoreController {
         return storeService.getStoreById(id);
     }
 
-
     /**
      * Add New Store
      * */
-    @PostMapping("api/stores")
-    public void addNewStore(@RequestBody Store data){
-        storeService.addNewStore(data);
+    @PostMapping(value = "api/stores" )
+    public void addNewStore(@RequestBody NewStoreDTO store){
+        storeService.addNewStore(store);
     }
 
 

@@ -22,7 +22,7 @@ const Admin = () => {
     if (selectedcontent === "DashBoard") {
       return <AdminDashBoard />;
     } else if (selectedcontent === "Store") {
-      return <AdminStoreManagement />;
+        return <AdminStoreManagement />;
     } else if (selectedcontent === "Order") {
       return <AdminOrderManagement />;
     } else if (selectedcontent === "Review") {

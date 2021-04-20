@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -20,7 +21,8 @@ public class Product {
     @SequenceGenerator(
             name = "product_sequence",
             sequenceName = "product_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 10000
     )
     @GeneratedValue(
             strategy = SEQUENCE,
@@ -115,8 +117,7 @@ public class Product {
     @Getter @Setter private List<Voucher> vouchers;
 
     //constructor
-    public Product( List<Review> review, String product_name, int current_stock, int sold, double price, Status status, String description, String img, Category category, List<Voucher> vouchers) {
-        this.review = review;
+    public Product( String product_name, int current_stock, int sold, double price, Status status, String description, String img, Category category) {
         this.product_name = product_name;
         this.current_stock = current_stock;
         this.sold = sold;
@@ -125,7 +126,8 @@ public class Product {
         this.description = description;
         this.img = img;
         this.category = category;
-        this.vouchers = vouchers;
+        this.vouchers=new ArrayList<>();
+        this.review =new ArrayList<>();
     }
 
     /***

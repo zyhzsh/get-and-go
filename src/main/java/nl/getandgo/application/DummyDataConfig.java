@@ -13,19 +13,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DummyDataConfig {
     @Bean
-    CommandLineRunner commandLineRunner(StoreRepository storeRepository, UserRepository userRepository) {
-
+    CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return args -> {
-            AddProducts(City.EINDOHOVEN,5, Product.Category.FOOD,storeRepository,userRepository);
-            AddProducts(City.EINDOHOVEN,10, Product.Category.WELLNESS,storeRepository,userRepository);
-            AddProducts(City.EINDOHOVEN,15, Product.Category.SPECIALITY,storeRepository,userRepository);
-            AddProducts(City.BREDA,15, Product.Category.EVENT,storeRepository,userRepository);
-            AddProducts(City.HAARLEM,15, Product.Category.EVENT,storeRepository,userRepository);
-            AddProducts(City.DELFT,15, Product.Category.EVENT,storeRepository,userRepository);
-            AddProducts(City.UTRECHT,15, Product.Category.EVENT,storeRepository,userRepository);
+            AddProducts(City.EINDOHOVEN,5, Product.Category.FOOD,userRepository);
+            AddProducts(City.EINDOHOVEN,10, Product.Category.WELLNESS,userRepository);
+            AddProducts(City.EINDOHOVEN,15, Product.Category.SPECIALITY,userRepository);
+            AddProducts(City.BREDA,15, Product.Category.EVENT,userRepository);
+            AddProducts(City.HAARLEM,15, Product.Category.EVENT,userRepository);
+            AddProducts(City.DELFT,15, Product.Category.EVENT,userRepository);
+            AddProducts(City.UTRECHT,15, Product.Category.EVENT,userRepository);
         };
     }
-    private void AddProducts(City city, int num, Product.Category category,StoreRepository storeRepository,UserRepository userRepository){
+    private void AddProducts(City city, int num, Product.Category category,UserRepository userRepository){
         Faker faker=new Faker();
         VendorUser vendor=new VendorUser(
                 faker.internet().emailAddress(),
@@ -44,7 +43,6 @@ public class DummyDataConfig {
                     faker.company().url()
             );
             Product p1 = new Product(
-                    null,
                     faker.commerce().productName(),
                     faker.number().numberBetween(1,99999),
                     faker.number().numberBetween(1,99999),
@@ -52,8 +50,7 @@ public class DummyDataConfig {
                     Product.Status.ONSALE,
                     faker.company().buzzword(),
                     "https://picsum.photos/640/360",
-                    category,
-                    null);
+                    category);
             s1.AddProduct(p1);
             vendor.addStore(s1);
             userRepository.save(vendor);

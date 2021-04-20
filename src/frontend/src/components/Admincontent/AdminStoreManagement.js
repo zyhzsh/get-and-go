@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStoreList } from "../../actions/storeAction";
 import { getVendorList } from "../../actions/adminAction";
 //Ant Ui
-import { Table, Space, Button } from "antd";
+import { Table, Space, Button,Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 //UI Component
 import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
@@ -13,22 +13,41 @@ const AdminStoreManagement = () => {
   const dispatch = useDispatch();
   const storeslist = useSelector((state) => state.stores.stores);
   const vendorslist = useSelector((state) => state.vendors.vendors);
-  const [vendors, Setvendors] = useState(vendorslist);
   const [mount, setMount] = useState(false);
+  const [value, setValue] = useState("");
+  const [datasourcestoreslist,setdatasourcestoreslist]=useState(null);
+  const FilterByInput = (placeholder) => (
+    <Input
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => {
+        const currValue = e.target.value;
+        setValue(currValue);
+        const filteredData = storeslist.filter((entry) =>
+          entry.store_id.toString().includes(currValue)
+        );
+        setdatasourcestoreslist(filteredData);
+      }}
+    />
+  );
   useEffect(() => {
     const loadstorelist = () => {
       if (!mount) {
         setMount(true);
         dispatch(getStoreList());
         dispatch(getVendorList());
-        Setvendors(vendorslist);
       }
     };
     loadstorelist();
   }, [dispatch, storeslist, vendorslist, mount]);
+  if(datasourcestoreslist==null){
+    setTimeout(() => {
+      setdatasourcestoreslist(storeslist);
+    }, 100);
+  }
   const columns = [
     {
-      title: "Store ID",
+      title: FilterByInput("Store ID"),
       dataIndex: "store_id",
       key: "store_id",
     },
@@ -80,7 +99,7 @@ const AdminStoreManagement = () => {
               icon={<PlusOutlined />}
               size="middle"
               onClick={() => {
-                set_visible_add_new_store_form(true);     
+                set_visible_add_new_store_form(true);
               }}
             >
               Add New Store
@@ -100,14 +119,16 @@ const AdminStoreManagement = () => {
           </>
         )}
         columns={columns}
-        dataSource={storeslist}
+        dataSource={datasourcestoreslist}
         rowKey="store_id"
       />
-      <AdminAddNewStoreForm
-        visiable={visible_add_new_store_form}
-        setvisiable={set_visible_add_new_store_form}
-        vendors={vendors}
-      />
+      {visible_add_new_store_form&&(
+        <AdminAddNewStoreForm
+          visiable={visible_add_new_store_form}
+          setvisiable={set_visible_add_new_store_form}
+          vendors={vendorslist}
+        />
+      )}
     </div>
   );
 };

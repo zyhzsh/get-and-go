@@ -15,12 +15,10 @@ export const addnewStore = (data) => async (dispatch) => {
     "vendor_id":data.vendor_id,
     "store_name":data.store_name,
     "description":data.description,
-    "city":data.city,
+    "city":data.city.toUpperCase(),
     "address":data.address,
     "img":data.img,
     "official_website":data.website
   })
-  dispatch({
-    type: "ADD_NEW_STORE"
-  });
+  dispatch({type: "ADD_NEW_STORE"},{type:"FETCH_STORES"});
 };

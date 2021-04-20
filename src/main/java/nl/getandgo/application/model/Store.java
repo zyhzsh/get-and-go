@@ -18,8 +18,22 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "stores")
 public class Store {
 
-    public Store(String store_name, String description, City city, String address, String img, String official_website) {
-        this.vendor=null;
+
+    /**
+     * Constructor
+     * @param store_name
+     * @param description
+     * @param city
+     * @param address
+     * @param img
+     * @param official_website
+     * */
+    public Store(String store_name,
+                 String description,
+                 City city,
+                 String address,
+                 String img,
+                 String official_website) {
         this.store_name = store_name;
         this.description = description;
         this.city = city;
@@ -27,6 +41,7 @@ public class Store {
         this.img = img;
         this.official_website = official_website;
         this.products=new ArrayList<>();
+        this.vendor=null;
     }
 
     /***
@@ -36,7 +51,8 @@ public class Store {
     @SequenceGenerator(
            name = "store_sequence",
            sequenceName = "store_sequence",
-           allocationSize = 1
+           allocationSize = 1,
+            initialValue = 10000
     )
     @GeneratedValue(
            strategy = SEQUENCE,
@@ -91,7 +107,7 @@ public class Store {
     /**
      * Official Website
      * */
-    @Column(name = "offical_website")
+    @Column(name = "official_website")
     @Getter @Setter private String official_website;
 
 
