@@ -3,6 +3,7 @@ package nl.getandgo.application.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
+import javax.management.InstanceAlreadyExistsException;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -43,10 +44,12 @@ public class VendorUser extends User {
         this.storeList=new ArrayList<>();
     }
 
-    public void addStore(Store store){
+    public void addStore(Store store) throws InstanceAlreadyExistsException {
         if(!storeList.contains(store)){
             storeList.add(store);
             store.setVendor(this);
+        }else {
+            throw new InstanceAlreadyExistsException();
         }
     }
 }

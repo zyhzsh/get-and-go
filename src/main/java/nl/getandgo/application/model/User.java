@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import nl.getandgo.application.model.Comment;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -96,7 +95,12 @@ public abstract class User {
     /**
      * Constructor
      * */
-    public User(String email, String password, String first_name, String last_name, String avatar_link, String phone) {
+    public User(String email,
+                String password,
+                String first_name,
+                String last_name,
+                String avatar_link,
+                String phone) {
         this.email = email;
         this.password = password;
         this.first_name = first_name;

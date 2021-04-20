@@ -10,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.management.InstanceAlreadyExistsException;
+
 @Configuration
 public class DummyDataConfig {
     @Bean
@@ -24,7 +26,7 @@ public class DummyDataConfig {
             AddProducts(City.UTRECHT,15, Product.Category.EVENT,userRepository);
         };
     }
-    private void AddProducts(City city, int num, Product.Category category,UserRepository userRepository){
+    private void AddProducts(City city, int num, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {
         Faker faker=new Faker();
         VendorUser vendor=new VendorUser(
                 faker.internet().emailAddress(),
@@ -54,7 +56,6 @@ public class DummyDataConfig {
             s1.AddProduct(p1);
             vendor.addStore(s1);
             userRepository.save(vendor);
-           // storeRepository.save(s1);
         }
 
     }

@@ -30,7 +30,7 @@ public class Order {
             generator = "order_sequence"
     )
     @Column(name = "order_id")
-    @Getter @Setter private Long order_id;
+    @Getter private Long order_id;
 
     /**
      * Customer Id
@@ -49,19 +49,19 @@ public class Order {
      * Store Id
      * */
     @Column(name = "store_id",nullable = false)
-    @Getter @Setter private Long store_id;
+    @Getter private Long store_id;
 
     /**
      * Product Id
      * */
     @Column(name = "product_id",nullable = false)
-    @Getter @Setter private Long product_id;
+    @Getter private Long product_id;
 
     /**
      * Voucher
      * */
     @Column(name = "voucher_id")
-    @Getter @Setter private Long voucher_id;
+    @Getter private Long voucher_id;
 
 
     /**
@@ -78,7 +78,7 @@ public class Order {
      * Buyer's Email
      * */
     @Column(name = "buyer_email",nullable = false)
-    @Getter @Setter private String buyer_email;
+    @Getter private String buyer_email;
 
     /**
      * Detail
