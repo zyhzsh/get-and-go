@@ -7,9 +7,11 @@ import { Table, Space, Button,Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 //UI Component
 import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
+import AdminRegisterNewVendorForm from './AdminRegisterNewVendorForm';
 
 const AdminStoreManagement = () => {
   const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(false);
+  const [visible_register_new_vendor_form,set_visible_register_new_vendor_form]=useState(false);
   const dispatch = useDispatch();
   const storeslist = useSelector((state) => state.stores.stores);
   const vendorslist = useSelector((state) => state.vendors.vendors);
@@ -43,7 +45,7 @@ const AdminStoreManagement = () => {
   if(datasourcestoreslist==null){
     setTimeout(() => {
       setdatasourcestoreslist(storeslist);
-    }, 100);
+    }, 200);
   }
   const columns = [
     {
@@ -111,7 +113,7 @@ const AdminStoreManagement = () => {
               icon={<PlusOutlined />}
               size="middle"
               onClick={() => {
-                set_visible_add_new_store_form(true);
+                set_visible_register_new_vendor_form(true);
               }}
             >
               Register A New Vendor
@@ -122,13 +124,18 @@ const AdminStoreManagement = () => {
         dataSource={datasourcestoreslist}
         rowKey="store_id"
       />
-      {visible_add_new_store_form&&(
+      {datasourcestoreslist&&(
         <AdminAddNewStoreForm
           visiable={visible_add_new_store_form}
           setvisiable={set_visible_add_new_store_form}
           vendors={vendorslist}
         />
       )}
+      {datasourcestoreslist&&<AdminRegisterNewVendorForm
+        visiable={visible_register_new_vendor_form}
+        setvisiable={set_visible_register_new_vendor_form}
+        vendors={vendorslist}
+      /> }
     </div>
   );
 };

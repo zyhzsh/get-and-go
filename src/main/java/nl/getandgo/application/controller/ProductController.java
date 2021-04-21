@@ -42,7 +42,6 @@ public class ProductController {
      * */
     @GetMapping(value = "api/products", params = "category")
     public List<Product> getOnSaleProductsByCategory(@RequestParam String category) {
-        System.out.println("category");
         return  productService.getProductsByCategoryAndStatus(category, Product.Status.ONSALE);
     }
     /**

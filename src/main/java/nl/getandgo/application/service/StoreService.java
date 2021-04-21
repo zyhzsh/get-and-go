@@ -6,6 +6,8 @@ import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,10 +37,8 @@ public class StoreService {
      * */
     public List<Store> getStoresByVendorId(String id){
         Long owner_id;
-        try {
-            owner_id=Long.parseLong(id);
-            return storeRepository.findStoresByVendor(owner_id);
-        }catch (Exception e){return null;}
+        owner_id=Long.parseLong(id);
+        return storeRepository.findStoresByVendor(owner_id);
     }
     /**
      * Adding New Store In System

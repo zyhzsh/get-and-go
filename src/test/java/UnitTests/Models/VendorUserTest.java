@@ -1,4 +1,4 @@
-package UnitTests.Models.Models;
+package UnitTests.Models;
 import com.github.javafaker.Faker;
 import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Store;

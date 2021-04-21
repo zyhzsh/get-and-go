@@ -1,5 +1,4 @@
 package nl.getandgo.application.dto;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import nl.getandgo.application.model.City;

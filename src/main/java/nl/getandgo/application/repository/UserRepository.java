@@ -21,4 +21,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT m FROM ProductManagerUser m WHERE m.user_id=?1 AND m.usertype='ProductManagerUser'")
     Optional<ProductManagerUser> findManagerById(Long id);
+
+    @Query("SELECT u FROM User u WHERE u.email=?1")
+    Optional<User> findUserByEmail(String email);
 }
