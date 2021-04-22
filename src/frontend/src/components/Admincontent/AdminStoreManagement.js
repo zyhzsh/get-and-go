@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStoreList } from "../../actions/storeAction";
-import { getVendorList,deleteStorebyid } from "../../actions/adminAction";
+import { getVendorList, deleteStorebyid } from "../../actions/adminAction";
 //Ant Ui
-import { Table, Space, Button, Input, Modal,notification } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Table, Space, Button, Input, Modal, notification } from "antd";
+import { PlusOutlined, SyncOutlined } from "@ant-design/icons";
 //UI Component
 import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
 import AdminRegisterNewVendorForm from "./AdminRegisterNewVendorForm";
 import AdminEditStoreForm from "./AdminEditStoreForm";
 const AdminStoreManagement = () => {
-  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(false);
-  const [visible_register_new_vendor_form,set_visible_register_new_vendor_form] = useState(false);
-  const [visible_edit_store_form,set_visible_edit_store_form]=useState(false);
+  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(
+    false
+  );
+  const [
+    visible_register_new_vendor_form,
+    set_visible_register_new_vendor_form,
+  ] = useState(false);
+  const [visible_edit_store_form, set_visible_edit_store_form] = useState(
+    false
+  );
 
   const dispatch = useDispatch();
   const storeslist = useSelector((state) => state.stores.stores);
@@ -24,12 +31,12 @@ const AdminStoreManagement = () => {
   const [deletestoremodal, setdeletestoremodal] = useState(false);
   const [confirmdeletedloading, setConfirmdeleted] = useState(false);
   const [deletedstore, setdeletedstore] = useState(null);
-  const [editstore,seteditstore]=useState(null);
+  const [editstore, seteditstore] = useState(null);
 
-  const editstorehandler=(e)=>{
+  const editstorehandler = (e) => {
     set_visible_edit_store_form(true);
     seteditstore(e);
-  }
+  };
   const openNotificationWithIcon = (type) => {
     notification[type]({
       message: "Your request has been send",
@@ -138,7 +145,13 @@ const AdminStoreManagement = () => {
       key: "action",
       render: (e) => (
         <Space size="middle">
-          <Button onClick={() => {editstorehandler(e)}}>Edit</Button>
+          <Button
+            onClick={() => {
+              editstorehandler(e);
+            }}
+          >
+            Edit
+          </Button>
           <Button
             onClick={() => {
               showDeletedModal(e);
@@ -154,38 +167,51 @@ const AdminStoreManagement = () => {
   return (
     <div>
       <h2>Store</h2>
-      <Table
-        title={() => (
-          <>
-            <Button
-              type="primary"
-              shape="round"
-              icon={<PlusOutlined />}
-              size="middle"
-              onClick={() => {
-                set_visible_add_new_store_form(true);
-              }}
-            >
-              Add New Store
-            </Button>
-            <span> </span>
-            <Button
-              type="primary"
-              shape="round"
-              icon={<PlusOutlined />}
-              size="middle"
-              onClick={() => {
-                set_visible_register_new_vendor_form(true);
-              }}
-            >
-              Register A New Vendor
-            </Button>
-          </>
-        )}
-        columns={columns}
-        dataSource={datasourcestoreslist}
-        rowKey="store_id"
-      />
+      {mount && (
+        <Table
+          title={() => (
+            <>
+              <Button
+                onClick={() => {
+                  setdatasourcestoreslist(null);
+                  setMount(false);
+                }}
+                type="primary"
+                shape="round"
+              >
+                <SyncOutlined />
+              </Button>
+              <span> </span>
+              <Button
+                type="primary"
+                shape="round"
+                icon={<PlusOutlined />}
+                size="middle"
+                onClick={() => {
+                  set_visible_add_new_store_form(true);
+                }}
+              >
+                Add New Store
+              </Button>
+              <span> </span>
+              <Button
+                type="primary"
+                shape="round"
+                icon={<PlusOutlined />}
+                size="middle"
+                onClick={() => {
+                  set_visible_register_new_vendor_form(true);
+                }}
+              >
+                Register A New Vendor
+              </Button>
+            </>
+          )}
+          columns={columns}
+          dataSource={datasourcestoreslist}
+          rowKey="store_id"
+        />
+      )}
       {datasourcestoreslist && (
         <AdminAddNewStoreForm
           visiable={visible_add_new_store_form}
@@ -200,13 +226,13 @@ const AdminStoreManagement = () => {
           vendors={vendorslist}
         />
       )}
-      {editstore&&
-      <AdminEditStoreForm
-        visiable={visible_edit_store_form}
-        setvisiable={set_visible_edit_store_form}
-        store={editstore}
-      />
-      }
+      {editstore && (
+        <AdminEditStoreForm
+          visiable={visible_edit_store_form}
+          setvisiable={set_visible_edit_store_form}
+          store={editstore}
+        />
+      )}
 
       {deletedstore && (
         <Modal

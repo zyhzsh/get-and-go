@@ -1,4 +1,4 @@
-package nl.getandgo.application.model;
+package UnitTests.Model;
 
 import com.github.javafaker.Faker;
 import nl.getandgo.application.model.City;
