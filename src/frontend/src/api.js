@@ -12,6 +12,11 @@ export const loginURL='api/login';
 //Store
 export const all_storesURL='api/stores';
 export const add_new_store_Api='api/stores';
+export const update_store_Api='api/stores';
+export const delete_store_Api=(store_id)=>`api/stores?id=${store_id}`;
+
 //Vendor
 export const all_vendorsURL="api/vendors";
 export const register_new_vendor_Api="api/vendor/signup";
+export const update_vendor_information_Api="api/vendor/edit";
+

@@ -23,7 +23,6 @@ const Home = () => {
         <Route exact path="/about" component={AboutMainContent} />
         <Route exact path="/signin" component={SignInContent} />
         <Route exact path="/signup" component={SignUpContent} />
-
         <Route component={NotFound} />
       </Switch>
       <Footer>
@@ -43,7 +42,7 @@ const Footer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-background:grey;
+  background: grey;
   height: 7vh;
 `;
 

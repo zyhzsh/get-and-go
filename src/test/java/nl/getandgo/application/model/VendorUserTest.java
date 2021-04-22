@@ -1,4 +1,5 @@
-package UnitTests.Models;
+package nl.getandgo.application.model;
+
 import com.github.javafaker.Faker;
 import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Store;
@@ -100,4 +101,5 @@ public class VendorUserTest {
         //Assert
         Assert.assertTrue(vendorUser_1.getStoreList().contains(store_1));
     }
+
 }

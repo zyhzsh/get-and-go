@@ -1,5 +1,10 @@
 import axios from "axios";
-import { all_vendorsURL ,add_new_store_Api,register_new_vendor_Api} from "../api";
+import { all_vendorsURL ,
+  add_new_store_Api,
+  register_new_vendor_Api,
+  delete_store_Api,
+  update_store_Api
+} from "../api";
 export const getVendorList = () => async (dispatch) => {
   const vendorlist = await axios.get(all_vendorsURL)
   dispatch({
@@ -19,7 +24,7 @@ export const addnewStore = (data) => async (dispatch) => {
     "img":data.img,
     "official_website":data.website
   })
-  dispatch({type: "ADD_NEW_STORE"},{type:"FETCH_STORES"});
+  dispatch({type: "ADD_NEW_STORE"});
 };
 
 export const registernewVendor=(data)=>async(dispatch)=>{
@@ -31,5 +36,13 @@ export const registernewVendor=(data)=>async(dispatch)=>{
     "avatar_link":data.avatar_link,
     "phone":data.phone
   })
-  dispatch({type:"REGISTER_NEW_VENDOR"},{type:"FETCH_VENDORS"});
+  dispatch({type:"REGISTER_NEW_VENDOR"});
+}
+export const deleteStorebyid=(store_id)=>async(dispatch)=>{
+  await axios.delete(delete_store_Api(store_id))
+  dispatch({type:"DELETE_STORE"});
+}
+export const editStoreInfomation=(data)=>async(dispatch)=>{
+  await axios.put(update_store_Api,data)
+  dispatch({type:"UPDATE_STORE"});
 }

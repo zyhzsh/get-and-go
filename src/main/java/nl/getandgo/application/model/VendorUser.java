@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.management.InstanceAlreadyExistsException;
+import javax.management.InstanceNotFoundException;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -19,7 +20,7 @@ public class VendorUser extends User {
 
     @OneToMany(
             mappedBy = "vendor",
-            cascade = CascadeType.MERGE
+            cascade = CascadeType.ALL
     )
     @JsonBackReference
     @Getter @Setter private List<Store> storeList;
@@ -51,5 +52,11 @@ public class VendorUser extends User {
         }else {
             throw new InstanceAlreadyExistsException();
         }
+    }
+
+    public void deletedStore(Store store) throws InstanceNotFoundException{
+        if(!storeList.contains(store)){throw new InstanceNotFoundException();}
+        store.setVendor(null);
+        storeList.remove(store);
     }
 }

@@ -25,7 +25,6 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
     });
   };
   const SubmitForm = (formdata) => {
-    alert("add succeed ~ !");
     openNotificationWithIcon("success");
     dispatch(addnewStore(formdata));
     form.current.resetFields();

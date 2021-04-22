@@ -1,8 +1,9 @@
 package nl.getandgo.application.repository;
+
 import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Product;
-import nl.getandgo.application.model.Product.Status;
 import nl.getandgo.application.model.Product.Category;
+import nl.getandgo.application.model.Product.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,10 @@
 package nl.getandgo.application.controller;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.dto.EditStoreDTO;
 import nl.getandgo.application.dto.NewStoreDTO;
 import nl.getandgo.application.model.Store;
 import nl.getandgo.application.service.StoreService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +12,8 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class StoreController {
-    private final StoreService storeService;
 
+    private final StoreService storeService;
     /**
      * Get All Store
      * */
@@ -38,5 +38,20 @@ public class StoreController {
         storeService.addNewStore(store);
     }
 
+    /**
+     * Edit Store Data
+     */
+    @PutMapping(value = "api/stores")
+    public void editStoreData(@RequestBody EditStoreDTO storeDTO){
+        storeService.updateStoreInFormation(storeDTO);
+    }
+
+    /**
+     * Delete Store
+     * */
+    @DeleteMapping(value = "api/stores",params = {"id"})
+    public void deleteStore(@RequestParam Long id){
+        storeService.deleteStore(id);
+    }
 
 }

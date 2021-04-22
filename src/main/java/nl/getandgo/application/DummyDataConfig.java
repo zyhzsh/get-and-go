@@ -1,10 +1,10 @@
 package nl.getandgo.application;
+
 import com.github.javafaker.Faker;
 import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Product;
 import nl.getandgo.application.model.Store;
 import nl.getandgo.application.model.VendorUser;
-import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

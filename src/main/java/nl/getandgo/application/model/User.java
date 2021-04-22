@@ -110,7 +110,6 @@ public abstract class User {
         this.comments=new ArrayList<>();
         this.usertype = UserType.CUSTOMERUSER;
     }
-
     /**
      * User Type:
      * - Customer User,
