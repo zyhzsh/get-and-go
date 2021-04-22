@@ -17,16 +17,14 @@ public class DummyDataConfig {
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return args -> {
-            AddProducts(City.EINDOHOVEN,5, Product.Category.FOOD,userRepository);
-            AddProducts(City.EINDOHOVEN,10, Product.Category.WELLNESS,userRepository);
-            AddProducts(City.EINDOHOVEN,15, Product.Category.SPECIALITY,userRepository);
-            AddProducts(City.BREDA,15, Product.Category.EVENT,userRepository);
-            AddProducts(City.HAARLEM,15, Product.Category.EVENT,userRepository);
-            AddProducts(City.DELFT,15, Product.Category.EVENT,userRepository);
-            AddProducts(City.UTRECHT,15, Product.Category.EVENT,userRepository);
+            for(City city:City.values()){
+                for (Product.Category category: Product.Category.values()) {
+                    AddProducts(city,2, category,userRepository);
+                }
+            }
         };
     }
-    private void AddProducts(City city, int num, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {
+    private void AddProducts(City city, int num_store, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {
         Faker faker=new Faker();
         VendorUser vendor=new VendorUser(
                 faker.internet().emailAddress(),
@@ -35,7 +33,7 @@ public class DummyDataConfig {
                 faker.name().lastName(),
                 faker.internet().avatar(),
                 faker.phoneNumber().cellPhone());
-        for (int i=0;i<num;i++){
+        for (int i=0;i<num_store;i++){
             Store s1=new Store(
                     faker.company().name(),
                     faker.lorem().characters(50),

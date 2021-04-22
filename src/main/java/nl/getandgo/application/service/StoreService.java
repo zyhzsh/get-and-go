@@ -98,12 +98,12 @@ public class StoreService {
     public void deleteStore(Long id) {
         storeRepository.findById(id).ifPresent(store -> {
             try {
-                store.getVendor().deletedStore(store);
-
+                VendorUser vendor=store.getVendor();
+                vendor.deletedStore(store);
+                storeRepository.delete(store);
             } catch (InstanceNotFoundException e) {
                 e.printStackTrace();
             }
-        }
-        );
+        });
     }
 }

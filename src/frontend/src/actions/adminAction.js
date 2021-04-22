@@ -39,6 +39,7 @@ export const registernewVendor=(data)=>async(dispatch)=>{
   dispatch({type:"REGISTER_NEW_VENDOR"});
 }
 export const deleteStorebyid=(store_id)=>async(dispatch)=>{
+  console.log(delete_store_Api(store_id));
   await axios.delete(delete_store_Api(store_id))
   dispatch({type:"DELETE_STORE"});
 }

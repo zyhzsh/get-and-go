@@ -70,7 +70,6 @@ public class Store {
             foreignKey = @ForeignKey(
                     name = "vendor_id_fk")
     )
-    @JsonManagedReference
     @Getter @Setter private VendorUser vendor;
 
     /**
@@ -113,7 +112,8 @@ public class Store {
 
     @OneToMany(
             mappedBy = "store",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     @JsonBackReference
     @Getter private List<Product> products;
@@ -129,7 +129,7 @@ public class Store {
     }
 
     /**
-     * Off Sale Product
+     * OffShelf Product
      * */
     public void OffShelfProduct(Long product_id){
         for (Product p:products) {
@@ -137,6 +137,13 @@ public class Store {
                 p.setStatus(Product.Status.OFFSHELF);
             }
         }
+    }
+    /**
+     * Delete Store In System:
+     * */
+    public void CloseStore(){
+        setVendor(null);
+        products.clear();
     }
 
 }

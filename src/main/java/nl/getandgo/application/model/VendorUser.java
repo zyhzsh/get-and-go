@@ -1,6 +1,7 @@
 package nl.getandgo.application.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -56,7 +57,7 @@ public class VendorUser extends User {
 
     public void deletedStore(Store store) throws InstanceNotFoundException{
         if(!storeList.contains(store)){throw new InstanceNotFoundException();}
-        store.setVendor(null);
         storeList.remove(store);
+        store.CloseStore();
     }
 }

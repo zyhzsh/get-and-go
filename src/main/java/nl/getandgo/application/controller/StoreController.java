@@ -51,6 +51,7 @@ public class StoreController {
      * */
     @DeleteMapping(value = "api/stores",params = {"id"})
     public void deleteStore(@RequestParam Long id){
+
         storeService.deleteStore(id);
     }
 
