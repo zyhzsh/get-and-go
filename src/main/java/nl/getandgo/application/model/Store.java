@@ -140,6 +140,8 @@ public class Store {
     }
     /**
      * Delete Store In System:
+     * - Disconnected with Vendor
+     * - Clear the Products Belong To The Store
      * */
     public void CloseStore(){
         setVendor(null);

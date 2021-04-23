@@ -46,6 +46,9 @@ public class VendorUser extends User {
         this.storeList=new ArrayList<>();
     }
 
+    /**
+     * Adding New Store
+     * */
     public void addStore(Store store) throws InstanceAlreadyExistsException {
         if(!storeList.contains(store)){
             storeList.add(store);
@@ -55,7 +58,12 @@ public class VendorUser extends User {
         }
     }
 
-    public void deletedStore(Store store) throws InstanceNotFoundException{
+    /**
+     * Remove the Store Belong to this Owner:
+     * - Remove The Store
+     * - Close the Store ( Decouple: the Relationship Between Store and Vendor... )
+     * */
+    public void deleteStore(Store store) throws InstanceNotFoundException{
         if(!storeList.contains(store)){throw new InstanceNotFoundException();}
         storeList.remove(store);
         store.CloseStore();

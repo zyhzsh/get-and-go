@@ -99,11 +99,11 @@ public class StoreService {
         storeRepository.findById(id).ifPresent(store -> {
             try {
                 VendorUser vendor=store.getVendor();
-                vendor.deletedStore(store);
-                storeRepository.delete(store);
+                vendor.deleteStore(store);
             } catch (InstanceNotFoundException e) {
-                e.printStackTrace();
+                System.out.println(e);
             }
+            storeRepository.delete(store);
         });
     }
 }

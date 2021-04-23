@@ -1,9 +1,6 @@
-package UnitTests.Model;
+package nl.getandgo.application.model;
 
 import com.github.javafaker.Faker;
-import nl.getandgo.application.model.City;
-import nl.getandgo.application.model.Store;
-import nl.getandgo.application.model.VendorUser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
