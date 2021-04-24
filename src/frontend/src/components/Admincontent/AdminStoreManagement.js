@@ -4,11 +4,12 @@ import { getStoreList } from "../../actions/storeAction";
 import { getVendorList, deleteStorebyid } from "../../actions/adminAction";
 //Ant Ui
 import { Table, Space, Button, Input, Modal, notification } from "antd";
-import { PlusOutlined, SyncOutlined } from "@ant-design/icons";
+import { PlusOutlined, SyncOutlined ,ShopOutlined,UserAddOutlined} from "@ant-design/icons";
 //UI Component
 import AdminAddNewStoreForm from "./AdminAddNewStoreForm";
 import AdminRegisterNewVendorForm from "./AdminRegisterNewVendorForm";
 import AdminEditStoreForm from "./AdminEditStoreForm";
+
 const AdminStoreManagement = () => {
   const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(
     false
@@ -32,7 +33,6 @@ const AdminStoreManagement = () => {
   const [confirmdeletedloading, setConfirmdeleted] = useState(false);
   const [deletedstore, setdeletedstore] = useState(null);
   const [editstore, seteditstore] = useState(null);
-
   const editstorehandler = (e) => {
     set_visible_edit_store_form(true);
     seteditstore(e);
@@ -46,7 +46,6 @@ const AdminStoreManagement = () => {
     setdeletestoremodal(true);
     setdeletedstore(e);
   };
-
   const handleDeleted = () => {
     setConfirmdeleted(true);
     setTimeout(() => {
@@ -191,7 +190,7 @@ const AdminStoreManagement = () => {
                   set_visible_add_new_store_form(true);
                 }}
               >
-                Add New Store
+              <ShopOutlined />  Add New Store
               </Button>
               <span> </span>
               <Button
@@ -203,7 +202,7 @@ const AdminStoreManagement = () => {
                   set_visible_register_new_vendor_form(true);
                 }}
               >
-                Register A New Vendor
+              <UserAddOutlined />  Register A New Vendor
               </Button>
             </>
           )}

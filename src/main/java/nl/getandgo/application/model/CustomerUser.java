@@ -53,23 +53,14 @@ public class CustomerUser extends User {
      * @param password
      * @param first_name
      * @param last_name
-     * @param avatar_link
-     * @param phone
-     * @param username
-     * @param city
      */
     public CustomerUser(String email,
                         String password,
                         String first_name,
-                        String last_name,
-                        String avatar_link,
-                        String phone,
-                        String username,
-                        City city) {
-        super(email, password, first_name, last_name, avatar_link, phone);
-        this.username=username;
-        this.city=city;
+                        String last_name) {
+        super(email, password, first_name, last_name);
         this.reviews=new ArrayList<>();
         this.orders=new ArrayList<>();
+        this.usertype=UserType.CUSTOMERUSER;
     }
 }

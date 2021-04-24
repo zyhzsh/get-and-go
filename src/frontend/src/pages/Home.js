@@ -42,7 +42,13 @@ const Footer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: grey;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    56deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(114, 190, 180, 1) 66%,
+    rgba(120, 131, 191, 1) 100%
+  );
   height: 7vh;
 `;
 

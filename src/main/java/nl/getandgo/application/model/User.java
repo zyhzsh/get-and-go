@@ -72,13 +72,13 @@ public abstract class User {
     /**
      * Avatar Link
      * */
-    @Column(name = "avatar_link",nullable = false)
+    @Column(name = "avatar_link")
     @Getter @Setter protected String avatar_link;
 
     /**
      * Phone Number
      * */
-    @Column(name = "phone",nullable = false)
+    @Column(name = "phone")
     @Getter @Setter protected String phone;
 
     /**
@@ -94,6 +94,12 @@ public abstract class User {
 
     /**
      * Constructor
+     * @param email
+     * @param password
+     * @param first_name
+     * @param last_name
+     * @param avatar_link
+     * @param phone
      * */
     public User(String email,
                 String password,
@@ -108,8 +114,27 @@ public abstract class User {
         this.avatar_link = avatar_link;
         this.phone = phone;
         this.comments=new ArrayList<>();
-        this.usertype = UserType.CUSTOMERUSER;
     }
+    /**
+     * Constructor
+     * @param email
+     * @param password
+     * @param first_name
+     * @param last_name
+     * */
+    public User(String email,
+                String password,
+                String first_name,
+                String last_name){
+        this.email=email;
+        this.password=password;
+        this.first_name=first_name;
+        this.last_name=last_name;
+        this.comments=new ArrayList<>();
+    }
+
+
+
     /**
      * User Type:
      * - Customer User,

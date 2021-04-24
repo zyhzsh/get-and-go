@@ -1,16 +1,16 @@
 package nl.getandgo.application.service;
 
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
 import nl.getandgo.application.model.CustomerUser;
-import nl.getandgo.application.model.Store;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.InvalidPropertiesFormatException;
+import javax.management.InstanceAlreadyExistsException;
 import java.util.List;
 
 @Service
@@ -24,16 +24,27 @@ public class UserService {
         return null;
     }
 
-    public boolean registerCustomerUser(CustomerUser customerUser){
-        return true;
+    /**
+     * Register A New Customer
+     * */
+    public void registerCustomerUser(NewCustomerDTO register) throws InstanceAlreadyExistsException {
+        //Check Email Unique
+        if(userRepository.findUserByEmail(register.getEmail()).isPresent()){ throw new InstanceAlreadyExistsException("Email address has been taken"); }
+        CustomerUser newCustomer=new CustomerUser(
+                register.getEmail(),
+                register.getPassword(),
+                register.getFirst_name(),
+                register.getLast_name()
+        );
+        userRepository.save(newCustomer);
     }
 
     /**
      * Register New Vendor In System
      * */
-    public boolean registerVendorUser(NewVendorDTO vendorDTO){
+    public void registerVendorUser(NewVendorDTO vendorDTO)throws InstanceAlreadyExistsException{
         //Check Unique Email
-        if(userRepository.findUserByEmail(vendorDTO.getEmail()).isPresent()){ return false;}
+        if(userRepository.findUserByEmail(vendorDTO.getEmail()).isPresent()){ throw new InstanceAlreadyExistsException("Email address has been taken");  }
         //Convert DTO
         VendorUser newVendor=new VendorUser(
                 vendorDTO.getEmail(),
@@ -44,7 +55,6 @@ public class UserService {
                 vendorDTO.getPhone());
         //Save
         userRepository.save(newVendor);
-        return true;
     }
 
     public List<User> getAllVendor() {
