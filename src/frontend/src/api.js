@@ -7,7 +7,13 @@ export const all_products_by_Category_City=(city,category)=>`${all_productsURL}?
 
 //Login
 export const loginURL='api/login';
-
+/***
+ * Sign Up
+ * - Vendor User
+ * - Customer User
+ * */ 
+export const register_new_vendor_Api="api/vendor/signup";
+export const register_new_customer_Api="api/customer/signup"
 
 //Store
 export const all_storesURL='api/stores';
@@ -17,6 +23,5 @@ export const delete_store_Api=(store_id)=>`api/stores?id=${store_id}`;
 
 //Vendor
 export const all_vendorsURL="api/vendors";
-export const register_new_vendor_Api="api/vendor/signup";
 export const update_vendor_information_Api="api/vendor/edit";
 

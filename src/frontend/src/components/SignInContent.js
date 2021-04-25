@@ -1,14 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button,notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch ,useSelector} from "react-redux";
 import { userLogin
  } from "../actions/userAction";
 const SignInContent = () => {
   const dispatch = useDispatch();
+  const registerResult = useSelector(
+    (state) => state.message.systemBack.signupResult
+  );
+  const openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: "Success",
+      description: "Your Request is submitted",
+    });
+  };
+  if(registerResult==="Request Accepted"){
+    openNotificationWithIcon("success")
+  }
 
+  dispatch({ type: "RESET_SIGN_UP_MESSAGE" });
   const onFinish = (values) => {
     if (values) {
     //  console.log(values.email);
