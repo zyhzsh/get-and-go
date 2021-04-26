@@ -11,9 +11,7 @@ import AdminRegisterNewVendorForm from "./AdminRegisterNewVendorForm";
 import AdminEditStoreForm from "./AdminEditStoreForm";
 
 const AdminStoreManagement = () => {
-  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(
-    false
-  );
+  const [visible_add_new_store_form, set_visible_add_new_store_form] = useState(false);
   const [
     visible_register_new_vendor_form,
     set_visible_register_new_vendor_form,
@@ -167,7 +165,7 @@ const AdminStoreManagement = () => {
     <div>
       <h2>Store</h2>
       {mount && (
-        <Table
+  <Table
           title={() => (
             <>
               <Button
@@ -209,6 +207,8 @@ const AdminStoreManagement = () => {
           columns={columns}
           dataSource={datasourcestoreslist}
           rowKey="store_id"
+          pagination={{ pageSize: 4 } }
+          showHeader={true}
         />
       )}
       {datasourcestoreslist && (
