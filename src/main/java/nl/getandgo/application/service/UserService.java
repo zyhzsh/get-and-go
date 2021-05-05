@@ -8,14 +8,21 @@ import nl.getandgo.application.model.User;
 import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceAlreadyExistsException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService{
+
+    private final static String USER_NOT_FOUND_MSG =
+            "user with email %s not found";
 
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
@@ -59,5 +66,12 @@ public class UserService {
 
     public List<User> getAllVendor() {
         return userRepository.findAll();
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return new org.springframework.security.core.userdetails.User("foo","foo",new ArrayList<>());
+
     }
 }
