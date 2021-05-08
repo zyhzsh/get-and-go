@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.management.InstanceAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -68,10 +69,10 @@ public class UserService implements UserDetailsService{
         return userRepository.findAll();
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return new org.springframework.security.core.userdetails.User("foo","foo",new ArrayList<>());
-
+        UserDetails user= userRepository.findUserByEmail(email).orElse(null);
+        if (user==null){throw new UsernameNotFoundException("User Not Found ~ ! ");}
+        return user;
     }
 }

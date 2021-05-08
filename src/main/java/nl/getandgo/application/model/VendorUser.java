@@ -27,7 +27,6 @@ public class VendorUser extends User {
     )
     @JsonBackReference
     @Getter @Setter private List<Store> storeList;
-
     /**
      * Constructor
      * @param email
@@ -47,7 +46,6 @@ public class VendorUser extends User {
         this.usertype=UserType.VENDORUSER;
         this.storeList=new ArrayList<>();
     }
-
     /**
      * Adding New Store
      * */
@@ -59,7 +57,6 @@ public class VendorUser extends User {
             throw new InstanceAlreadyExistsException();
         }
     }
-
     /**
      * Remove the Store Belong to this Owner:
      * - Remove The Store

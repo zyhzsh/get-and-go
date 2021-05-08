@@ -52,7 +52,7 @@ public class JwtHelper {
                 .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
-                .signWith(jwtConfig.getSecurityKeyForSigning())
+                .signWith(SignatureAlgorithm.HS256,jwtConfig.getSecurityKeyForSigning())
                 .compact();
     }
     public Boolean validateToken(String token, UserDetails userDetails) {

@@ -2,13 +2,11 @@ package nl.getandgo.application.controller;
 
 import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.dto.LoginRequestDTO;
-import nl.getandgo.application.dto.LoginResponseDTO;
 import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
 import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,23 +28,26 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtHelper jwtHelper;
 
+    /**
+     * User Login
+    * */
     @PostMapping(value = "api/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginUser) throws Exception{
-        System.out.println(loginUser.getEmail());
+    public String login(@RequestBody LoginRequestDTO loginUser) throws Exception{
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword())
-            );
+            System.out.println("Try Here 1");
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
+            System.out.println("Try Here 2");
         }
         catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
+            throw new Exception("Incorrect Email or password", e);
         }
         final UserDetails userDetails = userService
                 .loadUserByUsername(loginUser.getEmail());
         final String jwt=jwtHelper.generateToken(userDetails);
-
-        return ResponseEntity.ok(new LoginResponseDTO(jwt));
+        System.out.println(jwt);
+        return "dfgsdff";
     }
+
 
     /**
      * Get Vendor List
@@ -61,7 +62,8 @@ public class UserController {
      * */
     @PostMapping(value = "api/vendor/signup")
     public String signUpVendor(@RequestBody NewVendorDTO vendorDTO){
-         try{
+        System.out.println(vendorDTO.getEmail());
+        try{
              userService.registerVendorUser(vendorDTO);
          }catch (InstanceAlreadyExistsException e){
              return e.getMessage();

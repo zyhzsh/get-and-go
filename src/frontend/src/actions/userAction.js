@@ -6,6 +6,7 @@ export const userLogin=(email,password) => async (dispatch) => {
     "email":email,
     "password":password
   });
+  console.log(data.data);
   dispatch({
     type: "LOG_IN",
     payload: {

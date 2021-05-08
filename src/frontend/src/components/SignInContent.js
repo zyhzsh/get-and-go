@@ -24,8 +24,6 @@ const SignInContent = () => {
   dispatch({ type: "RESET_SIGN_UP_MESSAGE" });
   const onFinish = (values) => {
     if (values) {
-    //  console.log(values.email);
-     // console.log(values.password);
       dispatch(userLogin(values.email,values.password))
     }
   };
