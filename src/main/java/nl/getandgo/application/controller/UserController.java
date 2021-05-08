@@ -32,20 +32,27 @@ public class UserController {
      * User Login
     * */
     @PostMapping(value = "api/login")
-    public String login(@RequestBody LoginRequestDTO loginUser) throws Exception{
-        try {
-            System.out.println("Try Here 1");
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
-            System.out.println("Try Here 2");
+    public String login(@RequestBody LoginRequestDTO loginUser){
+//        try {
+//            System.out.println("Try Here 1");
+//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
+//            System.out.println("Try Here 2");
+//        }
+//        catch (BadCredentialsException e) {
+//            throw new Exception("Incorrect Email or password", e);
+//        }
+//        final UserDetails userDetails = userService
+//                .loadUserByUsername(loginUser.getEmail());
+//        final String jwt=jwtHelper.generateToken(userDetails);
+//        System.out.println(jwt);
+//        return "dfgsdff";
+        String jwt="";
+        try{
+            userService.Login(loginUser);
+        }catch (BadCredentialsException e){
+            return "e";
         }
-        catch (BadCredentialsException e) {
-            throw new Exception("Incorrect Email or password", e);
-        }
-        final UserDetails userDetails = userService
-                .loadUserByUsername(loginUser.getEmail());
-        final String jwt=jwtHelper.generateToken(userDetails);
-        System.out.println(jwt);
-        return "dfgsdff";
+        return jwt;
     }
 
 

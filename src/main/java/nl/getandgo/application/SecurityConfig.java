@@ -1,26 +1,31 @@
 package nl.getandgo.application;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.filter.JwtRequestFilter;
 import nl.getandgo.application.model.UserType;
+import nl.getandgo.application.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@AllArgsConstructor
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-    private UserDetailsService myUserDetailService;
-    private JwtRequestFilter jwtRequestFilter;
+
+    private final UserService myUserDetailService;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,15 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //    http.authorizeRequests()
 //            .antMatchers("/**").fullyAuthenticated().and().formLogin().loginPage("/signin");
     http
-            .csrf()
-            .disable()
+            .csrf().disable()
+            //.disable().addFilter(jwtRequestFilter)
             .authorizeRequests()
-            //.antMatchers("/login","").permitAll();
             .antMatchers("/api/test/manager").hasAnyAuthority(UserType.MANAGERUSER.toString())
-            .anyRequest().permitAll()
+            .anyRequest().anonymous()
             .and()
             .formLogin()
-            .loginPage("/signin");
+            .disable();
 
 
 

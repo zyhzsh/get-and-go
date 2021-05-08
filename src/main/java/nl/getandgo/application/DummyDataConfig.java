@@ -22,6 +22,14 @@ public class DummyDataConfig {
                     AddProducts(city,2, category,userRepository);
                 }
             }
+            VendorUser testvendor=new VendorUser(
+                    "test@vendor.com",
+                    "test",
+                    "sd",
+                    "s",
+                    "dd",
+                    "ssd");
+            userRepository.save(testvendor);
         };
     }
     private void AddProducts(City city, int num_store, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {

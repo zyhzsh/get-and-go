@@ -47,13 +47,15 @@ public class JwtHelper {
 
     private String createToken(Map<String, Object> claims, String subject) {
 
-        return Jwts.builder()
+         String token=Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
-                .signWith(SignatureAlgorithm.HS256,jwtConfig.getSecurityKeyForSigning())
+                .signWith(jwtConfig.getSecurityKeyForSigning())
                 .compact();
+         token+="sdgfasdfsadfsdfas";
+        return token;
     }
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);

@@ -1,13 +1,16 @@
 package nl.getandgo.application.service;
 
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.dto.LoginRequestDTO;
 import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
+import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.model.CustomerUser;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,9 +30,14 @@ public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
+    private final JwtHelper jwtHelper;
 
-    public User Login(String email,String password){
-        return null;
+    //After Login Return Jwt Token
+    public String Login(LoginRequestDTO loginRequestDTO)throws BadCredentialsException {
+        final UserDetails user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).orElse(null);
+        if(user==null){throw new BadCredentialsException("user not exists");}
+        final String jwt=jwtHelper.generateToken(user);
+        return jwt;
     }
 
     /**
