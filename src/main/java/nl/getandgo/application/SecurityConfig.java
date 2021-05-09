@@ -2,6 +2,7 @@ package nl.getandgo.application;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.filter.JwtConfig;
 import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.filter.JwtRequestFilter;
 import nl.getandgo.application.model.UserType;
@@ -17,6 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final UserService myUserDetailService;
     private final JwtRequestFilter jwtRequestFilter;
+    private final JwtHelper jwtHelper;
+    private final JwtConfig jwtConfig;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -51,13 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //            .antMatchers("/**").fullyAuthenticated().and().formLogin().loginPage("/signin");
     http
             .csrf().disable()
-            //.disable().addFilter(jwtRequestFilter)
+            .addFilterAfter(jwtRequestFilter,DefaultLoginPageGeneratingFilter.class)
             .authorizeRequests()
-            .antMatchers("/api/test/manager").hasAnyAuthority(UserType.MANAGERUSER.toString())
-            .anyRequest().anonymous()
-            .and()
-            .formLogin()
-            .disable();
+            .antMatchers("/api/test/manager").hasAnyAuthority(UserType.VENDORUSER.toString())
+            .anyRequest().anonymous();
+//            .and()
+//            .formLogin()
+//            .disable();
 
 
 

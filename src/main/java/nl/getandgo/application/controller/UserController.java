@@ -46,13 +46,13 @@ public class UserController {
 //        final String jwt=jwtHelper.generateToken(userDetails);
 //        System.out.println(jwt);
 //        return "dfgsdff";
-        String jwt="";
+        //String jwt="";
         try{
-            userService.Login(loginUser);
+            return  userService.Login(loginUser);
         }catch (BadCredentialsException e){
             return "e";
         }
-        return jwt;
+        //return jwt;
     }
 
 

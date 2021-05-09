@@ -46,7 +46,6 @@ public class JwtHelper {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-
          String token=Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
@@ -54,7 +53,6 @@ public class JwtHelper {
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
                 .signWith(jwtConfig.getSecurityKeyForSigning())
                 .compact();
-         token+="sdgfasdfsadfsdfas";
         return token;
     }
     public Boolean validateToken(String token, UserDetails userDetails) {
