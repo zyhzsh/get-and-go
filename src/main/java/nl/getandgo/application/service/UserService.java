@@ -2,11 +2,13 @@ package nl.getandgo.application.service;
 
 import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.dto.LoginRequestDTO;
+import nl.getandgo.application.dto.LoginResponseDTO;
 import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
 import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.model.CustomerUser;
 import nl.getandgo.application.model.User;
+import nl.getandgo.application.model.UserType;
 import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
@@ -17,9 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceAlreadyExistsException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,11 +33,20 @@ public class UserService implements UserDetailsService{
     private final JwtHelper jwtHelper;
 
     //After Login Return Jwt Token
-    public String Login(LoginRequestDTO loginRequestDTO)throws BadCredentialsException {
-        final UserDetails user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).orElse(null);
-        if(user==null){throw new BadCredentialsException("user not exists");}
-        final String jwt=jwtHelper.generateToken(user);
-        return jwt;
+    public LoginResponseDTO Login(LoginRequestDTO loginRequestDTO)throws BadCredentialsException {
+        try {
+            //Find the User
+            final User user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).get();
+            //If user not exists: user.getPassword() will fail->Catch throw Credential Error
+            //If password not right : throw Credential Error
+            if(!user.getPassword().equals(loginRequestDTO.getPassword())){throw new BadCredentialsException("Credential Error");}
+            //Generate JWT token
+            final String token=jwtHelper.generateToken(user);
+            //Return ResponseDTO (@Param JWT token, @Param user_type)
+            return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful");
+        }catch (Exception e){
+            throw new BadCredentialsException("Credential Error");
+        }
     }
 
     /**
@@ -74,7 +83,7 @@ public class UserService implements UserDetailsService{
     }
 
     public List<User> getAllVendor() {
-        return userRepository.findAll();
+        return userRepository.findAllByUserType(UserType.VENDORUSER);
     }
 
     @Override

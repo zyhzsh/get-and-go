@@ -1,15 +1,10 @@
 package nl.getandgo.application;
-
 import com.github.javafaker.Faker;
-import nl.getandgo.application.model.City;
-import nl.getandgo.application.model.Product;
-import nl.getandgo.application.model.Store;
-import nl.getandgo.application.model.VendorUser;
+import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import javax.management.InstanceAlreadyExistsException;
 
 @Configuration
@@ -29,7 +24,23 @@ public class DummyDataConfig {
                     "s",
                     "dd",
                     "ssd");
+            ProductManagerUser testManager=new ProductManagerUser(
+                    "test@manager.com",
+                    "test",
+                    "manager",
+                    "a",
+                    "vdssfds",
+                    "151518"
+
+            );
+            CustomerUser testCustomer=new CustomerUser(
+                    "test@customer.com",
+                    "test",
+                    "sds",
+                     "asd");
             userRepository.save(testvendor);
+            userRepository.save(testCustomer);
+            userRepository.save(testManager);
         };
     }
     private void AddProducts(City city, int num_store, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {
