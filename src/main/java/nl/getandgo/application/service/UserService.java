@@ -6,12 +6,7 @@ import nl.getandgo.application.dto.LoginResponseDTO;
 import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
 import nl.getandgo.application.filter.JwtHelper;
-import nl.getandgo.application.model.ConfirmationToken;
-import nl.getandgo.application.model.CustomerUser;
-import nl.getandgo.application.model.User;
-import nl.getandgo.application.model.UserType;
-import nl.getandgo.application.model.VendorUser;
-import nl.getandgo.application.repository.ConfirmationTokenRepository;
+import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.scheduling.annotation.Async;
@@ -22,12 +17,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceAlreadyExistsException;
-import javax.security.auth.login.CredentialException;
-import javax.servlet.UnavailableException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
