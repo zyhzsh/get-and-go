@@ -1,16 +1,26 @@
 const initState = {
-  user: null,
-  login:null,
-  accounttype:null,
-  userprofile:null
+  jwt: null,
+  usertype:null,
+  result:null
 };
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
     case "LOG_IN":
-      return { ...state, user: action.payload.user ,login:action.payload.login};
+      return { 
+        ...state, 
+        jwt: action.payload.jwt,
+        usertype:action.payload.usertype,
+        result:action.payload.result
+      };
     case "LOG_OUT":
-      return { ...state, user: null };
+      return { ...state, 
+        jwt:null,
+        usertype:null,
+        result: null
+      };
+    case "RESET_LOG_IN_MESSAGE":
+      return {...state,result:null}
     default:
       return { ...state };
   }

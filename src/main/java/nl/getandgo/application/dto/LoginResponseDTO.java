@@ -1,10 +1,10 @@
 package nl.getandgo.application.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class LoginResponseDTO {
     @Getter @Setter private final String jwt;
+    @Getter @Setter private final String user_type;
+    @Getter @Setter private final String result;
 }

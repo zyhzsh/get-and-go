@@ -4,6 +4,7 @@ import nl.getandgo.application.dto.EditStoreDTO;
 import nl.getandgo.application.dto.NewStoreDTO;
 import nl.getandgo.application.model.Store;
 import nl.getandgo.application.service.StoreService;
+import org.springframework.context.annotation.Role;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class StoreController {
 
     private final StoreService storeService;
+
     /**
      * Get All Store
      * */
