@@ -14,6 +14,7 @@ import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.ConfirmationTokenRepository;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +22,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceAlreadyExistsException;
+import javax.security.auth.login.CredentialException;
+import javax.servlet.UnavailableException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,21 +47,23 @@ public class UserService implements UserDetailsService{
         try {
             //Find the User
             final User user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).get();
+            //If the user not been Activated
+            if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ");}
             //If user not exists: user.getPassword() will fail->Catch throw Credential Error
             //If password not right : throw Credential Error
-            if(!user.getPassword().equals(loginRequestDTO.getPassword())){throw new BadCredentialsException("Credential Error");}
+            if(!user.getPassword().equals(loginRequestDTO.getPassword())){return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");}
             //Generate JWT token
             final String token=jwtHelper.generateToken(user);
             //Return ResponseDTO (@Param JWT token, @Param user_type)
             return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful");
         }catch (Exception e){
-            throw new BadCredentialsException("Credential Error");
+            return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");
         }
     }
-
     /**
      * Register A New Customer
      * */
+    @Async
     public void registerCustomerUser(NewCustomerDTO register) throws InstanceAlreadyExistsException {
         //Check Email Unique
         User user=userRepository.findUserByEmail(register.getEmail()).orElse(null);
@@ -87,7 +92,8 @@ public class UserService implements UserDetailsService{
     /**
      * Generate Active Link For User
      * */
-    private void GenerateActivateEmailForUser(User user){
+    @Async
+    public void GenerateActivateEmailForUser(User user){
         String token= UUID.randomUUID().toString();
         ConfirmationToken confirmationToken=new ConfirmationToken(
                 token,
@@ -136,7 +142,7 @@ public class UserService implements UserDetailsService{
         //Verify Token Exist or not
         if (confirmationToken!=null
                 //Check Expired or not
-                && confirmationToken.getExpiresAt().isBefore(LocalDateTime.now())){
+                && confirmationToken.getExpiresAt().isAfter(LocalDateTime.now())){
             //Confirm Activate Time
             confirmationToken.setConfirmedAt(LocalDateTime.now());
 

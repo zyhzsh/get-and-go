@@ -5,19 +5,11 @@ import nl.getandgo.application.dto.LoginRequestDTO;
 import nl.getandgo.application.dto.LoginResponseDTO;
 import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
-import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.service.UserService;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.management.InstanceAlreadyExistsException;
 import java.util.List;
@@ -28,26 +20,25 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-
     /**
      * User Login
     * */
     @PostMapping(value = "api/login")
     public LoginResponseDTO login(@RequestBody LoginRequestDTO loginUser){
-        try{
             return userService.Login(loginUser);
-        }catch (BadCredentialsException e){
-            return new LoginResponseDTO("","",e.getMessage());
-        }
     }
 
-
+    /**
+     *
+     * @param token Activate User Token
+     * @return Error Page Or Signin Page
+     */
     @GetMapping(value = "api/confirm")
     public ModelAndView confirm(@RequestParam("token") String token){
+        System.out.println("sss");
         boolean result=userService.activateUserByToken(token);
-        if(result) { return new ModelAndView("redirect:"+"http://localhost:8080/"); }
-        return new  ModelAndView("Errors:+"+"http://localhost:8080/Error");
+        if(result) { return new ModelAndView("redirect:"+"http://localhost:8080/signin"); }
+        return new  ModelAndView("Errors:+"+"http://localhost:8080/unknownerror");
     }
 
     /**
@@ -84,5 +75,6 @@ public class UserController {
         }
         return "Request Accepted";
     }
+
 
 }

@@ -15,7 +15,7 @@ const SignInContent = () => {
   const userJwt = useSelector((state) => state.user.jwt);
   const userType = useSelector((state) => state.user.usertype);
   const loginResult=useSelector((state) => state.user.result);
-  const openNotificationWithIcon = (type) => {
+  const openNotificationWithIcon = (msg,type) => {
 
     switch (type) {
       case "success":
@@ -27,20 +27,22 @@ const SignInContent = () => {
       case "warning":
         notification[type]({
           message: "Warning",
-          description: "E-mail does not exists or the password is wrong",
+          description: `${msg}`,
         });
+      
         break;
       default:
         break;
       }
   };
   if(registerResult==="Request Accepted"){
-    openNotificationWithIcon("success")
+    openNotificationWithIcon("","success")
+    dispatch({ type: "RESET_SIGN_UP_MESSAGE" });
   }
   
   const onFinish = (values) => {
     if (values) {
-      dispatch(userLogin(values.email,values.password))
+      dispatch(userLogin(values.email,values.password));
       dispatch({ type: "RESET_SIGN_UP_MESSAGE" });
     }
   };
@@ -53,7 +55,7 @@ const SignInContent = () => {
      }
   }else{
     if(loginResult){
-      openNotificationWithIcon("warning");
+      openNotificationWithIcon(loginResult,"warning");
       dispatch(dispatch({ type: "RESET_LOG_IN_MESSAGE" }));
     }
     return (
@@ -101,7 +103,7 @@ const SignInContent = () => {
               Log in
             </Button>
             Or
-            <Link to="signup"> register now!</Link>
+            <Link to="/signup"> register now!</Link>
           </Form.Item>
         </Form>
       </Content>

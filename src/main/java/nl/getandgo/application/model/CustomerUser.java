@@ -63,5 +63,6 @@ public class CustomerUser extends User {
         this.reviews=new ArrayList<>();
         this.orders=new ArrayList<>();
         this.usertype=UserType.CUSTOMERUSER;
+        this.enabled=false;
     }
 }

@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 
 const SignUpContent = () => {
+
   const form = useRef(null);
   const dispatch = useDispatch();
   const openNotificationWithIcon = (type) => {
@@ -14,8 +15,8 @@ const SignUpContent = () => {
           description: registerResult, //"Email address has been taken",
         })
   };
-  const SubmitForm = (formdata) => {
-    dispatch(signUpCustomer(formdata));
+  const SubmitForm = async(formdata) => {
+   await dispatch(signUpCustomer(formdata));
   };
   const registerResult = useSelector(
     (state) => state.message.systemBack.signupResult

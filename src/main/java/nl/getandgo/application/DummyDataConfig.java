@@ -38,6 +38,7 @@ public class DummyDataConfig {
                     "test",
                     "sds",
                      "asd");
+            testCustomer.setEnabled(true);
             userRepository.save(testvendor);
             userRepository.save(testCustomer);
             userRepository.save(testManager);

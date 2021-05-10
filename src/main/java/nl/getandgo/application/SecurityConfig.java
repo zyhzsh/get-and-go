@@ -1,13 +1,8 @@
 package nl.getandgo.application;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import nl.getandgo.application.filter.JwtConfig;
-import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.filter.JwtRequestFilter;
-import nl.getandgo.application.model.UserType;
 import nl.getandgo.application.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
-import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -30,8 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final UserService myUserDetailService;
     private final JwtRequestFilter jwtRequestFilter;
-    private final JwtHelper jwtHelper;
-    private final JwtConfig jwtConfig;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
