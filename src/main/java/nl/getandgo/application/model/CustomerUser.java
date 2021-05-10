@@ -59,6 +59,7 @@ public class CustomerUser extends User {
                         String first_name,
                         String last_name) {
         super(email, password, first_name, last_name);
+        this.enabled=false;
         this.reviews=new ArrayList<>();
         this.orders=new ArrayList<>();
         this.usertype=UserType.CUSTOMERUSER;

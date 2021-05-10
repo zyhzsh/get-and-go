@@ -11,10 +11,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.management.InstanceAlreadyExistsException;
 import java.util.List;
@@ -25,34 +23,25 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtHelper jwtHelper;
 
     /**
      * User Login
     * */
     @PostMapping(value = "api/login")
     public String login(@RequestBody LoginRequestDTO loginUser){
-//        try {
-//            System.out.println("Try Here 1");
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
-//            System.out.println("Try Here 2");
-//        }
-//        catch (BadCredentialsException e) {
-//            throw new Exception("Incorrect Email or password", e);
-//        }
-//        final UserDetails userDetails = userService
-//                .loadUserByUsername(loginUser.getEmail());
-//        final String jwt=jwtHelper.generateToken(userDetails);
-//        System.out.println(jwt);
-//        return "dfgsdff";
-        //String jwt="";
         try{
             return  userService.Login(loginUser);
         }catch (BadCredentialsException e){
             return "e";
         }
-        //return jwt;
+    }
+
+
+    @GetMapping(value = "api/confirm")
+    public ModelAndView confirm(@RequestParam("token") String token){
+        boolean result=userService.activateUserByToken(token);
+        if(result) { return new ModelAndView("redirect:"+"http://localhost:8080/"); }
+        return new  ModelAndView("Errors:+"+"http://localhost:8080/Error");
     }
 
 

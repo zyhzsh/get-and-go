@@ -140,8 +140,8 @@ public abstract class User implements UserDetails {
      * UserDetails Implementation:
      * */
 
-    protected boolean locked=false;
-    protected boolean enabled=true;
+    @Setter protected boolean locked=false;
+    @Setter protected boolean enabled=true;
     /**
     * Get User's Authorities
     * */
