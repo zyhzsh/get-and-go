@@ -1,7 +1,6 @@
 package nl.getandgo.application.model;
 
 import lombok.Getter;
-import org.springframework.context.annotation.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +16,11 @@ public enum UserType {
     MANAGERUSER,
     VENDORUSER;
 
-    // Anonymous User Authorities:
-    @Getter public static final String BROWSER_ON_SALE_PRODUCT = "BROWSER_ON_SALE_PRODUCT";
-    @Getter public static final String REGISTER_NEW_CUSTOMER_ACCOUNT = "REGISTER_NEW_CUSTOMER_ACCOUNT";
-    @Getter public static final String BROWSER_USERS_REVIEWS = "BROWSER_USERS_REVIEWS";
-    @Getter public static final String BROWSER_USERS_COMMENTS = "BROWSER_USERS_COMMENTS";
-    @Getter public static final String BROWSER_VOUCHERS = "BROWSER_VOUCHERS";
-    @Getter public static final String BROWSER_STORES_INFORMATION = "BROWSER_STORES_INFORMATION";
-    @Getter public static final String LOG_IN = "LOG_IN";
-
     // Customer User Authorities:
-    @Getter public static final String BROWSER_USER_INFORMATION = "BROWSER_USER_INFORMATION";
+    @Getter public static final String BROWSER_PERSONAL_INFORMATION = "BROWSER_PERSONAL_INFORMATION";
     @Getter public static final String PLACE_ORDER = "PLACE_ORDER";
     @Getter public static final String UPDATE_PERSONAL_PROFILE = "UPDATE_PERSONAL_PROFILE";
-    @Getter public static final String BROWSER_PERSONAL_ORDERS = "BROWSER_USER_ORDER";
+    @Getter public static final String BROWSER_PERSONAL_ORDERS = "BROWSER_PERSONAL_ORDERS";
     @Getter public static final String ADD_REVIEW="ADD_REVIEW";
     @Getter public static final String REMOVE_REVIEW="REMOVE_REVIEW";
     @Getter public static final String UPDATE_REVIEW="UPDATE_REVIEW";
@@ -39,32 +29,17 @@ public enum UserType {
     @Getter public static final String REMOVE_COMMENT="REMOVE_COMMENT";
 
     // ProductManager User Authorities:
+    @Getter public static final String GET_ALL_STORES="GET_ALL_STORES";
     @Getter public static final String ADD_NEW_STORE = "ADD_NEW_STORE";
     @Getter public static final String ADD_NEW_VENDOR = "ADD_NEW_VENDOR";
     @Getter public static final String UPDATE_STORE_INFORMATION = "UPDATE_STORE_INFORMATION";
-    @Getter public static final String BROWSER_VENDORS_INFORMATION = "BROWSER_VENDORS";
+    @Getter public static final String DELETE_STORE="DELETE_STORE";
+    @Getter public static final String GET_ALL_VENDORS="GET_ALL_VENDORS";
+    @Getter public static final String GET_ALL_STATUS_PRODUCTS="GET_ALL_STATUS_PRODUCTS";
 
-    /**
-     * Anonymous User Authority:
-     * - BROWSER_ON_SALE_PRODUCT
-     * - REGISTER_NEW_CUSTOMER_ACCOUNT
-     * - BROWSER_USERS_REVIEWS
-     * - BROWSER_USERS_COMMENTS
-     * - BROWSER_VOUCHERS
-     * - BROWSER_STORES_INFORMATION
-     * - LOG_IN
-     */
+    // Vendor User Authorities:
+    @Getter public static final String GET_STORE_SELLING_HISTORY="GET_STORE_SELLING_HISTORY";
 
-    @Getter
-    private final List<String> AnonymousUserAuthorities = new ArrayList<>(List.of(
-            BROWSER_ON_SALE_PRODUCT,
-            REGISTER_NEW_CUSTOMER_ACCOUNT,
-            BROWSER_USERS_REVIEWS,
-            BROWSER_USERS_COMMENTS,
-            BROWSER_VOUCHERS,
-            BROWSER_STORES_INFORMATION,
-            LOG_IN
-    ));
 
     /**
      * Customers User Authority:
@@ -77,14 +52,7 @@ public enum UserType {
     @Getter
     private final List<String> CustomerUserAuthorities = new ArrayList<>(
             List.of(
-                    BROWSER_ON_SALE_PRODUCT,
-                    REGISTER_NEW_CUSTOMER_ACCOUNT,
-                    BROWSER_USERS_REVIEWS,
-                    BROWSER_USERS_COMMENTS,
-                    BROWSER_VOUCHERS,
-                    BROWSER_STORES_INFORMATION,
-                    BROWSER_USER_INFORMATION,
-                    LOG_IN,
+                    BROWSER_PERSONAL_INFORMATION,
                     PLACE_ORDER,
                     UPDATE_PERSONAL_PROFILE,
                     BROWSER_PERSONAL_ORDERS,
@@ -96,6 +64,7 @@ public enum UserType {
                     REMOVE_COMMENT
             )
     );
+
     /**
      * ProductManager User Authority:
      * - All Authority From Anonymous User
@@ -107,23 +76,19 @@ public enum UserType {
     @Getter
     private final List<String> ProductManagerUserAuthorities =  new ArrayList<>(
             List.of(
-                    BROWSER_ON_SALE_PRODUCT,
-                    REGISTER_NEW_CUSTOMER_ACCOUNT,
-                    BROWSER_USERS_REVIEWS,
-                    BROWSER_USERS_COMMENTS,
-                    BROWSER_VOUCHERS,
-                    BROWSER_STORES_INFORMATION,
-                    BROWSER_USER_INFORMATION,
-                    LOG_IN,
-                    PLACE_ORDER,
-                    UPDATE_PERSONAL_PROFILE,
-                    BROWSER_PERSONAL_ORDERS
+                    ADD_NEW_VENDOR,
+                    GET_ALL_STORES,
+                    ADD_NEW_STORE ,
+                    ADD_NEW_VENDOR ,
+                    UPDATE_STORE_INFORMATION ,
+                    DELETE_STORE,
+                    GET_ALL_VENDORS,
+                    GET_ALL_STATUS_PRODUCTS
             )
     );
-
     @Getter
     private final List<String> VendorUserAuthorities = new ArrayList<>(
-
+            List.of(GET_STORE_SELLING_HISTORY)
     );
 
     /**
@@ -138,6 +103,6 @@ public enum UserType {
             case VENDORUSER:
                 return VendorUserAuthorities;
         }
-        return AnonymousUserAuthorities;
+        return null;
     }
 }

@@ -14,6 +14,9 @@ public interface StoreRepository extends JpaRepository<Store,Long> {
     @Query("SELECT s FROM Store s WHERE s.vendor.user_id=?1")
     List<Store> findStoresByVendor(Long vendor_id);
 
+    @Query("FROM Store as st ORDER BY st.store_id desc ")
+    List<Store> findAllSORTED();
+
     @Query("DELETE FROM Store s WHERE s.store_id=?1")
     @Modifying
     void deleteStore(Long id);

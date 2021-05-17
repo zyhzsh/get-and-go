@@ -10,11 +10,14 @@ import {
   Space,
   Select
 } from "antd";
+
+import {useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { editStoreInfomation } from "../../actions/adminAction";
 const AdminEditStoreForm = ({visiable,setvisiable,store}) => {
     const { Option } = Select;
     const dispatch = useDispatch();
+    const Jwt = useSelector((state) => state.user.jwt);
     //Submit New Store From
     const openNotificationWithIcon = (type) => {
           notification[type]({
@@ -22,7 +25,7 @@ const AdminEditStoreForm = ({visiable,setvisiable,store}) => {
             description: "Your Request is submitted",})
     };
     const SubmitForm = (formdata) => {
-      dispatch(editStoreInfomation(formdata));
+      dispatch(editStoreInfomation(formdata,Jwt));
       setTimeout(() => {
           openNotificationWithIcon("success");
           setvisiable(false)

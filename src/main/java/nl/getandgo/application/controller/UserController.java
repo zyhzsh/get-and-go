@@ -7,6 +7,7 @@ import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,7 +35,6 @@ public class UserController {
      */
     @GetMapping(value = "api/confirm")
     public ModelAndView confirm(@RequestParam("token") String token){
-        System.out.println("sss");
         boolean result=userService.activateUserByToken(token);
         if(result) { return new ModelAndView("redirect:"+"http://localhost:8080/signin"); }
         return new  ModelAndView("Errors:+"+"http://localhost:8080/unknownerror");
@@ -43,6 +43,7 @@ public class UserController {
     /**
      * Get Vendor List
      * */
+    @PreAuthorize("hasAuthority('GET_ALL_VENDORS')")
     @GetMapping(value="api/vendors")
     public List<User> getVendorList(){
        return userService.getAllVendor();
@@ -51,6 +52,7 @@ public class UserController {
     /**
      * SignUp A new Vendor
      * */
+    @PreAuthorize("hasAuthority('ADD_NEW_VENDOR')")
     @PostMapping(value = "api/vendor/signup")
     public String signUpVendor(@RequestBody NewVendorDTO vendorDTO){
         System.out.println(vendorDTO.getEmail());

@@ -3,7 +3,7 @@ import { NavLink as Link } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 export const Nav = styled.nav`
 //  background:#8a6767;
-background: rgb(2,0,36);
+//background: rgb(2,0,36);
 background: linear-gradient(56deg, rgba(2,0,36,1) 0%, rgba(114,190,180,1) 66%, rgba(120,131,191,1) 100%);
   height: 80px;
   display: flex;

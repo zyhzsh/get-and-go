@@ -34,22 +34,25 @@ public class UserService implements UserDetailsService{
     private final EmailService emailService;
 
     //After Login Return Jwt Token
-    public LoginResponseDTO Login(LoginRequestDTO loginRequestDTO)throws BadCredentialsException {
+    public LoginResponseDTO Login(LoginRequestDTO loginRequestDTO)  {
+        String msg="Error";
         try {
             //Find the User
-            final User user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).get();
-            //If the user not been Activated
-            if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ");}
-            //If user not exists: user.getPassword() will fail->Catch throw Credential Error
-            //If password not right : throw Credential Error
-            if(!user.getPassword().equals(loginRequestDTO.getPassword())){return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");}
-            //Generate JWT token
-            final String token=jwtHelper.generateToken(user);
-            //Return ResponseDTO (@Param JWT token, @Param user_type)
-            return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful");
+            final User user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).orElse(null);
+            if (user!=null){
+                //If the user not been Activated
+                if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ");}
+                //If password not right
+                if(!user.getPassword().equals(loginRequestDTO.getPassword())){return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");}
+                //Generate JWT token
+                final String token=jwtHelper.generateToken(user);
+                //Return ResponseDTO (@Param JWT token, @Param user_type)
+                return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful");
+            }
         }catch (Exception e){
             return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");
         }
+        return new LoginResponseDTO("","",msg);
     }
     /**
      * Register A New Customer

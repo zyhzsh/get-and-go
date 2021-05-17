@@ -53,8 +53,7 @@ const HomePageMainContent = () => {
   );
 };
 const ContentContainer=styled.div`
-  height:auto;
-  width:auto;
+
 `;
 
 export default HomePageMainContent;

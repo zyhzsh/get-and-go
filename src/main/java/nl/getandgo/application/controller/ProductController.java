@@ -23,12 +23,11 @@ public class ProductController {
     /**
      * Get List Of Products By Status = OnSale
      * */
-
-    @PreAuthorize("hasAuthority('BROWSER_ON_SALE_PRODUCT')")
     @GetMapping("api/products")
     public List<Product> getAllOnSaleProducts() {
         return productService.getProducts(Product.Status.ONSALE);
     }
+
     /**
      * Get Product By Product Id
      * */
@@ -36,6 +35,7 @@ public class ProductController {
     public Object getProductById(@RequestParam String id) {
        return productService.getProductById(id);
     }
+
     /**
      * Get All OnSale Products By It's City
      * */
@@ -43,6 +43,7 @@ public class ProductController {
     public List<Product> getOnSaleProductsByCity(@RequestParam String city) {
         return  productService.getProductsByCityAndStatus(city, Product.Status.ONSALE);
     }
+
     /**
      * Get All OnSale Products By It's Category
      * */
@@ -50,6 +51,7 @@ public class ProductController {
     public List<Product> getOnSaleProductsByCategory(@RequestParam String category) {
         return  productService.getProductsByCategoryAndStatus(category, Product.Status.ONSALE);
     }
+
     /**
      * Get All OnSale Products By It's City And Category
      * */
@@ -61,6 +63,7 @@ public class ProductController {
     /**
      * Get All Products By
      * */
+    @PreAuthorize("hasAuthority('GET_ALL_STATUS_PRODUCTS')")
     @GetMapping(value = "api/products",params = {"status"})
     public List<Product> getAllProductsWithStatus(@RequestParam String status){
        return productService.getProducts(status);

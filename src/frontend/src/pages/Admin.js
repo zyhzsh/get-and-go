@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useSelector } from "react-redux";
 //Admin Content element
 import AdminDashBoard from "../components/Admincontent/AdminDashBoard";
 import AdminStoreManagement from "../components/Admincontent/AdminStoreManagement";
@@ -13,11 +14,14 @@ import {
   CommentOutlined,
 } from "@ant-design/icons";
 import LOGO from "../components/images/logo.svg";
+import { Redirect } from "react-router";
 const Admin = () => {
-  //  const { SubMenu } = Menu; for future use
   const { Header, Content, Footer, Sider } = Layout;
   const [collapsed, setcollapsed] = useState(false);
   const [selectedcontent, Setselectedcontent] = useState("DashBoard");
+  const Role = useSelector((state) => state.user);
+  console.log(Role.usertype);
+  if(Role.usertype!=="MANAGERUSER"){return <Redirect to= "/error"/>}
   const SelectedContent = () => {
     if (selectedcontent === "DashBoard") {
       return <AdminDashBoard />;
@@ -33,7 +37,7 @@ const Admin = () => {
     setcollapsed(collapsed);
   };
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout className="ss" style={{ minHeight: "100vh"}}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <img src={LOGO} alt="logo" />
         <Menu theme="dark" defaultSelectedKeys={["DashBoard"]} mode="inline">
@@ -85,5 +89,7 @@ const Admin = () => {
     </Layout>
   );
 };
+
+
 
 export default Admin;

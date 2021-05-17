@@ -6,6 +6,7 @@ import NavBar from "../components/HomePageNavBar";
 import HomePageMainContent from "../components/HomePageMainContent";
 import AboutMainContent from "../components/AboutMainContent";
 import NotFound from "../components/NotFound";
+import Forbidden from "../components/Forbidden";
 import SignInContent from "../components/SignInContent";
 import SignUpContent from "../components/SignUpContent";
 import {
@@ -23,6 +24,8 @@ const Home = () => {
         <Route exact path="/about" component={AboutMainContent} />
         <Route exact path="/signin" component={SignInContent} />
         <Route exact path="/signup" component={SignUpContent} />
+        <Route exact path="/forbidden" component={Forbidden} />
+        <Route exact path="/error" component={Forbidden} />
         <Route component={NotFound} />
       </Switch>
       <Footer>

@@ -23,6 +23,7 @@ const AdminStoreManagement = () => {
   const dispatch = useDispatch();
   const storeslist = useSelector((state) => state.stores.stores);
   const vendorslist = useSelector((state) => state.vendors.vendors);
+  const Jwt = useSelector((state) => state.user.jwt);
   const [mount, setMount] = useState(false);
   const [value, setValue] = useState("");
 
@@ -47,7 +48,7 @@ const AdminStoreManagement = () => {
   const handleDeleted = () => {
     setConfirmdeleted(true);
     setTimeout(() => {
-      dispatch(deleteStorebyid(deletedstore.store_id));
+      dispatch(deleteStorebyid(deletedstore.store_id,Jwt));
       setdeletestoremodal(false);
       setConfirmdeleted(false);
       openNotificationWithIcon("success");
@@ -76,12 +77,12 @@ const AdminStoreManagement = () => {
     const loadstorelist = () => {
       if (!mount) {
         setMount(true);
-        dispatch(getStoreList());
-        dispatch(getVendorList());
+        dispatch(getStoreList(Jwt));
+        dispatch(getVendorList(Jwt));
       }
     };
     loadstorelist();
-  }, [dispatch, storeslist, vendorslist, mount]);
+  }, [dispatch, storeslist, vendorslist, mount,Jwt]);
   if (datasourcestoreslist == null) {
     setTimeout(() => {
       setdatasourcestoreslist(storeslist);

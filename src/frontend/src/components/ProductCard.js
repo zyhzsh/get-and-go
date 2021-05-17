@@ -6,9 +6,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-const ProductCard=({product}) =>{
+const ProductCard=({product,toggleOpenDetail}) =>{
+
+
   return (
-    <CardContainer>
+    <CardContainer onClick={()=>{toggleOpenDetail(product)}}>
       <CardActionArea>
         <CardMedia
           component="img"

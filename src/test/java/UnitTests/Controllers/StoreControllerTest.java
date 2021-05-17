@@ -39,6 +39,7 @@ public class StoreControllerTest {
         //Act
         when(storeService.getAllStores()).thenReturn(stores);
         List<Store> result=storeController.getAllStores();
+
         Assert.assertArrayEquals(stores.toArray(),result.toArray());
     }
 }

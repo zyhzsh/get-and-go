@@ -1,6 +1,7 @@
 package nl.getandgo.application.filter;
 
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.JwtConfig;
 import nl.getandgo.application.service.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

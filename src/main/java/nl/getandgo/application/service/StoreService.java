@@ -23,7 +23,7 @@ public class StoreService {
     /**
      * Get All Stores
      * */
-    public List<Store> getAllStores() {return storeRepository.findAll(); }
+    public List<Store> getAllStores() {return storeRepository.findAllSORTED(); }
 
     /**
      * Get Store By Id

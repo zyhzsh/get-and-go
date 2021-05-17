@@ -1,4 +1,4 @@
-package nl.getandgo.application.filter;
+package nl.getandgo.application;
 
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
@@ -9,9 +9,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+
 import javax.crypto.SecretKey;
-
-
 
 @Component
 @ConfigurationProperties(prefix = "application.jwt")
@@ -29,7 +28,8 @@ public class JwtConfig {
         return HttpHeaders.AUTHORIZATION;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String tokenPrefix;
     @Getter @Setter
     private Integer tokenExpirationAfterDays;

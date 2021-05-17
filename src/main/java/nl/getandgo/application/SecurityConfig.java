@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .addFilterAfter(jwtRequestFilter,DefaultLoginPageGeneratingFilter.class)
                 .authorizeRequests()
-                .anyRequest().anonymous();
+                .anyRequest().permitAll();
     }
 
     @Override

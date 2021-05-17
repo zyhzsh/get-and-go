@@ -12,9 +12,10 @@ import {
   Space,
 } from "antd";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 import { addnewStore } from "../../actions/adminAction";
+import { useDispatch, useSelector } from "react-redux";
 const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
+  const Jwt = useSelector((state) => state.user.jwt);
   const { Option } = Select;
   const dispatch = useDispatch();
   //Submit New Store From
@@ -26,7 +27,7 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
   };
   const SubmitForm = (formdata) => {
     openNotificationWithIcon("success");
-    dispatch(addnewStore(formdata));
+    dispatch(addnewStore(formdata,Jwt));
     form.current.resetFields();
   };
 

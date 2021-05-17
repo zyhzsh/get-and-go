@@ -8,10 +8,7 @@ import lombok.ToString;
 
 import javax.management.InstanceAlreadyExistsException;
 import javax.management.InstanceNotFoundException;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +20,11 @@ public class VendorUser extends User {
 
     @OneToMany(
             mappedBy = "vendor",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     @JsonBackReference
-    @Getter @Setter private List<Store> storeList;
+    @Getter @Setter private List<Store> storeList=new ArrayList<>();
     /**
      * Constructor
      * @param email
@@ -44,7 +42,6 @@ public class VendorUser extends User {
                       String phone) {
         super(email, password, first_name, last_name, avatar_link, phone);
         this.usertype=UserType.VENDORUSER;
-        this.storeList=new ArrayList<>();
     }
     /**
      * Adding New Store

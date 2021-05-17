@@ -11,7 +11,9 @@ import {
 } from "antd";
 import { useDispatch } from "react-redux";
 import { registernewVendor } from "../../actions/adminAction";
+import {useSelector } from "react-redux";
 const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
+  const Jwt = useSelector((state) => state.user.jwt);
   const dispatch = useDispatch();
   //Submit New Store From
   const openNotificationWithIcon = (type) => {
@@ -34,7 +36,7 @@ const AdminAddNewStoreForm = ({ visiable, setvisiable, vendors }) => {
   };
   const SubmitForm = (formdata) => {
     openNotificationWithIcon("success");
-    dispatch(registernewVendor(formdata));
+    dispatch(registernewVendor(formdata,Jwt));
     form.current.resetFields();
   };
   const form = useRef(null);

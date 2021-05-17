@@ -3,6 +3,7 @@ package nl.getandgo.application.filter;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.JwtConfig;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
