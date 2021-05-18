@@ -33,14 +33,20 @@ public class DummyDataConfig {
                     "151518"
 
             );
+            CustomerUser testCustomer_un_enabled=new CustomerUser(
+                    "test@unenabledcustomer.com",
+                    "test",
+                    "sds",
+                     "asd");
             CustomerUser testCustomer=new CustomerUser(
                     "test@customer.com",
                     "test",
                     "sds",
-                     "asd");
+                    "asd");
             testCustomer.setEnabled(true);
             userRepository.save(testvendor);
             userRepository.save(testCustomer);
+            userRepository.save(testCustomer_un_enabled);
             userRepository.save(testManager);
         };
     }

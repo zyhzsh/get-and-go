@@ -1,4 +1,4 @@
-package UnitTests.Controllers;
+package IntegrationTests;
 
 import com.github.javafaker.Faker;
 import nl.getandgo.application.controller.StoreController;
