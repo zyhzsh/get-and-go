@@ -10,7 +10,6 @@ import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,8 +23,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService{
-
-    private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
@@ -132,7 +129,7 @@ public class UserService implements UserDetailsService{
 
     public boolean activateUserByToken(String token) {
         //Find Token
-        ConfirmationToken confirmationToken=confirmationTokenService.findToken(token).orElse(null);
+        ConfirmationToken confirmationToken=confirmationTokenService.findToken(token);
         //Verify Token Exist or not
         if (confirmationToken!=null
                 //Check Expired or not
@@ -142,7 +139,6 @@ public class UserService implements UserDetailsService{
 
             //Enable User
             confirmationToken.getUser().setEnabled(true);
-
             //Update Token
             confirmationTokenService.saveConfirmationToken(confirmationToken);
             return true;
@@ -150,4 +146,6 @@ public class UserService implements UserDetailsService{
         return false;
 
     }
+
+
 }

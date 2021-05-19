@@ -8,6 +8,7 @@ import nl.getandgo.application.dto.NewVendorDTO;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
