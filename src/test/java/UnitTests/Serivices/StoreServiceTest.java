@@ -8,8 +8,9 @@ import nl.getandgo.application.model.VendorUser;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import nl.getandgo.application.service.StoreService;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -27,7 +28,7 @@ public class StoreServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    @Before
+    @BeforeEach
     public void Setup(){
         faker=new Faker();
         MockitoAnnotations.initMocks(this);

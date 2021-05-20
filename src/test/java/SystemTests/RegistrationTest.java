@@ -1,10 +1,11 @@
 package SystemTests;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegistrationTest {
 
@@ -44,7 +45,7 @@ public class RegistrationTest {
         //Assert - Check Page Router to the right page
         String ActualURL = driver.getCurrentUrl();
         String ExpectedURL = link;
-        Assert.assertEquals(ActualURL,ExpectedURL);
+        assertEquals(ActualURL,ExpectedURL);
         closeBrowser();
     }
 
@@ -76,7 +77,7 @@ public class RegistrationTest {
         //Assert - Check Page Router to the right page
         String ActualURL = driver.getCurrentUrl();
         String ExpectedURL = "http://localhost:8080/signin";
-        Assert.assertEquals(ActualURL,ExpectedURL);
+        assertEquals(ActualURL,ExpectedURL);
         closeBrowser();
     }
 

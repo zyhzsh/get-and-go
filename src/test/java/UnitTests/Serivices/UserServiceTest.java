@@ -14,17 +14,20 @@ import nl.getandgo.application.repository.UserRepository;
 import nl.getandgo.application.service.ConfirmationTokenService;
 import nl.getandgo.application.service.EmailService;
 import nl.getandgo.application.service.UserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.management.InstanceAlreadyExistsException;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class UserServiceTest {
@@ -42,14 +45,16 @@ public class UserServiceTest {
     private  ConfirmationTokenService confirmationTokenService;
     @Mock
     private  EmailService emailService;
+    @Mock
+    private BCryptPasswordEncoder passwordEncoder;
 
-    @Before
+    @BeforeEach
     public void Setup(){
         faker=new Faker();
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test(expected = InstanceAlreadyExistsException.class)
+    @Test
     public void Register_New_Customer_When_Email_Address_Already_Exist_And_Activated_Test() throws InstanceAlreadyExistsException {
         //Arrange New Register User
         String email=faker.internet().emailAddress();
@@ -61,7 +66,9 @@ public class UserServiceTest {
         user.setEnabled(true);
         //Act
         Mockito.when(userRepository.findUserByEmail(email)).thenReturn(Optional.of(user));
-        userService.registerCustomerUser(new_customer);
+        Assertions.assertThrows(InstanceAlreadyExistsException.class,()->{
+            userService.registerCustomerUser(new_customer);
+        });
     }
 
     @Test
@@ -78,7 +85,7 @@ public class UserServiceTest {
         userService.registerCustomerUser(new_customer);
     }
 
-    @Test(expected = InstanceAlreadyExistsException.class)
+    @Test
     public void Register_Vendor_User_When_Email_Address_Already_Exist_Test() throws InstanceAlreadyExistsException {
         //Arrange New Register User
         String email=faker.internet().emailAddress();
@@ -91,7 +98,9 @@ public class UserServiceTest {
         VendorUser existVendor=new VendorUser(email,password,first_name,last_name,avatar_link,phone);
         //Act
         Mockito.when(userRepository.findUserByEmail(email)).thenReturn(Optional.of(existVendor));
-        userService.registerVendorUser(newVendor);
+        Assertions.assertThrows(InstanceAlreadyExistsException.class,()->{
+            userService.registerVendorUser(newVendor);
+        });
     }
 
     @Test
@@ -108,7 +117,7 @@ public class UserServiceTest {
         Mockito.when(confirmationTokenService.findToken(token)).thenReturn(confirmationToken);
         boolean result = userService.activateUserByToken(token);
         //Assert
-        Assert.assertEquals(result,true);
+        assertEquals(result,true);
 
     }
 
@@ -126,7 +135,7 @@ public class UserServiceTest {
         Mockito.when(confirmationTokenService.findToken(token)).thenReturn(confirmationToken);
         boolean result = userService.activateUserByToken(token);
         //Assert
-        Assert.assertEquals(result,false);
+        assertEquals(result,false);
 
     }
 
@@ -138,7 +147,7 @@ public class UserServiceTest {
         Mockito.when(confirmationTokenService.findToken(token)).thenReturn(null);
         boolean result = userService.activateUserByToken(token);
         //Assert
-        Assert.assertEquals(result,false);
+        assertEquals(result,false);
 
     }
 
@@ -159,7 +168,8 @@ public class UserServiceTest {
         LoginResponseDTO response=userService.Login(login_request);
         //Assert
         String expected_msg="E-mail does not exists or the password is wrong";
-        Assert.assertEquals(response.getResult(),expected_msg);
+        //Assert.assertEquals(response.getResult(),expected_msg);
+        assertEquals(response.getResult(),expected_msg);
     }
 
     @Test
@@ -178,7 +188,7 @@ public class UserServiceTest {
         LoginResponseDTO response=userService.Login(login_request);
         //Assert
         String expected_msg="User Need to be Activated ~! ";
-        Assert.assertEquals(response.getResult(),expected_msg);
+        assertEquals(response.getResult(),expected_msg);
     }
 
     @Test
@@ -192,11 +202,12 @@ public class UserServiceTest {
         LoginRequestDTO login_request=new LoginRequestDTO(email,password);
         user.setEnabled(true);
         //Act
+        Mockito.when(passwordEncoder.matches(login_request.getPassword(),user.getPassword())).thenReturn(true);
         Mockito.when(userRepository.findUserByEmail(email)).thenReturn(Optional.of(user));
         LoginResponseDTO response=userService.Login(login_request);
         //Assert
         String expected_msg="login successful";
-        Assert.assertEquals(expected_msg,response.getResult());
+        assertEquals(expected_msg,response.getResult());
     }
 
 

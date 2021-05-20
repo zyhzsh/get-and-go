@@ -10,7 +10,7 @@ build:
 
 sonar:
   stage: sonar
-  script: ./gradlew sonarqube -D sonar.projectKey=getandgo -D sonar.host.url=%URL% -D sonar.login=%SONARKEY%
+  script: ./gradlew jacocoTestReport sonarqube -D sonar.projectKey=getandgo -D sonar.host.url=%URL% -D sonar.login=%SONARKEY%
 test:
   stage: test
   script: ./gradlew test

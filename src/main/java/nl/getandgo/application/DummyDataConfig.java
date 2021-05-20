@@ -1,14 +1,19 @@
 package nl.getandgo.application;
 import com.github.javafaker.Faker;
+import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.management.InstanceAlreadyExistsException;
 
 @Configuration
+@RequiredArgsConstructor
 public class DummyDataConfig {
+    private final BCryptPasswordEncoder passwordEncoder;
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return args -> {
@@ -19,14 +24,14 @@ public class DummyDataConfig {
             }
             VendorUser testvendor=new VendorUser(
                     "test@vendor.com",
-                    "test",
+                    passwordEncoder.encode("test"),
                     "sd",
                     "s",
                     "dd",
                     "ssd");
             ProductManagerUser testManager=new ProductManagerUser(
                     "test@manager.com",
-                    "test",
+                    passwordEncoder.encode("test"),
                     "manager",
                     "a",
                     "vdssfds",
@@ -35,12 +40,12 @@ public class DummyDataConfig {
             );
             CustomerUser testCustomer_un_enabled=new CustomerUser(
                     "test@unenabledcustomer.com",
-                    "test",
+                    passwordEncoder.encode("test"),
                     "sds",
                      "asd");
             CustomerUser testCustomer=new CustomerUser(
                     "test@customer.com",
-                    "test",
+                    passwordEncoder.encode("test"),
                     "sds",
                     "asd");
             testCustomer.setEnabled(true);
@@ -83,4 +88,5 @@ public class DummyDataConfig {
         }
 
     }
+
 }

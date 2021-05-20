@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -29,6 +30,8 @@ public class UserService implements UserDetailsService{
     private final JwtHelper jwtHelper;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailService emailService;
+    private final BCryptPasswordEncoder passwordEncoder;
+
 
     //After Login Return Jwt Token
     public LoginResponseDTO Login(LoginRequestDTO loginRequestDTO)  {
@@ -40,7 +43,8 @@ public class UserService implements UserDetailsService{
                 //If the user not been Activated
                 if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ");}
                 //If password not right
-                if(!user.getPassword().equals(loginRequestDTO.getPassword())){return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");}
+                if(!passwordEncoder.matches(loginRequestDTO.getPassword(),user.getPassword())){ return new LoginResponseDTO("","","E-mail does not exists or the password is wrong"); }
+
                 //Generate JWT token
                 final String token=jwtHelper.generateToken(user);
                 //Return ResponseDTO (@Param JWT token, @Param user_type)
@@ -72,7 +76,7 @@ public class UserService implements UserDetailsService{
         }
         CustomerUser newCustomer=new CustomerUser(
                 register.getEmail(),
-                register.getPassword(),
+                passwordEncoder.encode(register.getPassword()),
                 register.getFirst_name(),
                 register.getLast_name()
         );
@@ -106,7 +110,7 @@ public class UserService implements UserDetailsService{
         //Convert DTO
         VendorUser newVendor=new VendorUser(
                 vendorDTO.getEmail(),
-                vendorDTO.getPassword(),
+                passwordEncoder.encode(vendorDTO.getPassword()),
                 vendorDTO.getFirst_name(),
                 vendorDTO.getLast_name(),
                 vendorDTO.getAvatar_link(),
