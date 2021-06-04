@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Drawer,
   Form,
@@ -15,6 +15,7 @@ import {useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { editStoreInfomation } from "../../actions/adminAction";
 const AdminEditStoreForm = ({visiable,setvisiable,store}) => {
+  
     const { Option } = Select;
     const dispatch = useDispatch();
     const Jwt = useSelector((state) => state.user.jwt);
@@ -33,6 +34,12 @@ const AdminEditStoreForm = ({visiable,setvisiable,store}) => {
       form.current.resetFields();
     };
     const form = useRef(null);
+    
+    useEffect(() => {
+      form.current.resetFields();
+    }, [visiable]);
+
+
     return (
       <>
         <Space />

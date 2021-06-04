@@ -33,8 +33,8 @@ const AdminStoreManagement = () => {
   const [deletedstore, setdeletedstore] = useState(null);
   const [editstore, seteditstore] = useState(null);
   const editstorehandler = (e) => {
-    set_visible_edit_store_form(true);
     seteditstore(e);
+    set_visible_edit_store_form(true);
   };
   const openNotificationWithIcon = (type) => {
     notification[type]({
