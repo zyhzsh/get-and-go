@@ -1,15 +1,20 @@
 package nl.getandgo.application.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import nl.getandgo.application.model.City;
 
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class NewStoreDTO {
-    @Getter private Long vendor_id;
-    @Getter private String store_name;
-    @Getter private City city;
-    @Getter private String official_website;
-    @Getter private String address;
-    @Getter private String img;
-    @Getter private String description;
+     private Long vendor_id;
+     private String store_name;
+     private City city;
+     private String official_website;
+     private String address;
+     private String img;
+     private String description;
 }

@@ -83,6 +83,7 @@ public class StoreService {
             storeRepository.findById(storeDTO.getStore_id())
                     .ifPresent(store -> {
                 store.setStore_name(storeDTO.getStore_name());
+                store.setAddress(storeDTO.getAddress());
                 store.setCity(storeDTO.getCity());
                 store.setOfficial_website(storeDTO.getOfficial_website());
                 store.setImg(storeDTO.getImg());

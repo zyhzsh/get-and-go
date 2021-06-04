@@ -1,9 +1,10 @@
 package nl.getandgo.application.dto;
 
 import lombok.Getter;
+import lombok.ToString;
 import nl.getandgo.application.model.City;
 
-
+@ToString
 public class EditStoreDTO extends NewStoreDTO{
    @Getter private Long store_id;
     public EditStoreDTO(Long vendor_id,

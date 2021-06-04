@@ -29,9 +29,9 @@ const AdminEditStoreForm = ({visiable,setvisiable,store}) => {
       dispatch(editStoreInfomation(formdata,Jwt));
       setTimeout(() => {
           openNotificationWithIcon("success");
-          setvisiable(false)
       }, 1000);
       form.current.resetFields();
+      setvisiable(false);
     };
     const form = useRef(null);
     
