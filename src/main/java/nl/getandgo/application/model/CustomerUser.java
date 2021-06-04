@@ -46,6 +46,15 @@ public class CustomerUser extends User {
     )
     @Getter @Setter private List<Order> orders;
 
+    /**
+    *  Add Order
+    * */
+
+    public void addOrder(Order order){
+        order.setCustomer(this);
+        orders.add(order);
+    }
+
 
     /**
      * Constructor
@@ -65,4 +74,5 @@ public class CustomerUser extends User {
         this.usertype=UserType.CUSTOMERUSER;
         this.enabled=false;
     }
+
 }

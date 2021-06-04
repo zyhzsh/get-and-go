@@ -1,12 +1,11 @@
 package nl.getandgo.application.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -14,6 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @NoArgsConstructor
 @Entity(name = "Order")
 @Table(name = "orders")
+@AllArgsConstructor
 public class Order {
 
     /**
@@ -48,21 +48,35 @@ public class Order {
     /**
      * Store Id
      * */
-    @Column(name = "store_id",nullable = false)
-    @Getter private Long store_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "store_id",
+            referencedColumnName = "store_id",
+            foreignKey = @ForeignKey(
+                    name = "store_id_fk"
+            )
+    )
+    @Getter @Setter private Store store;
 
     /**
      * Product Id
      * */
-    @Column(name = "product_id",nullable = false)
-    @Getter private Long product_id;
+    @ManyToOne
+    @JoinColumn(
+            name = "product_id",
+            referencedColumnName = "product_id",
+            foreignKey = @ForeignKey(
+                    name = "product_id_fk"
+            )
+    )
+    @Getter @Setter private Product product;
 
     /**
      * Voucher
      * */
-    @Column(name = "voucher_id")
-    @Getter private Long voucher_id;
-
+    @JoinColumn(name = "voucher_id")
+    @OneToOne
+    @Getter private Voucher voucher;
 
     /**
      * Created At
@@ -77,14 +91,36 @@ public class Order {
     /**
      * Buyer's Email
      * */
-    @Column(name = "buyer_email",nullable = false)
+    @Column(name = "buyer_email")
     @Getter private String buyer_email;
 
     /**
      * Detail
      * */
-    @Column(name = "detail",nullable = false)
+    @Column(name = "detail")
     @Getter @Setter private String detail;
+
+
+
+    /**
+     * @param customer
+     * @param store
+     * @param product
+     * @param voucher
+     * @param buyerEmail
+     * */
+    public Order(String buyerEmail,CustomerUser customer,Store store, Product product, Voucher voucher) {
+        this.customer = customer;
+        this.store = store;
+        this.buyer_email=buyerEmail;
+        this.product = product;
+        this.voucher = voucher;
+        this.createdAt=LocalDateTime.now();
+        this.orderStatus=OrderStatus.PROCESSING;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.detail="User: "+customer.getUsername()+" Email: "+customer.getEmail()+" On "+createdAt.format(formatter)+" Ordered: "
+                +voucher.getTitle()+" "+voucher.getDescription();
+    }
 
     /**
      * Order Status

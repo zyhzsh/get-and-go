@@ -68,25 +68,6 @@ public class ProductController {
     public List<Product> getAllProductsWithStatus(@RequestParam String status){
        return productService.getProducts(status);
     }
-
-//    @PostMapping(value = "api/products")
-//    public boolean addNewProduct(@RequestBody Product product){
-//          return productService.addProduct(product);
-//    }
-
-//    @PutMapping(value = "api/products", params = "id")
-//    public Object updateProduct(@RequestBody Product product, String id) {
-//        Product temp = productService.upDateProduct(product, id);
-//        if (temp == null) {
-//            return ResponseEntity.notFound().build();
-//        } else {
-//            return new ResponseEntity<>(product, HttpStatus.NO_CONTENT);
-//        }
-//    }
-//    @DeleteMapping(value = "api/products", params = "id")
-//    public Object deleteProduct(String id) {
-//        productService.deleteProduct(id);
-//        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-//    }
+    
 
 }

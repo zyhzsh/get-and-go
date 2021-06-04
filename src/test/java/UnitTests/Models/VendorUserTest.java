@@ -4,9 +4,9 @@ import com.github.javafaker.Faker;
 import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Store;
 import nl.getandgo.application.model.VendorUser;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import javax.management.InstanceAlreadyExistsException;
 
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VendorUserTest {
 
     private static Faker faker;
-    @BeforeClass
+    @BeforeAll
     public static void Setup(){
         faker=new Faker();
     }
@@ -73,10 +73,11 @@ public class VendorUserTest {
         //Act
         vendorUser_1.addStore(store_1);
         //Assert
-        Assert.assertTrue(vendorUser_1.getStoreList().contains(store_1));
+        assertEquals(true,vendorUser_1.getStoreList().contains(store_1));
+
     }
 
-    @Test(expected =InstanceAlreadyExistsException.class )
+    @Test
     public void VendorUserAddDuplicateStoreTest() throws InstanceAlreadyExistsException {
         //Arrange
         VendorUser vendorUser_1=new VendorUser(
@@ -97,9 +98,12 @@ public class VendorUserTest {
         );
         //Act
         vendorUser_1.addStore(store_1);
-        vendorUser_1.addStore(store_1);
         //Assert
-        Assert.assertTrue(vendorUser_1.getStoreList().contains(store_1));
+        Assertions.assertThrows(InstanceAlreadyExistsException.class,()->{
+            vendorUser_1.addStore(store_1);
+        });
+
     }
+
 
 }

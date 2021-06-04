@@ -1,10 +1,7 @@
 package nl.getandgo.application.service;
 
 import lombok.RequiredArgsConstructor;
-import nl.getandgo.application.dto.LoginRequestDTO;
-import nl.getandgo.application.dto.LoginResponseDTO;
-import nl.getandgo.application.dto.NewCustomerDTO;
-import nl.getandgo.application.dto.NewVendorDTO;
+import nl.getandgo.application.dto.*;
 import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.StoreRepository;
@@ -13,6 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -25,10 +23,11 @@ import java.util.UUID;
 public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
-    private final StoreRepository storeRepository;
     private final JwtHelper jwtHelper;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailService emailService;
+    private final BCryptPasswordEncoder passwordEncoder;
+
 
     //After Login Return Jwt Token
     public LoginResponseDTO Login(LoginRequestDTO loginRequestDTO)  {
@@ -38,18 +37,20 @@ public class UserService implements UserDetailsService{
             final User user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).orElse(null);
             if (user!=null){
                 //If the user not been Activated
-                if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ");}
+                if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ",null);}
                 //If password not right
-                if(!user.getPassword().equals(loginRequestDTO.getPassword())){return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");}
+                if(!passwordEncoder.matches(loginRequestDTO.getPassword(),user.getPassword())){ return new LoginResponseDTO("","","E-mail does not exists or the password is wrong",null); }
+
                 //Generate JWT token
                 final String token=jwtHelper.generateToken(user);
                 //Return ResponseDTO (@Param JWT token, @Param user_type)
-                return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful");
+                UserProfileDTO userProfileDTO=new UserProfileDTO(user.getUser_id(),user.getEmail(),user.getFirst_name(),user.getLast_name(),user.getAvatar_link(),user.getPhone());
+                return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful",userProfileDTO);
             }
         }catch (Exception e){
-            return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");
+            return new LoginResponseDTO("","","E-mail does not exists or the password is wrong",null);
         }
-        return new LoginResponseDTO("","",msg);
+        return new LoginResponseDTO("","",msg,null);
     }
     /**
      * Register A New Customer
@@ -72,7 +73,7 @@ public class UserService implements UserDetailsService{
         }
         CustomerUser newCustomer=new CustomerUser(
                 register.getEmail(),
-                register.getPassword(),
+                passwordEncoder.encode(register.getPassword()),
                 register.getFirst_name(),
                 register.getLast_name()
         );
@@ -106,7 +107,7 @@ public class UserService implements UserDetailsService{
         //Convert DTO
         VendorUser newVendor=new VendorUser(
                 vendorDTO.getEmail(),
-                vendorDTO.getPassword(),
+                passwordEncoder.encode(vendorDTO.getPassword()),
                 vendorDTO.getFirst_name(),
                 vendorDTO.getLast_name(),
                 vendorDTO.getAvatar_link(),

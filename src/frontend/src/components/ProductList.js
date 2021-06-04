@@ -1,31 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
+
 import { Spin, Alert } from "antd";
-const ProductList = ({ productlist }) => {
-const [toggleToOpenProductDetail,settoggleToOpenProductDetail]=useState(null);
-const ProductShelf=()=>{
-  // if(toggleToOpenProductDetail!=null){
-  //   return(<AnimatePresence><ProductDetailShowCase>{toggleToOpenProductDetail.product_id}</ProductDetailShowCase></AnimatePresence>);
-  // }else{
-  //   productlist.map((p, i) => {
-  //     return <ProductCard key={i} product={p} toggleOpenDetail={settoggleToOpenProductDetail}/>;
-  //   })
-  // }
-
-
-
-}
+const ProductList = ({ productlist ,toggleProductDetail}) => {
   if (productlist.length > 0) {
     return (
       <Content>
-        <AnimateSharedLayout type="crossfade">
        {productlist.map((p, i) => {
-       return <ProductCard key={i} product={p} toggleOpenDetail={settoggleToOpenProductDetail}/>;
+       return <ProductCard openDetail={toggleProductDetail} key={i} product={p}/>;
      })}
-        <AnimatePresence>{toggleToOpenProductDetail&&<ProductDetailShowCase>{toggleToOpenProductDetail.product_id}</ProductDetailShowCase>}</AnimatePresence>
-      </AnimateSharedLayout>
       </Content>
     );
   } else {
@@ -42,12 +26,6 @@ const ProductShelf=()=>{
     );
   }
 };
-const ProductDetailShowCase=styled.div`
-  height:70vh;
-  width:50%;
-  position:absolute;
-  background: #96babe;
-`;
 const Content = styled.div`
   padding: 1rem;
   height: 75vh;

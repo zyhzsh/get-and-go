@@ -116,7 +116,14 @@ public class Product {
             fetch = FetchType.EAGER,
             orphanRemoval = true
     )
+    @JsonManagedReference
     @Getter @Setter private List<Voucher> vouchers;
+
+    public void addVoucher(Voucher voucher){
+        voucher.setProduct(this);
+        vouchers.add(voucher);
+    }
+
 
     //constructor
     public Product( String product_name, int current_stock, int sold, double price, Status status, String description, String img, Category category) {
@@ -130,6 +137,8 @@ public class Product {
         this.category = category;
         this.vouchers=new ArrayList<>();
         this.review =new ArrayList<>();
+        Voucher voucher=new Voucher(price,"Standard Voucher","Standard Ticket");
+        addVoucher(voucher);
     }
 
     /***

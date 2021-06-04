@@ -1,9 +1,11 @@
 package nl.getandgo.application.service;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.dto.NewVoucherDTO;
 import nl.getandgo.application.model.City;
 import nl.getandgo.application.model.Product;
 import nl.getandgo.application.model.Product.Status;
 import nl.getandgo.application.model.Product.Category;
+import nl.getandgo.application.model.Voucher;
 import nl.getandgo.application.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -75,4 +77,17 @@ public class ProductService {
     public Optional<Product> getProductById(String id) {
        return productRepository.findById(Long.parseLong(id));
     }
+
+    /**
+     * Add Voucher For Product
+     * */
+    public String addVoucherForProduct(NewVoucherDTO newVoucher){
+        Product product= productRepository.findById(newVoucher.getProduct_id()).orElse(null);
+        if(product==null){return "Product not exists";}
+        Voucher voucher=new Voucher(newVoucher.getPrice(),newVoucher.getTitle(),newVoucher.getDescription());
+        product.addVoucher(voucher);
+        productRepository.save(product);
+        return "Update succeed";
+    }
+
 }

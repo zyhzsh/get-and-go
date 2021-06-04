@@ -1,7 +1,7 @@
 package nl.getandgo.application.filter;
 
 import lombok.RequiredArgsConstructor;
-import nl.getandgo.application.JwtConfig;
+import nl.getandgo.application.config.JwtConfig;
 import nl.getandgo.application.service.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +30,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
         final String requestHeader=request.getHeader(jwtConfig.getAuthorizationHeader());
         String email=null;
         String jwt=null;
@@ -54,4 +53,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response);
     }
+
+
 }
