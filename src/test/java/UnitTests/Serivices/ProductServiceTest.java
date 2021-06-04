@@ -42,7 +42,7 @@ public class ProductServiceTest {
         Mockito.when(productRepository.findById(product.getProduct_id())).thenReturn(Optional.of(product));
 
         //Assert
-        String title =product.getVouchers().get(0).getTitle();
+        String title =product.getVouchers().get(1).getTitle();
         assertEquals(title,newVoucher.getTitle());
     }
 }
