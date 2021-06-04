@@ -1,10 +1,7 @@
 package nl.getandgo.application.service;
 
 import lombok.RequiredArgsConstructor;
-import nl.getandgo.application.dto.LoginRequestDTO;
-import nl.getandgo.application.dto.LoginResponseDTO;
-import nl.getandgo.application.dto.NewCustomerDTO;
-import nl.getandgo.application.dto.NewVendorDTO;
+import nl.getandgo.application.dto.*;
 import nl.getandgo.application.filter.JwtHelper;
 import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.StoreRepository;
@@ -26,7 +23,6 @@ import java.util.UUID;
 public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
-    private final StoreRepository storeRepository;
     private final JwtHelper jwtHelper;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailService emailService;
@@ -41,19 +37,20 @@ public class UserService implements UserDetailsService{
             final User user = userRepository.findUserByEmail(loginRequestDTO.getEmail()).orElse(null);
             if (user!=null){
                 //If the user not been Activated
-                if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ");}
+                if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ",null);}
                 //If password not right
-                if(!passwordEncoder.matches(loginRequestDTO.getPassword(),user.getPassword())){ return new LoginResponseDTO("","","E-mail does not exists or the password is wrong"); }
+                if(!passwordEncoder.matches(loginRequestDTO.getPassword(),user.getPassword())){ return new LoginResponseDTO("","","E-mail does not exists or the password is wrong",null); }
 
                 //Generate JWT token
                 final String token=jwtHelper.generateToken(user);
                 //Return ResponseDTO (@Param JWT token, @Param user_type)
-                return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful");
+                UserProfileDTO userProfileDTO=new UserProfileDTO(user.getUser_id(),user.getEmail(),user.getFirst_name(),user.getLast_name(),user.getAvatar_link(),user.getPhone());
+                return new LoginResponseDTO(token,user.getUsertype().toString(),"login successful",userProfileDTO);
             }
         }catch (Exception e){
-            return new LoginResponseDTO("","","E-mail does not exists or the password is wrong");
+            return new LoginResponseDTO("","","E-mail does not exists or the password is wrong",null);
         }
-        return new LoginResponseDTO("","",msg);
+        return new LoginResponseDTO("","",msg,null);
     }
     /**
      * Register A New Customer

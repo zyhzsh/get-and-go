@@ -11,12 +11,15 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ConfirmationTokenService {
     private final ConfirmationTokenRepository confirmationTokenRepository;
+
     public void saveConfirmationToken(ConfirmationToken token){
         confirmationTokenRepository.save(token);
     }
+
     public ConfirmationToken findToken(String token) {
         return confirmationTokenRepository.findByToken(token).orElse(null);
     }
+
     public int setConfirmedAt(String token) {
         return confirmationTokenRepository.updateConfirmedAt(
                 token, LocalDateTime.now());

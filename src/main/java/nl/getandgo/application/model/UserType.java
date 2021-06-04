@@ -1,6 +1,7 @@
 package nl.getandgo.application.model;
 
 import lombok.Getter;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public enum UserType {
     @Getter public static final String DELETE_STORE="DELETE_STORE";
     @Getter public static final String GET_ALL_VENDORS="GET_ALL_VENDORS";
     @Getter public static final String GET_ALL_STATUS_PRODUCTS="GET_ALL_STATUS_PRODUCTS";
-
+    @Getter public static final String UPDATE_PRODUCT_INFORMATION="UPDATE_PRODUCT_INFORMATION";
     // Vendor User Authorities:
     @Getter public static final String GET_STORE_SELLING_HISTORY="GET_STORE_SELLING_HISTORY";
 
@@ -83,7 +84,8 @@ public enum UserType {
                     UPDATE_STORE_INFORMATION ,
                     DELETE_STORE,
                     GET_ALL_VENDORS,
-                    GET_ALL_STATUS_PRODUCTS
+                    GET_ALL_STATUS_PRODUCTS,
+                    UPDATE_PRODUCT_INFORMATION
             )
     );
     @Getter

@@ -25,3 +25,5 @@ export const delete_store_Api=(store_id)=>`api/stores?id=${store_id}`;
 export const all_vendorsURL="api/vendors";
 export const update_vendor_information_Api="api/vendor/edit";
 
+//Order 
+export const order_voucher_Api="api/orders";

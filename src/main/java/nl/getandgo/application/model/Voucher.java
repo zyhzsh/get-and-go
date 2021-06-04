@@ -1,9 +1,7 @@
 package nl.getandgo.application.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @ToString
 @Entity(name = "Voucher")
 @Table(name = "vouchers")
+@AllArgsConstructor
 public class Voucher {
     /***
      * Voucher Id
@@ -21,7 +20,8 @@ public class Voucher {
     @SequenceGenerator(
             name = "voucher_sequence",
             sequenceName = "voucher_sequence",
-            allocationSize = 1
+            allocationSize = 1,
+            initialValue = 10000
     )
     @GeneratedValue(
             strategy = SEQUENCE,
@@ -36,12 +36,12 @@ public class Voucher {
     @ManyToOne
     @JoinColumn(
             name = "product_id",
-            nullable = false,
             referencedColumnName = "product_id",
             foreignKey = @ForeignKey(
                     name = "product_id_fk"
             )
     )
+    @JsonBackReference
     @Getter @Setter private Product product;
 
     /**
@@ -62,4 +62,9 @@ public class Voucher {
     @Column(name = "description",nullable = false)
     @Getter @Setter private String description;
 
+    public Voucher(Double price, String title, String description) {
+        this.price = price;
+        this.title = title;
+        this.description = description;
+    }
 }

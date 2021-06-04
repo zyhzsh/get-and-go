@@ -11,7 +11,8 @@ const userReducer = (state = initState, action) => {
         ...state, 
         jwt: action.payload.jwt,
         usertype:action.payload.usertype,
-        result:action.payload.result
+        result:action.payload.result,
+        user:action.payload.user
       };
     case "LOG_OUT":
       return { ...state, 
