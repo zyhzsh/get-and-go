@@ -2,9 +2,8 @@ package nl.getandgo.application.service;
 
 import lombok.RequiredArgsConstructor;
 import nl.getandgo.application.dto.*;
-import nl.getandgo.application.filter.JwtHelper;
+import nl.getandgo.application.Util.JwtHelper;
 import nl.getandgo.application.model.*;
-import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -127,7 +126,6 @@ public class UserService implements UserDetailsService{
         return user;
     }
 
-
     public boolean activateUserByToken(String token) {
         //Find Token
         ConfirmationToken confirmationToken=confirmationTokenService.findToken(token);
@@ -147,6 +145,5 @@ public class UserService implements UserDetailsService{
         return false;
 
     }
-
 
 }

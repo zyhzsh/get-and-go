@@ -1,12 +1,11 @@
 package UnitTests.Serivices;
 
-import UnitTests.Models.VendorUserTest;
 import com.github.javafaker.Faker;
 import nl.getandgo.application.dto.LoginRequestDTO;
 import nl.getandgo.application.dto.LoginResponseDTO;
 import nl.getandgo.application.dto.NewCustomerDTO;
 import nl.getandgo.application.dto.NewVendorDTO;
-import nl.getandgo.application.filter.JwtHelper;
+import nl.getandgo.application.Util.JwtHelper;
 import nl.getandgo.application.model.*;
 import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;

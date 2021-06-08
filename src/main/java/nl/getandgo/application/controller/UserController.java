@@ -37,7 +37,7 @@ public class UserController {
     public ModelAndView confirm(@RequestParam("token") String token){
         boolean result=userService.activateUserByToken(token);
         if(result) { return new ModelAndView("redirect:"+"http://localhost:8080/signin"); }
-        return new  ModelAndView("Errors:+"+"http://localhost:8080/unknownerror");
+        return new  ModelAndView("Errors:+"+"http://localhost:8080/error");
     }
 
     /**

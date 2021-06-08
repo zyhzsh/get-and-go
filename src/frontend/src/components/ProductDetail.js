@@ -57,7 +57,7 @@ const GetVouchers = (voucher, i) => {
       setvisible={setOpenOrderForm}
       />)}
       <ProductShowCase>
-        <img src={ProductDetail.img} alt="product_img" />
+        <div><img src={ProductDetail.img} alt="product_img" /></div>
         <div>
           <Button
             color="primary"
@@ -106,8 +106,8 @@ const Container = styled.div`
   font-family: "Odibee Sans", cursive;
   height: 90vh;
   overflow: auto;
+  width: 100%;
   background: #ffffff;
-  display: grid;
   align-items: center;
   align-content: center;
   grid-row-gap: 15px;
@@ -126,10 +126,8 @@ const Container = styled.div`
     );
   }
 `;
-
 const ProductShowCase = styled.div`
   margin: 0 auto;
-  margin-top: 40%;
   overflow: hidden;
   width: 90%;
   height: 400px;
@@ -146,10 +144,25 @@ const ProductShowCase = styled.div`
     margin: 20px;
   }
   box-shadow: 5px 5px 5px 5px #19191a33;
+  @media (max-width: 1400px) {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+    height: 800px;
+    text-align:center;
+  }
+  @media (max-width:850px){
+    img{
+      width: 400px;
+    }
+  }
 `;
-
 const ProductIntroduction = styled.div`
   margin: 0 auto;
+  margin-top: 20px;
   padding: 20px;
   width: 90%;
   height: 200px;
@@ -161,6 +174,7 @@ const ProductIntroduction = styled.div`
 `;
 const VoucherList = styled.div`
   margin: 0 auto;
+  margin-top: 20px;
   width: 90%;
   height: 300px;
   background-color: #fcfcfc;
@@ -199,6 +213,7 @@ const Voucher = styled.div`
 `;
 const ReviewList = styled.div`
   margin: 0 auto;
+  margin-top: 20px;
   width: 90%;
   height: 600px;
   background-color: #fcfcfc;

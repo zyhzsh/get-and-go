@@ -118,7 +118,7 @@ public class Order {
         this.createdAt=LocalDateTime.now();
         this.orderStatus=OrderStatus.PROCESSING;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        this.detail="User: "+customer.getUsername()+" Email: "+customer.getEmail()+" On "+createdAt.format(formatter)+" Ordered: "
+        this.detail="User: "+customer.getFirst_name()+" "+customer.getLast_name()+" Email: "+customer.getEmail()+" On "+createdAt.format(formatter)+" Ordered: "
                 +voucher.getTitle()+" "+voucher.getDescription();
     }
 

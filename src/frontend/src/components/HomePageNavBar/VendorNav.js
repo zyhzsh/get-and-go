@@ -15,12 +15,12 @@ const VendorNav = () => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.usertype);
   const LogOut=()=>{
+
     dispatch({ type: "LOG_OUT" });
   }
   function Check(){
     if(userType!=="VENDORUSER"){
-      console.log(userType);
-      return <Redirect to="/error"/>;
+      return <Redirect to="/signin"/>;
     }
   }
   return (
@@ -32,8 +32,7 @@ const VendorNav = () => {
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/contactus">Contact Us</NavLink>
+ 
         </NavMenu>
           <NavBtn>
             {<Button onClick={LogOut} type="primary">Log Out</Button>}

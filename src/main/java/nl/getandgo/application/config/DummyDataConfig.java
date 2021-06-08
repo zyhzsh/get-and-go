@@ -1,8 +1,11 @@
 package nl.getandgo.application.config;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.dto.NewOrderDTO;
 import nl.getandgo.application.model.*;
+import nl.getandgo.application.repository.OrderRepository;
 import nl.getandgo.application.repository.UserRepository;
+import nl.getandgo.application.service.OrderService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +18,15 @@ import javax.management.InstanceAlreadyExistsException;
 public class DummyDataConfig {
     private final BCryptPasswordEncoder passwordEncoder;
     @Bean
-    CommandLineRunner commandLineRunner(UserRepository userRepository) {
+    CommandLineRunner commandLineRunner(UserRepository userRepository, OrderService orderService) {
         return args -> {
+            //Test Products
             for(City city:City.values()){
                 for (Product.Category category: Product.Category.values()) {
                     AddProducts(city,2, category,userRepository);
                 }
             }
+            //Adding Test User Here
             VendorUser testvendor=new VendorUser(
                     "test@vendor.com",
                     passwordEncoder.encode("test"),
@@ -36,30 +41,30 @@ public class DummyDataConfig {
                     "a",
                     "vdssfds",
                     "151518"
-
             );
             CustomerUser testCustomer_un_enabled=new CustomerUser(
                     "test@unenabledcustomer.com",
                     passwordEncoder.encode("test"),
                     "sds",
-                     "asd");
+                    "asd");
             CustomerUser testCustomer=new CustomerUser(
                     "test@customer.com",
                     passwordEncoder.encode("test"),
-                    "sds",
-                    "asd");
+                    "ShengHang",
+                    "Zhu");
             testCustomer.setEnabled(true);
             userRepository.save(testvendor);
             userRepository.save(testCustomer);
             userRepository.save(testCustomer_un_enabled);
             userRepository.save(testManager);
         };
+
     }
     private void AddProducts(City city, int num_store, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {
         Faker faker=new Faker();
         VendorUser vendor=new VendorUser(
                 faker.internet().emailAddress(),
-                faker.lorem().characters(8),
+                passwordEncoder.encode("test"),
                 faker.name().firstName(),
                 faker.name().lastName(),
                 faker.internet().avatar(),
@@ -88,5 +93,4 @@ public class DummyDataConfig {
         }
 
     }
-
 }

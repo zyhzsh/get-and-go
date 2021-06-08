@@ -1,18 +1,14 @@
 package nl.getandgo.application.controller;
-import lombok.RequiredArgsConstructor;
-import nl.getandgo.application.model.*;
-import nl.getandgo.application.service.ProductService;
-import nl.getandgo.application.service.StoreService;
-import org.springframework.context.annotation.Role;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
-import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.StandardCharsets;
+import lombok.RequiredArgsConstructor;
+import nl.getandgo.application.model.Product;
+import nl.getandgo.application.service.ProductService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController

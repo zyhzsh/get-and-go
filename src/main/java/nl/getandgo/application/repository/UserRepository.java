@@ -13,6 +13,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("SELECT v FROM VendorUser v WHERE v.user_id=?1 AND v.usertype='VENDORUSER'")
     Optional<VendorUser> findVendorById(Long id);
 
+    @Query("SELECT v FROM VendorUser v WHERE v.email=?1 AND v.usertype='VENDORUSER'")
+    Optional<VendorUser> findVendorByEmail(String email);
+
     @Query("SELECT c FROM CustomerUser c WHERE c.user_id=?1 AND c.usertype='CUSTOMERUSER'")
     Optional<CustomerUser> findCustomerById(Long id);
 
@@ -24,4 +27,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT u FROM User u WHERE u.usertype=?1")
     List<User> findAllByUserType(UserType userType);
+
+
+
 }

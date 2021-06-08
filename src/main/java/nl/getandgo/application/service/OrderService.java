@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private final UserRepository userRepository;
     private final VoucherRepository voucherRepository;
+    private final WebSocketVendorEndPoint webSocketVendorEndPoint;
+
 
     /**
      * Adding New Order
@@ -30,6 +32,10 @@ public class OrderService {
         //4.Save Order
         user.addOrder(order);
         userRepository.save(user);
+        //5. Trigger Method to send message to vendor.
+        Long vendor_id = voucher.getProduct().getStore().getVendor().getUser_id();
+        webSocketVendorEndPoint.notifyVendorNewOrders(user,vendor_id);
+        //6. Inform Customer Order Placed.
         return "Order Placed~!";
     }
 }
