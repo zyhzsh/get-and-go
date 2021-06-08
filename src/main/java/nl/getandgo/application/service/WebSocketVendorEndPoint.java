@@ -3,21 +3,18 @@ package nl.getandgo.application.service;
 import lombok.extern.slf4j.Slf4j;
 import nl.getandgo.application.Util.JwtHelper;
 import nl.getandgo.application.Util.SpringContextUtil;
-import nl.getandgo.application.dto.StatisticStoreOrderTurnOverDTO;
-import nl.getandgo.application.model.Store;
 import nl.getandgo.application.model.User;
 import nl.getandgo.application.model.VendorUser;
-import nl.getandgo.application.repository.OrderRepository;
-import nl.getandgo.application.repository.StoreRepository;
 import nl.getandgo.application.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.*;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
