@@ -22,7 +22,7 @@ deploy-docker:
   before_script:
     - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PSW"
   script:
-    - docker build . -f Dockerfile -t "$DOCKER_REGISTRY_IMAGE" 
+    - docker build . -f Dockerfile -t "$DOCKER_REGISTRY_IMAGE"
     - docker push "$DOCKER_REGISTRY_IMAGE"
 after_script:
   - echo "End CI~!"
