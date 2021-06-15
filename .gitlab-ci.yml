@@ -7,8 +7,8 @@ build:
   stage: build
   script:
   - ./gradlew assemble
-  - copy build/libs/getandgo-1.0-SNAPSHOT.jar .
-
+#  - copy build/libs/getandgo-1.0-SNAPSHOT.jar .
+#
 
 #sonar:
 #  stage: sonar
@@ -23,6 +23,7 @@ deploy-docker:
     - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PSW"
  ##   - build/libs/getandgo-1.0-SNAPSHOT.jar
   script:
+    - ./gradlew assemble
     - docker build -f Dockerfile -t "$DOCKER_REGISTRY_IMAGE" .
     - docker push "$DOCKER_REGISTRY_IMAGE"
 after_script:
