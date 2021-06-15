@@ -83,11 +83,11 @@ public class LoginTest {
         //Act - Submit Registration Form
         driver.findElement(By.tagName("button")).click();
         //Act- Wait for server response
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         //Assert - Check Page Router to the right page
         String ActualURL = driver.getCurrentUrl();
         String ExpectedURL = "http://localhost:8080/vendor";
-        assertEquals(ActualURL,ExpectedURL);
+        assertEquals(ExpectedURL,ActualURL);
         closeBrowser();
     }
 }
