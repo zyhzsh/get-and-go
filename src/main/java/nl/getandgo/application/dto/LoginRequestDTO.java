@@ -1,14 +1,14 @@
 package nl.getandgo.application.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class LoginRequestDTO {
-    @Getter @Setter private String email;
-    @Getter @Setter private String password;
+    private String email;
+    private String password;
 
 }

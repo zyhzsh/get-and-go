@@ -68,11 +68,6 @@ public enum UserType {
 
     /**
      * ProductManager User Authority:
-     * - All Authority From Anonymous User
-     * - PLACE_ORDER
-     * - BROWSER_USER_INFORMATION
-     * - UPDATE_PERSONAL_PROFILE
-     * - BROWSER_PERSONAL_ORDERS
      **/
     @Getter
     private final List<String> ProductManagerUserAuthorities =  new ArrayList<>(

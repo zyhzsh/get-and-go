@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailService implements EmailSender{
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
     private final JavaMailSender mailSender;
+
     @Override
     @Async
     public void send(String to, String email) {
@@ -34,6 +35,10 @@ public class EmailService implements EmailSender{
             throw new IllegalStateException("failed to send email");
         }
     }
+
+    /**
+     * Email body
+     * */
     public String buildEmailBody(String name, String token){
         String link="http://localhost:8080/api/confirm?token="+token;
         return "\n" +

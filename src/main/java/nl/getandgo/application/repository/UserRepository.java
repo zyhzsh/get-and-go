@@ -28,6 +28,4 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("SELECT u FROM User u WHERE u.usertype=?1")
     List<User> findAllByUserType(UserType userType);
 
-
-
 }

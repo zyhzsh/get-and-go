@@ -1,11 +1,14 @@
 package nl.getandgo.application.dto;
 
 import lombok.*;
-
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class LoginResponseDTO {
-    @Getter @Setter private  String jwt;
-    @Getter @Setter private  String user_type;
-    @Getter @Setter private  String result;
-    @Getter @Setter private  UserProfileDTO user;
+      private  String jwt;
+      private  String user_type;
+      private  String result;
+      private  UserProfileDTO user;
 }

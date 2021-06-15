@@ -59,6 +59,9 @@ public class DummyDataConfig {
             userRepository.save(testManager);
         };
 
+
+
+
     }
     private void AddProducts(City city, int num_store, Product.Category category,UserRepository userRepository) throws InstanceAlreadyExistsException {
         Faker faker=new Faker();

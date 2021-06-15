@@ -78,10 +78,6 @@ public class WebSocketVendorEndPoint {
         log.info("[websocket message] receive Message ~ ! {}",message);
     }
 
-
-    /**
-     *
-     * */
     public void notifyVendorNewOrders(User user, Long vendor_id){
         try {
             log.info("[websocket message] Customer: {} placed an new order , message={}, ",user.getEmail(),"notify to vendor_id="+ vendor_id);
