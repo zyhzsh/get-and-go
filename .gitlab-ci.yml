@@ -5,7 +5,10 @@ stages:
   - deploy-docker
 build:
   stage: build
-  script: ./gradlew assemble
+  script:
+  - ./gradlew assemble
+  - copy build/libs/getandgo-1.0-SNAPSHOT.jar .
+
 
 #sonar:
 #  stage: sonar
