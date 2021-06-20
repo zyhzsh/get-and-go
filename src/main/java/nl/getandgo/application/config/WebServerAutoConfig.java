@@ -1,10 +1,16 @@
 package nl.getandgo.application.config;
 
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.ErrorPageRegistrar;
+import org.springframework.boot.web.server.ErrorPageRegistry;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebServerAutoConfig implements WebMvcConfigurer {
+public class WebServerAutoConfig implements WebMvcConfigurer, ErrorPageRegistrar
+{
     /**
      * When url request are not defined.
      * Redirect to the Frontend to handle content;
@@ -17,14 +23,8 @@ public class WebServerAutoConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000","http://localhost:8080")
-                .allowedMethods("GET", "POST", "OPTIONS", "PUT")
-                .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-                        "Access-Control-Request-Headers", "Access-Control-Allow-Origin", "Access-Control-Allow-Method", "Set-Cookie")
-                .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-                .allowCredentials(true).maxAge(3600);
+    public void registerErrorPages(ErrorPageRegistry registry) {
+        ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/error");
+        registry.addErrorPages(error404Page);
     }
-
 }

@@ -1,12 +1,10 @@
 package nl.getandgo.application.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -32,6 +30,25 @@ public class Review {
     )
     @Column(name = "review_id")
     @Getter @Setter private Long review_id;
+
+
+
+    /**
+     * Constructor
+     * @Param product
+     * @Param reviewer
+     * @Param creatAt
+     * @Param content
+     * @Param rating
+     * */
+    public Review(Product product, CustomerUser reviewer, LocalDateTime createdAt, String content, double rating) {
+        this.product = product;
+        this.reviewer = reviewer;
+        this.comments = new ArrayList<>();
+        this.createdAt = createdAt;
+        this.content = content;
+        this.rating = rating;
+    }
 
     /**
      * Product Id

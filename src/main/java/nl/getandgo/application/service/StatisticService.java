@@ -19,9 +19,9 @@ public class StatisticService {
     private final OrderRepository orderRepository;
 
     /**
-    * Obtain the order statistics of all stores under the Vendor's name for the past six months
+     * Obtain the order statistics of all stores under the Vendor's name for the past six months
      * Note: this converting process still need be improved later.
-    * */
+     **/
     public List<StatisticStoreOrderTurnOverDTO> getOrderOverTurnLastHalfYear(Long vendor_id){
 
        LocalDateTime star=LocalDateTime.now().plusMonths(-6);
@@ -43,14 +43,14 @@ public class StatisticService {
                 //when list not empty
                  for (int i=0;i<list.size();i++){
                      //when the store list name are not same
-                     if(s.getStore_name()!=list.get(i).getStore_name()){
+                     if(s.getStore_name().equals(list.get(i).getStore_name())){
                          if(!checkNameOnTheList(list,s.getStore_name())){
                              list.add(new StatisticStoreOrderTurnOverDTO(o.getStore().getStore_name(),o.getCreatedAt().getMonthValue(),1));continue;
                          }
                      }
                      //if (month) == (month) , perform quantity + 1
-                     if(s.getStore_name()==list.get(i).getStore_name()){
-                         if (o.getCreatedAt().getMonthValue()==list.get(i).getMonth()&&o.getStore().getStore_name()==s.getStore_name()){list.get(i).setQuantity(list.get(i).getQuantity()+1); break;}
+                     if(s.getStore_name().equals(list.get(i).getStore_name())){
+                         if (o.getCreatedAt().getMonthValue()==list.get(i).getMonth()&&o.getStore().getStore_name().equals(s.getStore_name())){list.get(i).setQuantity(list.get(i).getQuantity()+1); break;}
                          //if (month)!=(month), then creating new record
                          list.add(new StatisticStoreOrderTurnOverDTO(o.getStore().getStore_name(),o.getCreatedAt().getMonthValue(),1));break;
                      }
@@ -63,6 +63,12 @@ public class StatisticService {
         return data;
     }
 
+
+    /**
+     * GObtain the order statistics of all stores under the Vendor's name for the past six months
+     * Format list of data to Json
+     * Note: this converting process still need be improved later.
+     * */
     public String getOrderOverTurnLastHalfYearText(Long vendor_id){
         String result="[";
         List<StatisticStoreOrderTurnOverDTO> temp=getOrderOverTurnLastHalfYear(vendor_id);
@@ -78,14 +84,13 @@ public class StatisticService {
         return result;
     }
 
-
     /**
      * Temporary method for covert data structure use
      * */
     private boolean checkNameOnTheList(List<StatisticStoreOrderTurnOverDTO> list,String name){
         if (list.isEmpty()){return false;}
         for (StatisticStoreOrderTurnOverDTO o: list) {
-            if(o.getStore_name()==name){
+            if(o.getStore_name().equals(name)){
                 return true;
             }
         }

@@ -9,9 +9,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.management.InstanceAlreadyExistsException;
+import javax.management.InstanceNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.mockito.Mockito.mock;
 
 
 public class VendorUserTest {
@@ -23,31 +24,31 @@ public class VendorUserTest {
     }
 
     @Test
-    public void VendorUserUniqueSequenceIdTest(){
+    public void AddVendorUserTest(){
         //Arrange
-        VendorUser vendorUser_1=new VendorUser(
-                faker.internet().emailAddress(),
-                faker.lorem().characters(15),
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.internet().avatar(),
-                faker.phoneNumber().cellPhone()
-        );
-        VendorUser vendorUser_2=new VendorUser(
-                faker.internet().emailAddress(),
-                faker.lorem().characters(15),
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.internet().avatar(),
-                faker.phoneNumber().cellPhone());
+        String email= faker.internet().emailAddress();
+        String password =faker.lorem().characters(15);
+        String firstname=faker.name().firstName();
+        String lastname=faker.name().lastName();
+        String avatar=faker.internet().avatar();
+        String phone=faker.phoneNumber().cellPhone();
+
         //Act
-        Long id_1=vendorUser_1.getUser_id();
-        Long id_2=vendorUser_2.getUser_id();
-
-        String x=faker.commerce().color();
+        VendorUser vendorUser_1=new VendorUser(
+                email,
+                password,
+                firstname,
+                lastname,
+                avatar,
+                phone
+        );
         //Assert
-        assertEquals(vendorUser_1.getStoreList(),vendorUser_2.getStoreList());
-
+        assertEquals(true,vendorUser_1.isEnabled());
+        assertEquals(email,vendorUser_1.getEmail());
+        assertEquals(password,vendorUser_1.getPassword());
+        assertEquals(firstname,vendorUser_1.getFirst_name());
+        assertEquals(lastname,vendorUser_1.getLast_name());
+        assertEquals(phone,vendorUser_1.getPhone());
     }
 
     @Test
@@ -74,6 +75,30 @@ public class VendorUserTest {
         vendorUser_1.addStore(store_1);
         //Assert
         assertEquals(true,vendorUser_1.getStoreList().contains(store_1));
+
+    }
+
+    @Test
+    public void VendorUserDeleteStoreTest() throws InstanceAlreadyExistsException, InstanceNotFoundException {
+        //Arrange
+        VendorUser vendorUser_1=new VendorUser(
+                faker.internet().emailAddress(),
+                faker.lorem().characters(15),
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.internet().avatar(),
+                faker.phoneNumber().cellPhone()
+        );
+        Store store_1=mock(Store.class);
+        Store store_2=mock(Store.class);
+        Store store_3=mock(Store.class);
+        vendorUser_1.addStore(store_1);
+        vendorUser_1.addStore(store_2);
+        vendorUser_1.addStore(store_3);
+        //Act
+        vendorUser_1.deleteStore(store_1);
+        //Assert
+        assertEquals(false,vendorUser_1.getStoreList().contains(store_1));
 
     }
 

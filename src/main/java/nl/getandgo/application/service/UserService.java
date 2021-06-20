@@ -39,7 +39,6 @@ public class UserService implements UserDetailsService{
                 if(!user.isEnabled()){return new LoginResponseDTO("","","User Need to be Activated ~! ",null);}
                 //If password not right
                 if(!passwordEncoder.matches(loginRequestDTO.getPassword(),user.getPassword())){ return new LoginResponseDTO("","","E-mail does not exists or the password is wrong",null); }
-
                 //Generate JWT token
                 final String token=jwtHelper.generateToken(user);
                 //Return ResponseDTO (@Param JWT token, @Param user_type)

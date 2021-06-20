@@ -40,7 +40,6 @@ public class ProductServiceTest {
         //Act
         productService.addVoucherForProduct(newVoucher);
         Mockito.when(productRepository.findById(product.getProduct_id())).thenReturn(Optional.of(product));
-
         //Assert
         String title =product.getVouchers().get(1).getTitle();
         assertEquals(title,newVoucher.getTitle());

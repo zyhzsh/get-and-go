@@ -69,7 +69,16 @@ public class WebSocketVendorEndPoint {
 
     @OnClose
     public void onClose(){
-        webSockets.remove(this);
+        Long key=null;
+        for (Long i: webSockets.keySet()){
+            if (webSockets.get(i).equals(this)){
+                key=i;
+                break;
+            }
+        }
+        if (key!=null){webSockets.remove(key);}
+
+
         log.info("[websocket message] vendor connection close ~ !, total connection:{}",webSockets.size());
     }
 

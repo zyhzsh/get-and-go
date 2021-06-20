@@ -51,6 +51,7 @@ public class CustomerUser extends User {
     * */
 
     public void addOrder(Order order){
+        if(orders==null){orders=new ArrayList<>();}
         order.setCustomer(this);
         orders.add(order);
     }
