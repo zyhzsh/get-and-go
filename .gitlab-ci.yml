@@ -5,11 +5,7 @@ stages:
   - deploy-docker
 build:
   stage: build
-  script:
-  - ./gradlew assemble
-  artifacts:
-    paths:
-      - build
+  script: ./gradlew assemble
 sonar:
   stage: sonar
   script: ./gradlew jacocoTestReport sonarqube -D sonar.projectKey=getandgo -D sonar.host.url=%URL% -D sonar.login=%SONARKEY%
@@ -21,6 +17,7 @@ deploy-docker:
   before_script:
     - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PSW"
   script:
+    - ./gradlew assemble
     - docker build -f Dockerfile -t "$DOCKER_REGISTRY_IMAGE" .
     - docker push "$DOCKER_REGISTRY_IMAGE"
 after_script:
